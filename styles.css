@@ -167,7 +167,7 @@ textarea {
 }
 
 .header-icons i {
-    font-size: clamp(1.8rem, 3vw, 3rem);
+    font-size: clamp(1.3rem, 2vw, 2rem);
     color: var(--color1);
     transition: transform .4s ease;
     cursor: pointer;
