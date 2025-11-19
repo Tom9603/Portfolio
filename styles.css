@@ -100,7 +100,7 @@ textarea {
     color: var(--color2);
     font-size: 1.4rem;
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 -2px 30px rgba(0, 0, 0, 0.55);
     transition: transform .2s ease;
 }
 
@@ -121,7 +121,7 @@ textarea {
     color: var(--color2);
     font-size: 1.4rem;
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 -2px 30px rgba(0, 0, 0, 0.55);
     transition: transform .2s ease;
 }
 
@@ -171,11 +171,22 @@ textarea {
     color: var(--color1);
     transition: transform .4s ease;
     cursor: pointer;
+    filter: drop-shadow(0 -2px 30px rgba(0, 0, 0, 0.75));
 }
 
 .header-icons i:hover {
     transform: scale(1.08);
     color: var(--color3);
+}
+
+@keyframes bounce {
+  0%, 100% { transform: rotate(-20deg) translateY(-20px) translateX(50px); }
+  50%      { transform: rotate(-20deg) translateY(-40px) translateX(50px); }
+}
+
+.click {
+  font-size: 1.5rem;
+  animation: bounce 1.5s infinite;
 }
 
 .about {
@@ -208,6 +219,7 @@ textarea {
     font-weight: bold;
     text-align: center;
     transition: background-color 0.3s ease;
+    box-shadow: 0 -2px 30px rgba(0, 0, 0, 0.25);
 }
 
 .button:hover {
@@ -365,6 +377,7 @@ textarea {
     text-align: center;
     display: inline-block;
     transition: .25s ease;
+    box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.15);
 }
 
 .btn-outline {
@@ -434,6 +447,7 @@ textarea {
     background: #f6f7fb;
     transition: all 0.25s ease;
     outline: none;
+    box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.10);
 }
 
 .contact-form input:focus,
@@ -455,6 +469,7 @@ textarea {
     transition: 0.2s ease;
     width: fit-content;
     align-self: center;
+    box-shadow: 0 -2px 30px rgba(0, 0, 0, 0.25);
 }
 
 .contact-form button:hover {
@@ -504,6 +519,7 @@ header {
     top: 50%;
     transform: translateY(-50%);
     transition: transform .25s ease;
+    filter: drop-shadow(0 -2px 20px rgba(0, 0, 0, 0.85));
 }
 
 .logo-menu:hover {
@@ -579,16 +595,26 @@ footer {
 
     .header-icons i {
         font-size: clamp(1.8rem, 2.6vw, 2.6rem);
-        color: var(--color3);
+        color: var(--color1);
     }
 
     .button {
         background: var(--bg3);
         color: var(--color2);
+        box-shadow: 0 -2px 30px rgba(0, 0, 0, 0.55);
     }
 
     .stack-grid {
         grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
         gap: 1rem;
+    }
+
+    .project-card {
+        box-shadow: 0 -2px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+    box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.15);
     }
 }
