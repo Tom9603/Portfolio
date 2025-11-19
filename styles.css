@@ -32,6 +32,10 @@ body {
     margin: 0;
 }
 
+html, body {
+    overflow-x: hidden;
+}
+
 main {
     max-width: 1600px;
     margin: 0 auto;
@@ -70,12 +74,19 @@ ul {
     list-style-type: none;
 }
 
+textarea {
+    resize: none;
+}
+
 /****************************************/
 /****************************************/
 /************** COMPONENTS **************/
 /****************************************/
 /****************************************/
 
+/* ------ BOUTONS FLOTANTS ------ */
+
+/* Bouton Retour en Hautack to top */
 #topBtn {
     position: fixed;
     right: 25px;
@@ -96,6 +107,26 @@ ul {
     transform: scale(1.1);
 }
 
+/* Bouton Télécharger CV */
+#cvBtn {
+    position: fixed;
+    right: 25px;
+    bottom: 80px; /* juste au-dessus du topBtn */
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    background: var(--color3);
+    color: var(--color2);
+    font-size: 1.4rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: transform .2s ease;
+}
+
+#cvBtn:hover {
+    transform: scale(1.1);
+}
 
 /****************************************/
 /****************************************/
@@ -124,6 +155,26 @@ ul {
     margin: 0 auto;
     margin-bottom: -6rem;
     margin-top: -5rem;
+}
+
+.header-icons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    top: -80px;
+    position: relative;
+}
+
+.header-icons i {
+    font-size: clamp(1.8rem, 3vw, 3rem);
+    color: var(--color1);
+    transition: transform .4s ease;
+    cursor: pointer;
+}
+
+.header-icons i:hover {
+    transform: scale(1.08);
+    color: var(--color3);
 }
 
 .about {
@@ -230,8 +281,6 @@ ul {
 
 }
 
-/* ------ PROJECTS GRID ------ */
-
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -240,8 +289,6 @@ ul {
     margin: 0 auto;
     padding: 2rem;
 }
-
-/* ------ CARD ------ */
 
 .project-card {
     background: var(--color2);
@@ -255,14 +302,11 @@ ul {
     transform: scale(1.02);
     box-shadow: 0 8px 25px rgba(0,0,0,0.30);
 }
-/* IMAGE */
 
 .project-img img {
     width: 100%;
     display: block;
 }
-
-/* CONTENT */
 
 .project-content {
     padding: 1.5rem;
@@ -284,8 +328,6 @@ ul {
     color: #555;
 }
 
-/* TAGS */
-
 .project-tags {
      display: flex;
     flex-wrap: wrap;
@@ -304,8 +346,6 @@ ul {
     font-weight: 600;
     color: #2c57e7;
 }
-
-/* BUTTONS */
 
 .project-buttons {
     display: flex;
@@ -363,8 +403,6 @@ ul {
     margin-bottom: 2rem;
 }
 
-/* --- FORMULAIRE --- */
-
 .contact-form {
     background: var(--color2);
     padding: 3rem 2.5rem;
@@ -375,8 +413,6 @@ ul {
     gap: 1.5rem;
 }
 
-/* LABELS */
-
 .contact-form label {
     font-size: 1rem;
     font-weight: 600;
@@ -385,8 +421,6 @@ ul {
     flex-direction: column;
     gap: 0.5rem;
 }
-
-/* INPUTS & TEXTAREA */
 
 .contact-form input,
 .contact-form textarea {
@@ -408,8 +442,6 @@ ul {
     box-shadow: 0 0 0 4px rgba(44, 87, 231, 0.15);
 }
 
-/* BOUTON ENVOYER */
-
 .contact-form button {
     background: var(--color3);
     color: var(--color2);
@@ -428,8 +460,6 @@ ul {
     background: var(--color1);
     transform: translateY(-2px);
 }
-
-/* MESSAGE DE CONFIRMATION */
 
 .form-message {
     text-align: center;
