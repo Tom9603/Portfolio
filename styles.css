@@ -6,10 +6,12 @@
 
 :root {
     --bg1: #F3F3F5;
-    --bg2: #000000;
+    --bg2: #e2e2e2;
+    --bg3: #2c57e7;
     --color1: #374252;
     --color2: #F3F3F5;
     --color3: #2c57e7;
+    --color4: linear-gradient(to right, #2c57e7, #de58e2);
     --primary_police: "Inter", sans-serif;
 }
 
@@ -18,6 +20,10 @@
 /***************** BASE *****************/
 /****************************************/
 /****************************************/
+
+html {
+    scroll-behavior: smooth;
+}
 
 body {
     background-color: var(--bg1);
@@ -29,14 +35,14 @@ body {
 main {
     max-width: 1600px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding-top: 0rem;
 }
 
 h1 {
-    margin-top: -5rem;
+    margin: 0;
     text-align: center;
     font-size: 3rem;
-    background: linear-gradient(to right, #2c57e7, #de58e2);
+    background: var(--color4);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -78,20 +84,32 @@ ul {
 /***************** ABOUT ****************/
 /****************************************/
 
+.header-main {
+    text-align: center;
+}
+
+.header-main-logo {
+    width: 300px;
+    max-width: 40%;
+    height: auto;
+    margin: 0 auto;
+}
+
 .logo {
     width: 25%;
     display: block;
     margin: 0 auto;
+    margin-bottom: -6rem;
+    margin-top: -5rem;
 }
 
 .about {
-    padding-top: 4rem;
+    padding-top: 1rem;
     p {
         max-width: 800px;
         margin: 0 auto;
         padding: 2rem;
-        padding-bottom: 4rem;
-        padding-top: 4rem;
+        padding-bottom: 1rem;
         line-height: 1.5rem;
         font-size: 1.3rem;
         color: var(--color1);
@@ -99,24 +117,39 @@ ul {
     }
 }
 
+.about-text {
+    margin-bottom: 5rem;
+}
 
-/****************************************/
-/*************** PROJECTS ***************/
-/****************************************/
+.button {
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
+    padding: 0.75rem 1.5rem;
+    background: var(--bg1);
+    color: var(--color3);
+    border: 1px solid var(--color3);
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+        background: var(--bg3);
+        color: var(--color2)
+}
+
+/******************** GRID ********************/
 
 .container {
     max-width: 1600px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 1rem 0;
 }
 
-.projects {
-    width: 100vw;
-    padding: 2rem 0;
-    background-color: var(--bg2);
-    color: var(--color2);
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
+.stacks {
+    padding-bottom: 4rem;
 }
 
 .stack-grid {
@@ -134,19 +167,161 @@ ul {
     text-align: center;
 }
 
+.stack-item:hover {
+    transform: scale(1.1);
+    transition: transform 0.4s ease;
+}
+
 .stack-item i,
 .stack-item img {
-    font-size: 4rem;
+    font-size: 3rem;
     width: 60px;
     height: 60px;
     object-fit: contain;
 }
 
 .stack-item p {
-    margin-top: 0.5rem;
+    padding: 1rem;
+    margin-top: 0.1rem;
     font-weight: 600;
+    font-size: 1rem;
     color: var(--color1);
 }
+
+/****************************************/
+/*************** PROJECTS ***************/
+/****************************************/
+
+.projects {
+    width: 100vw;
+    padding: 2rem 0;
+    background-color: var(--bg1);
+    box-shadow: 0 -2px 30px rgba(0, 0, 0, 0.15);
+    color: var(--color2);
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+}
+
+.projects-title {
+    margin-bottom: 2rem;
+
+}
+
+/* ------ PROJECTS GRID ------ */
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* ------ CARD ------ */
+
+.project-card {
+    background: var(--color2);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.30);
+}
+/* IMAGE */
+
+.project-img img {
+    width: 100%;
+    display: block;
+}
+
+/* CONTENT */
+
+.project-content {
+    padding: 1.5rem;
+    color: var(--color1);
+}
+
+.project-content h3 {
+    margin-top: 0.5rem;
+    margin-bottom: .5rem;
+    font-size: 1.4rem;
+    color: var(--color1);
+    min-height: 3.2rem;
+}
+
+.project-content p {
+    margin: 0 0 1rem 0;
+    line-height: 1.5rem;
+    font-size: 1rem;
+    color: #555;
+}
+
+/* TAGS */
+
+.project-tags {
+     display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin-bottom: 2rem;
+    margin-left: 2rem;
+    align-content: flex-start;
+    min-height: 6.5rem;
+}
+
+.project-tags span {
+    background: #dfe2e9;
+    padding: .35rem .7rem;
+    border-radius: 6px;
+    font-size: .85rem;
+    font-weight: 600;
+    color: #2c57e7;
+}
+
+/* BUTTONS */
+
+.project-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.btn-outline,
+.btn-fill {
+    padding: .6rem 1.1rem;
+    border-radius: 6px;
+    font-size: .9rem;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    transition: .25s ease;
+}
+
+.btn-outline {
+    border: 1.5px solid #2c57e7;
+    color: #2c57e7;
+}
+
+.btn-outline:hover {
+    background: #2c57e7;
+    color: var(--color2);
+}
+
+.btn-fill {
+    background: #2c57e7;
+    color: var(--color2);
+}
+
+.btn-fill:hover {
+    opacity: .85;
+}
+
 
 /****************************************/
 /**************** CONTACT ***************/
@@ -164,34 +339,36 @@ ul {
 
 header {
     background-color: #ebebeb;
-}
-
-.logo-menu {
-    width: 7%;
-    position: absolute;
-    margin: 0;
-    left: 30rem;
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.2);
 }
 
 .menu {
     display: flex;
-    position: relative;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     padding: 1.5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    color: var(--color1);
+    position: relative;
+}
+
+.logo-menu {
+    height: 90px;
+    position: absolute;
+    left: 6rem;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .menu ul {
-        display: flex;
-        gap: 5rem;
-        margin: 0;
-        padding: 0;
-        font-weight: bold;
+    display: flex;
+    gap: 5rem;
+    margin: 0;
+    padding: 0;
+    font-weight: 500;
 }
+
 .menu ul li {
     position: relative;
+    color: var(--color1);
 }
 
 .menu ul li::after {
