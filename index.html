@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<!---------------------------- HEAD --------------------------------->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tom Ochietti</title>
+    <link rel="icon" type="image/x-icon" href="images/byTom_favicon.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <!---------------------------- HEADER --------------------------------->
+    <header>
+        <nav class="menu">
+            <img src="images/byTom.png" alt="Logo" class="logo">
+            <ul>
+                <li><a href="#a-propos">À propos</a></li>
+                <li><a href="#projets">Projets</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!---------------------------- MAIN --------------------------------->
+    <main>
+        <h1>Portfolio Tom Ochietti</h1>
+        <!-- A PROPOS -->
+        <section class="about" id="a-propos">
+            <h2>À propos</h2>
+            <article>
+                <p>Bonjour! Je m'appelle Tom Ochietti, un développeur passionné spécialisé dans la création de sites web modernes et réactifs. Avec une expertise en HTML, CSS, JavaScript et divers frameworks, je m'efforce de concevoir des expériences utilisateur exceptionnelles. Explorez mon portfolio pour découvrir mes projets récents et n'hésitez pas à me contacter pour toute collaboration ou opportunité professionnelle.</p>
+            </article>
+        </section>
+        <!-- PROJETS -->
+        <section class="projects" id="projets">
+            <div class="container">
+                <h2>Projets</h2>
+                <!-- PROJET 1 -->
+                <article class="project-card">
+                    <img src="images/project1.png" alt="Projet 1">
+                    <h3>Projet 1</h3>
+                    <p>Description du projet 1.</p>
+                </article>
+                <!-- PROJET 2 -->
+                <article class="project-card">
+                    <img src="images/project2.png" alt="Projet 2">
+                    <h3>Projet 2</h3>
+                    <p>Description du projet 2.</p>
+                </article>
+                <!-- PROJET 3 -->
+                <article class="project-card">
+                    <img src="images/project3.png" alt="Projet 3">
+                    <h3>Projet 3</h3>
+                    <p>Description du projet 3.</p>
+                </article>
+            </div>
+        </section>
+        <!-- CONTACT -->
+        <section class="contact" id="contact">
+            <h2>Contact</h2>
+            <form id="contactForm" action="https://formsubmit.co/tom.ochietti@gmail.com" method="POST" class="contact-form">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" value="">
+
+                <label>Nom<input type="text" name="Nom" required></label>
+
+                <label>Email<input type="email" name="Email" required></label>
+
+                <label>Message<textarea name="Message" rows="5" required></textarea></label>
+
+                <button type="submit">Envoyer</button>
+                <p id="formMessage" class="form-message"></p>
+            </form>
+        </section>
+    </main>
+    <!---------------------------- FOOTER --------------------------------->
+    <footer>
+        <p>&copy; 2025 Tom Ochietti</p>
+    </footer>
+    <!-- SCRIPT JS -->
+    <script src="script.js"></script>
+</body>
+</html>
