@@ -44,7 +44,7 @@ main {
 }
 
 section {
-    scroll-margin-top: 100px;
+    scroll-margin-top: 70px;
 }
 
 h1 {
@@ -567,6 +567,10 @@ footer {
 
 @media (max-width: 1000px) {
     
+    section {
+    scroll-margin-top: 115px;
+    }
+
     main {
         padding-top: 4rem;
     }
