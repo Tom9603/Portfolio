@@ -30,6 +30,7 @@ body {
     font-size: 16px;
     font-family: var(--primary_police);
     margin: 0;
+    user-select: none;
 }
 
 html, body {
