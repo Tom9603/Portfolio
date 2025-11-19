@@ -339,8 +339,13 @@ ul {
 /***************** HEADER *****************/
 
 header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     background-color: #ebebeb;
     box-shadow: 0 2px 7px rgba(0, 0, 0, 0.2);
+    z-index: 999;
 }
 
 .menu {
