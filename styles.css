@@ -21,6 +21,15 @@
 /****************************************/
 /****************************************/
 
+body, * {
+    transition: 
+    background-color .6s ease, 
+    color .6s ease, 
+    fill .6s ease, 
+    border-color .6s ease,
+    box-shadow .6s ease;
+}
+
 html {
     scroll-behavior: smooth;
 }
