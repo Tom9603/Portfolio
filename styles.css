@@ -631,7 +631,6 @@ footer {
     }
 
     .logo-menu {
-        content: url("images/byTom_menu.png");
         position: static;
         display: block;
         height: 30px;
@@ -765,7 +764,7 @@ footer {
         content: "";
         position: absolute;
         inset: 0;
-        padding: 3px;                      /* épaisseur du contour */
+        padding: 3px;
         border-radius: inherit;
         background: linear-gradient(to right, #2c57e7, #a552a8);
         -webkit-mask:
