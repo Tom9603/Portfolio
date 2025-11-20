@@ -8,6 +8,7 @@
     --bg1: #F3F3F5;
     --bg2: #e2e2e2;
     --bg3: #2c57e7;
+    --bg4: #dfe2e9;
     --color1: #374252;
     --color2: #F3F3F5;
     --color3: #2c57e7;
@@ -401,7 +402,7 @@ p {
 }
 
 .project-tags {
-     display: flex;
+    display: flex;
     flex-wrap: wrap;
     gap: .5rem;
     margin-bottom: 2rem;
@@ -411,12 +412,12 @@ p {
 }
 
 .project-tags span {
-    background: #dfe2e9;
+    background: var(--bg4);
     padding: .35rem .7rem;
     border-radius: 6px;
     font-size: .85rem;
     font-weight: 600;
-    color: #2c57e7;
+    color: var(--color3);
 }
 
 .project-buttons {
@@ -699,9 +700,17 @@ footer {
     --bg1: #1b1b1d;
     --bg2: #2a2a2d;
     --bg3: #8ab4f8;
+    --bg4: #2c57e7;
     --color1: #e5e5e5;
     --color2: #1b1b1d;
     --color3: #8ab4f8;
+    --color4: #F3F3F5;
+
+    h1 {
+    background: linear-gradient(to right, #2c57e7, #de58e2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    }
 
     .button {
         box-shadow: 0 0px 15px var(--color3);
@@ -765,6 +774,11 @@ footer {
         -webkit-text-fill-color: transparent;
         filter: none;
     }
+}
+
+.dark-mode .project-tags span {
+    background: var(--bg4);
+    color: var(--color4);
 }
 
 .dark-mode .contact-form {
