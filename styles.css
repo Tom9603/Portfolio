@@ -388,7 +388,7 @@ p {
     margin: 0 0 1rem 0;
     line-height: 1.5rem;
     font-size: 1rem;
-    color: #555;
+    color: var(--color1);
 }
 
 .project-tags {
@@ -753,24 +753,24 @@ footer {
 }
 
 .dark-mode .contact-form {
-        position: relative;
-        z-index: 0;
-        background: var(--color2);
-        padding: 3rem 2.5rem;
-        border-radius: 16px;
-    }
+    position: relative;
+    z-index: 0;
+    background: var(--color2);
+    padding: 3rem 2.5rem;
+    border-radius: 16px;
+}
 
 .dark-mode .contact-form::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        padding: 3px;
-        border-radius: inherit;
-        background: linear-gradient(to right, #2c57e7, #a552a8);
-        -webkit-mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-                mask-composite: exclude;
-        z-index: -1;
-    }
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 3px;
+    border-radius: inherit;
+    background: linear-gradient(to right, #2c57e7, #a552a8);
+    -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    z-index: -1;
+}
