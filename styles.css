@@ -196,7 +196,7 @@ p {
 
 .header-icons i {
     font-size: clamp(1.3rem, 2vw, 2rem);
-    background: linear-gradient(to right, #2c57e7, #a552a8);
+    background: var(--color1);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     transition: transform .4s ease, color .7s ease;
@@ -334,13 +334,32 @@ p {
     padding: 2rem;
 }
 
-.project-card {
+/* COMMUN (light + dark) */
+.project-card { 
+    position: relative;
     background: var(--color2);
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0,0,0,0.06);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+/* Contour dégradé */
+.project-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 3px;
+    border-radius: inherit;
+    background: linear-gradient(to right, #2c57e7, #a552a8);
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+}
+
 
 .project-card:hover {
     transform: scale(1.02);
@@ -612,6 +631,7 @@ footer {
     }
 
     .logo-menu {
+        content: url("images/byTom_menu.png");
         position: static;
         display: block;
         height: 30px;
@@ -670,43 +690,43 @@ footer {
     --color3: #8ab4f8;
 
     .button {
-    box-shadow: 0 0px 15px var(--color3);
+        box-shadow: 0 0px 15px var(--color3);
     }
 
     .symfony-dark {
-    filter: invert(1);
+        filter: invert(1);
     }
 
     .github-dark {
-    filter: invert(1);
+        filter: invert(1);
     }
 
     .wordpress-dark {
-    filter: invert(1);
+        filter: invert(1);
     }
 
     .wix-dark {
-    filter: invert(1);
+        filter: invert(1);
     }
 
     .wix-dark p {
-    filter: invert(1);
+        filter: invert(1);
     }
 
     .contact-form input:focus,
     .contact-form textarea:focus {
-    border-color: var(--color3);
-    box-shadow: 0 0 0 4px var(--color3);
+        border-color: var(--color3);
+        box-shadow: 0 0 0 4px var(--color3);
     }
 
     .btn-outline {
-    color: var(--color2);
-    background: var(--color1);
+        color: var(--color2);
+        background: var(--color1);
     }
 
     .btn-outline:hover {
-    background: #2c57e7;
-    color: var(--color1);
+        background: #2c57e7;
+        color: var(--color1);
     }
 
     .btn-fill {
@@ -718,36 +738,40 @@ footer {
     }
 
     .logo-menu {
-        filter: invert(1);
+        content : url("images/byTom_menu_dark.png");
     }
 
     .header-main-logo {
-        filter: invert(1);
+        content: url("images/byTom_dark.png");
     }
 
     .header-icons i {
+        background: linear-gradient(to right, #2c57e7, #a552a8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
         filter: none;
     }
+}
 
-    .project-card {
-    position: relative;
-    background: var(--color2);
-    border-radius: 16px;
-    overflow: hidden;
-    padding: 0;
+.dark-mode .contact-form {
+        position: relative;
+        z-index: 0;
+        background: var(--color2);
+        padding: 3rem 2.5rem;
+        border-radius: 16px;
     }
 
-    .project-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    padding: 3px;
-    border-radius: inherit;
-    background: linear-gradient(to right, #2c57e7, #a552a8);
-    -webkit-mask:
+.dark-mode .contact-form::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        padding: 3px;                      /* épaisseur du contour */
+        border-radius: inherit;
+        background: linear-gradient(to right, #2c57e7, #a552a8);
+        -webkit-mask:
         linear-gradient(#fff 0 0) content-box,
         linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-            mask-composite: exclude;
+        -webkit-mask-composite: xor;
+                mask-composite: exclude;
+        z-index: -1;
     }
-}
