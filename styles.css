@@ -22,7 +22,7 @@
 /****************************************/
 
 body, * {
-    transition: 
+    transition:
     background-color .6s ease, 
     color .6s ease, 
     fill .6s ease, 
@@ -624,6 +624,12 @@ footer {
     text-align: center;
 }
 
+/****************************************/
+/****************************************/
+/*************** RESPONSIVE *************/
+/***************** MOBILE ***************/
+/****************************************/
+
 @media (max-width: 1000px) {
     
     section {
@@ -649,7 +655,7 @@ footer {
     }
 
     .menu ul {
-        gap: 3rem;
+        gap: 2rem;
     }
 
     .header-main-logo {
