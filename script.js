@@ -45,3 +45,18 @@ document.getElementById("topBtn").onclick = () =>
 document.getElementById("cvBtn").onclick = () => {
     window.open("documents/CV_Tom_Ochietti.pdf", "_blank");
 };
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////// DARK MODE/ /////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+document.getElementById("themeToggle").onclick = () => {
+    document.body.classList.toggle("dark-mode");
+
+    const icon = document.querySelector("#themeToggle i");
+    if (document.body.classList.contains("dark-mode")) {
+        icon.classList.replace("fa-moon", "fa-sun");
+    } else {
+        icon.classList.replace("fa-sun", "fa-moon");
+    }
+};

@@ -79,6 +79,10 @@ textarea {
     resize: none;
 }
 
+p {
+    color: var(--color1);
+}
+
 /****************************************/
 /****************************************/
 /************** COMPONENTS **************/
@@ -96,16 +100,17 @@ textarea {
     height: 45px;
     border-radius: 50%;
     border: none;
-    background: var(--color3);
+    background: var(--color1);
     color: var(--color2);
     font-size: 1.4rem;
     cursor: pointer;
     box-shadow: 0 -2px 30px rgba(0, 0, 0, 0.55);
-    transition: transform .2s ease;
+    transition: transform .2s ease, background .7s ease;
 }
 
 #topBtn:hover {
     transform: scale(1.1);
+    background: var(--color3);
 }
 
 /* Bouton Télécharger CV */
@@ -117,16 +122,39 @@ textarea {
     height: 45px;
     border-radius: 50%;
     border: none;
-    background: var(--color3);
+    background: var(--color1);
     color: var(--color2);
     font-size: 1.4rem;
     cursor: pointer;
     box-shadow: 0 -2px 30px rgba(0, 0, 0, 0.55);
-    transition: transform .2s ease;
+    transition: transform .2s ease, background .7s ease;
 }
 
 #cvBtn:hover {
     transform: scale(1.1);
+    background: var(--color3);
+}
+
+.theme-btn {
+    position: fixed;
+    right: 25px;
+    bottom: 140px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    background: var(--color1);
+    color: var(--color2);
+    font-size: 1.4rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: transform .2s ease, background .7s ease;
+    z-index: 1000;
+}
+
+.theme-btn:hover {
+    transform: scale(1.1);
+    background: var(--color3);
 }
 
 /****************************************/
@@ -168,15 +196,17 @@ textarea {
 
 .header-icons i {
     font-size: clamp(1.3rem, 2vw, 2rem);
-    color: var(--color1);
-    transition: transform .4s ease;
+    background: linear-gradient(to right, #2c57e7, #a552a8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: transform .4s ease, color .7s ease;
     cursor: pointer;
     filter: drop-shadow(0 -2px 30px rgba(0, 0, 0, 0.75));
 }
 
 .header-icons i:hover {
     transform: scale(1.08);
-    color: var(--color3);
+    color: var(--color1);
 }
 
 @keyframes bounce {
@@ -185,8 +215,9 @@ textarea {
 }
 
 .click {
-  font-size: 1.5rem;
-  animation: bounce 1.5s infinite;
+    font-size: 1.5rem;
+    animation: bounce 1.5s infinite;
+    color: var(--color1);
 }
 
 .about {
@@ -499,7 +530,7 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #ebebeb;
+    background-color: var(--color2);
     box-shadow: 0 -2px 30px rgba(0, 0, 0, 0.25);
     z-index: 999;
 }
@@ -621,5 +652,102 @@ footer {
     .contact-form input,
     .contact-form textarea {
     box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.15);
+    }
+}
+
+/****************************************/
+/****************************************/
+/**************** DARK MODE *************/
+/****************************************/
+/****************************************/
+
+.dark-mode {
+    --bg1: #1b1b1d;
+    --bg2: #2a2a2d;
+    --bg3: #8ab4f8;
+    --color1: #e5e5e5;
+    --color2: #1b1b1d;
+    --color3: #8ab4f8;
+
+    .button {
+    box-shadow: 0 0px 15px var(--color3);
+    }
+
+    .symfony-dark {
+    filter: invert(1);
+    }
+
+    .github-dark {
+    filter: invert(1);
+    }
+
+    .wordpress-dark {
+    filter: invert(1);
+    }
+
+    .wix-dark {
+    filter: invert(1);
+    }
+
+    .wix-dark p {
+    filter: invert(1);
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+    border-color: var(--color3);
+    box-shadow: 0 0 0 4px var(--color3);
+    }
+
+    .btn-outline {
+    color: var(--color2);
+    background: var(--color1);
+    }
+
+    .btn-outline:hover {
+    background: #2c57e7;
+    color: var(--color1);
+    }
+
+    .btn-fill {
+        color: var(--color1)
+    }
+
+    .btn-fill:hover {
+        color: var(--color2)
+    }
+
+    .logo-menu {
+        filter: invert(1);
+    }
+
+    .header-main-logo {
+        filter: invert(1);
+    }
+
+    .header-icons i {
+        filter: none;
+    }
+
+    .project-card {
+    position: relative;
+    background: var(--color2);
+    border-radius: 16px;
+    overflow: hidden;
+    padding: 0;
+    }
+
+    .project-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 3px;
+    border-radius: inherit;
+    background: linear-gradient(to right, #2c57e7, #a552a8);
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
     }
 }
