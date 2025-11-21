@@ -127,7 +127,7 @@ p {
 #cvBtn {
     position: fixed;
     right: 25px;
-    bottom: 80px; /* juste au-dessus du topBtn */
+    bottom: 80px;
     width: 45px;
     height: 45px;
     border-radius: 50%;
@@ -165,6 +165,34 @@ p {
 .theme-btn:hover {
     transform: scale(1.1);
     background: var(--color3);
+}
+
+#langBtn {
+    position: fixed;
+    right: 25px;
+    bottom: 200px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    background: var(--color1);
+    color: var(--color2);
+    font-size: 1.4rem;
+    cursor: pointer;
+    box-shadow: 0 -2px 30px rgba(0, 0, 0, 0.55);
+    transition: transform .2s ease, background .7s ease;
+    z-index: 1000;
+}
+
+#langBtn:hover {
+    transform: scale(1.1);
+    background: var(--color3);
+}
+
+.btn-active {
+    background: var(--color3) !important;
+    transform: scale(1.1);
+    color: var(--color2) !important;
 }
 
 /****************************************/
@@ -630,6 +658,35 @@ footer {
     box-shadow: 0 -2px 30px rgba(0, 0, 0, 0.25);
     padding: 1rem;
     text-align: center;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(3px);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modal-content {
+    background: #fff;
+    color: var(--color1);
+    padding: 30px;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 12px;
+}
+.link-modal {
+    cursor: pointer;
+    text-decoration: underline;
+}
+.close {
+    float: right;
+    cursor: pointer;
+    font-size: 28px;
 }
 
 /****************************************/

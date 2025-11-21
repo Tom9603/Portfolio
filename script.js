@@ -43,20 +43,82 @@ document.getElementById("topBtn").onclick = () =>
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 document.getElementById("cvBtn").onclick = () => {
-    window.open("documents/CV_Tom_Ochietti.pdf", "_blank");
+    window.open("/documents/CV_Tom_Ochietti.pdf", "_blank");
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////// DARK MODE/ /////////////////////////////////////////////
+//////////////////////////////////////////// DARK MODE + SAVE ///////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-document.getElementById("themeToggle").onclick = () => {
+const themeBtn = document.getElementById("themeToggle");
+
+if (localStorage.getItem("darkMode") === "true") {
+    document.body.classList.add("dark-mode");
+    themeBtn.classList.add("btn-active");
+}
+
+themeBtn.onclick = () => {
     document.body.classList.toggle("dark-mode");
+    const isDark = document.body.classList.contains("dark-mode");
+    localStorage.setItem("darkMode", isDark);
 
     const icon = document.querySelector("#themeToggle i");
-    if (document.body.classList.contains("dark-mode")) {
+    if (isDark) {
         icon.classList.replace("fa-moon", "fa-sun");
+        themeBtn.classList.add("btn-active");
     } else {
         icon.classList.replace("fa-sun", "fa-moon");
+        themeBtn.classList.remove("btn-active");
     }
 };
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////// LANG TOGGLE ////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const langBtn = document.getElementById("langBtn");
+
+if (langBtn) {
+    const path = window.location.pathname;
+
+    if (path.includes("/en")) {
+        langBtn.classList.add("btn-active");
+        langBtn.title = "Passer en français";
+    } else {
+        langBtn.classList.remove("btn-active");
+        langBtn.title = "Switch to English";
+    }
+
+    langBtn.onclick = () => {
+        if (path.includes("/en")) {
+            window.location.href = "/";
+        } else {
+            window.location.href = "/en/";
+        }
+    };
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////// MODALS ///////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+document.querySelectorAll('.link-modal').forEach(link => {
+    link.addEventListener('click', () => {
+        const modalId = "modal-" + link.dataset.modal;
+        document.getElementById(modalId).style.display = 'flex';
+    });
+});
+
+document.querySelectorAll('.close').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const modalId = "modal-" + btn.dataset.close;
+        document.getElementById("modal-" + btn.dataset.close).style.display = 'none';
+    });
+});
+
+window.addEventListener('click', (e) => {
+    document.querySelectorAll('.modal').forEach(modal => {
+        if (e.target === modal) modal.style.display = 'none';
+    });
+});
