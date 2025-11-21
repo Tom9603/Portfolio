@@ -216,7 +216,9 @@ p {
 
 .header-icons i:hover {
     transform: scale(1.08);
-    color: var(--color1);
+    background: linear-gradient(to right, #2c57e7, #a552a8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 @keyframes bounce {
@@ -773,6 +775,12 @@ footer {
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         filter: none;
+    }
+
+    .header-icons i:hover {
+        background: var(--color3);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
 }
 
