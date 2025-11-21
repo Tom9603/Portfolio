@@ -258,7 +258,7 @@ p {
     background: var(--bg1);
     color: var(--color3);
     border: 1px solid var(--color3);
-    border-radius: 5px;
+    border-radius: 30px;
     font-weight: bold;
     text-align: center;
     transition: background-color 0.3s ease;
@@ -300,6 +300,11 @@ p {
 .stack-item:hover {
     transform: scale(1.1);
     transition: transform 0.4s ease;
+}
+
+.stack-item:hover img,
+.stack-item:hover i {
+    filter: drop-shadow(0 -2px 20px rgba(0, 0, 0, 0.35));
 }
 
 .stack-item i,
@@ -782,6 +787,24 @@ footer {
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
+
+    .stack-item:hover img,
+    .stack-item:hover i:hover {
+        filter: drop-shadow(0 -2px 30px rgba(231, 231, 231, 0.75));
+    }
+
+    /* Specific for dark mode icons */
+    .stack-item:hover img.github-dark,
+    .stack-item:hover i.github-dark,
+    .stack-item:hover img.symfony-dark,
+    .stack-item:hover i.symfony-dark,
+    .stack-item:hover img.wordpress-dark,
+    .stack-item:hover i.wordpress-dark,
+    .stack-item:hover img.wix-dark,
+    .stack-item:hover i.wix-dark {
+        filter: invert(1) drop-shadow(0 -2px 20px rgba(231,231,231,.75));
+}
+
 }
 
 .dark-mode .project-tags span {
