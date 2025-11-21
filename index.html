@@ -323,11 +323,20 @@
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="_next" value="">
 
-                <label>Nom<input type="text" name="Nom" required></label>
+                <label>
+                    Nom
+                    <input type="text" name="Nom" placeholder="Saisissez votre nom" required>
+                </label>
 
-                <label>Email<input type="email" name="Email" required></label>
+                <label>
+                    Email
+                    <input type="email" name="Email" placeholder="Saisissez votre email" required>
+                </label>
 
-                <label>Message<textarea name="Message" rows="5" required></textarea></label>
+                <label>
+                    Message
+                    <textarea name="Message" rows="5" placeholder="Votre message ici..." required></textarea>
+                </label>
 
                 <button type="submit">Envoyer</button>
                 <p id="formMessage" class="form-message"></p>
