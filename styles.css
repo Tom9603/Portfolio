@@ -505,7 +505,7 @@ p {
 /****************************************/
 
 .contact {
-    padding: 4rem 1rem;
+    padding: 10rem 1rem;
     max-width: 900px;
     margin: 0 auto;
 }
@@ -728,6 +728,10 @@ footer {
         gap: 1.35rem;
     }
 
+    .menu ul li a:hover {
+        color: var(--color1);
+    }
+
     .header-main-logo {
         width: 300px;
         max-width: 90%;
@@ -765,6 +769,10 @@ footer {
     .contact-form input,
     .contact-form textarea {
     box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .contact {
+        padding: 4rem 1rem;
     }
 
     #themeBtn:hover, #langBtn:hover, #cvBtn:hover, #topBtn:hover {
@@ -1060,6 +1068,10 @@ footer {
     .contact-form button:hover {
         background: var(--color3) !important;
         transform: none !important;
+    }
+
+    .menu ul li a:hover {
+        color: var(--color1);
     }
 }
 
