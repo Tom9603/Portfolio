@@ -189,6 +189,10 @@ p {
     background: var(--color3);
 }
 
+#langBtn {
+    
+}
+
 .btn-active {
     background: var(--color3) !important;
     transform: scale(1.1);
@@ -644,7 +648,7 @@ header {
     width: 0;
     height: 2px;
     background: var(--color3);
-    transition: width 0.3s ease;
+    transition: width 0.4s ease;
 }
 
 .menu ul li:hover::after {
@@ -714,9 +718,9 @@ footer {
     .logo-menu {
         position: static;
         display: block;
-        height: 30px;
+        height: 40px;
         padding-bottom: 0.5rem;
-        margin-top: 1rem;
+        margin-top: 0.7rem;
         filter: drop-shadow(0 -2px 20px rgba(0, 0, 0, 0.25));
     }
 
@@ -840,6 +844,16 @@ footer {
     .contact-form button:hover {
         background: var(--color3) !important;
         transform: none !important;
+    }
+
+    /* Désactiver le ::after du hover en mobile */
+    .menu ul li:hover::after {
+        width: 0 !important;
+    }
+    
+    /* Garder uniquement le ::after pour .active */
+    .menu ul li a.active::after {
+        width: 100% !important;
     }
 }
 
@@ -1075,4 +1089,22 @@ footer {
     -webkit-mask-composite: xor;
             mask-composite: exclude;
     z-index: -1;
+}
+
+.dark-mode .lang-btn img {
+    filter: invert(1) brightness(0.9);
+}
+
+/****************************************/
+/************ MENU ACTIVE LINK ***********/
+/****************************************/
+
+.menu ul li a.active {
+    color: var(--color3);
+    font-weight: 600;
+}
+
+/* Le :has() isole et cible mon a.active dans le parent li */
+.menu ul li:has(a.active)::after {
+    width: 100% !important;
 }

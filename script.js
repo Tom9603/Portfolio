@@ -118,3 +118,39 @@ window.addEventListener('click', (e) => {
         if (e.target === modal) modal.style.display = 'none';
     });
 });
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////// MENU SECTION ACTIVE /////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Menu actif au scroll
+window.addEventListener('scroll', () => {
+    const sections = document.querySelectorAll('section[id]');
+    const menuLinks = document.querySelectorAll('.menu ul li a');
+    
+    let current = '';
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        
+        // Ajuste la valeur pour tenir compte du header fixe (150px = hauteur approximative du header)
+        if (window.scrollY >= (sectionTop - 150)) {
+            current = section.getAttribute('id');
+        }
+    });
+    
+    menuLinks.forEach(link => {
+        link.classList.remove('active');
+        
+        // Si le lien correspond à la section actuelle, ajoute la classe active
+        if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+        }
+        
+        // Cas spécial pour "Accueil" quand on est tout en haut
+        if (window.scrollY < 300 && link.getAttribute('href') === '#') {
+            link.classList.add('active');
+        }
+    });
+});
