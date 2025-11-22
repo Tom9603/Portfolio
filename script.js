@@ -62,16 +62,12 @@ themeBtn.onclick = () => {
     const isDark = document.body.classList.contains("dark-mode");
     localStorage.setItem("darkMode", isDark);
 
-    const icon = document.querySelector("#themeToggle i");
     if (isDark) {
-        icon.classList.replace("fa-moon", "fa-sun");
         themeBtn.classList.add("btn-active");
     } else {
-        icon.classList.replace("fa-sun", "fa-moon");
         themeBtn.classList.remove("btn-active");
     }
 };
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////// LANG TOGGLE ////////////////////////////////////////////

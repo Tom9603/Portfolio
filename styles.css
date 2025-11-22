@@ -694,6 +694,7 @@ footer {
 /*************** RESPONSIVE *************/
 /***************** MOBILE ***************/
 /****************************************/
+/****************************************/
 
 @media (max-width: 1000px) {
     
@@ -731,6 +732,15 @@ footer {
     .header-icons i {
         font-size: clamp(1.8rem, 2.6vw, 2.6rem);
         color: var(--color1);
+
+    }
+
+    .header-icons i:hover {
+        transform: none;
+    }
+
+    .header-icons i:active {
+        transform: none;
     }
 
     .button {
@@ -751,6 +761,136 @@ footer {
     .contact-form input,
     .contact-form textarea {
     box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    #themeBtn:hover, #langBtn:hover, #cvBtn:hover, #topBtn:hover {
+        transform: none;
+        background: none;
+    }
+
+    #themeToggle:hover,
+    #langBtn:hover,
+    #cvBtn:hover,
+    #topBtn:hover {
+        transform: none !important;
+        background: var(--color1) !important;
+    }
+
+    #themeToggle.btn-active,
+    #langBtn.btn-active {
+        background: var(--color3) !important;
+        transform: none !important;
+    }
+
+    /* Forcer CV et Back to Top à rester gris en mobile */
+    #cvBtn.btn-active,
+    #topBtn.btn-active {
+        background: var(--color1) !important;
+        transform: none !important;
+    }
+
+    /* Icons sociaux */
+    .header-icons i:hover {
+        transform: none !important;
+        background: var(--color1) !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+    }
+
+    /* Boutons projets */
+    .btn-outline:hover {
+        background: var(--bg1) !important;
+        color: var(--color3) !important;
+    }
+
+    .btn-fill:hover {
+        background: #2c57e7 !important;
+        color: var(--color2) !important;
+    }
+
+    /* Bouton "Discutons de votre projet" */
+    .button:hover {
+        background: var(--bg3) !important;
+        color: var(--color2) !important;
+    }
+
+    /* Logo menu */
+    .logo-menu:hover {
+        transform: translateY(-50%) !important;
+    }
+
+    /* Stack items (technologies) */
+    .stack-item:hover {
+        transform: none !important;
+    }
+
+    .stack-item:hover img,
+    .stack-item:hover i {
+        filter: none !important;
+        transform: none !important;
+    }
+
+    /* Project cards */
+    .project-card:hover {
+        transform: none !important;
+        box-shadow: 0 -2px 30px rgba(0, 0, 0, 0.25) !important;
+    }
+
+    /* Bouton contact form */
+    .contact-form button:hover {
+        background: var(--color3) !important;
+        transform: none !important;
+    }
+}
+
+/* Buttons on the top */
+@media (max-width: 1000px) {
+
+    .theme-btn {
+        position: fixed;
+        right: 50px;
+        top: 25px;
+        bottom: auto;
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+
+ 
+
+    #themeToggle i {
+        padding-top: 4px;
+    }
+
+    #langBtn {
+        position: fixed;
+        left: 50px;
+        top: 25px;
+        right: auto;
+        bottom: auto;
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+
+    #cvBtn {
+        right: 15px;
+        bottom: 80px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+
+    #topBtn {
+        right: 15px;
+        bottom: 25px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+
+    .menu {
+        padding-top: 2.5rem;
     }
 }
 
@@ -860,8 +1000,53 @@ footer {
     .stack-item:hover img.wix-dark,
     .stack-item:hover i.wix-dark {
         filter: invert(1) drop-shadow(0 -2px 20px rgba(231,231,231,.75));
-}
+    }
 
+    /* Icons sociaux */
+    .header-icons i:hover {
+        transform: none !important;
+        background: linear-gradient(to right, #2c57e7, #a552a8) !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+    }
+
+    /* Boutons projets */
+    .btn-outline:hover {
+        background: var(--color1) !important;
+        color: var(--color2) !important;
+    }
+
+    .btn-fill:hover {
+        background: #2c57e7 !important;
+        color: var(--color4) !important;
+    }
+
+    /* Logo menu */
+    .logo-menu:hover {
+        transform: translateY(-50%) !important;
+    }
+
+    /* Stack items (technologies) */
+    .stack-item:hover {
+        transform: none !important;
+    }
+
+    .stack-item:hover img,
+    .stack-item:hover i {
+        filter: none !important;
+        transform: none !important;
+    }
+
+    /* Project cards */
+    .project-card:hover {
+        box-shadow: 0 -2px 30px rgba(0, 0, 0, 0.25) !important;
+    }
+
+    /* Bouton contact form */
+    .contact-form button:hover {
+        background: var(--color3) !important;
+        transform: none !important;
+    }
 }
 
 .dark-mode .project-tags span {
