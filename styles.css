@@ -189,10 +189,6 @@ p {
     background: var(--color3);
 }
 
-#langBtn {
-    
-}
-
 .btn-active {
     background: var(--color3) !important;
     transform: scale(1.1);
@@ -676,7 +672,7 @@ footer {
 }
 
 .modal-content {
-    background: #fff;
+    background: var(--bg2);
     color: var(--color1);
     padding: 30px;
     width: 90%;
