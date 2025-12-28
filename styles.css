@@ -59,6 +59,7 @@ section {
 
 h1 {
     margin: 0;
+    margin-bottom: 2rem;
     text-align: center;
     font-size: 3rem;
     background: var(--color4);
@@ -68,7 +69,7 @@ h1 {
 
 h2 {
     font-size: 2rem;
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
     text-align: center;
     color: var(--color1);
 }
@@ -350,6 +351,67 @@ p {
     font-size: 1rem;
     color: var(--color1);
 }
+
+/****************************************/
+/*************** A QUI ? ***************/
+/****************************************/
+
+.who {
+    padding-top: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    padding-bottom: 1rem;
+    line-height: 1.5rem;
+    font-size: 1.3rem;
+    color: var(--color1);
+    font-weight: 500;
+    text-align: left;
+}
+.who-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto 5rem;
+    padding: 2rem;
+    justify-items: center;
+}
+
+.who-item {
+    width: 220px;
+    min-height: 160px;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 12px;
+    background: transparent;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.who-item i {
+    font-size: 40px;
+    padding: 0;
+    color: var(--color1);
+}
+
+.who-item p{
+    margin: 0;
+}
+
+.who-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.10);
+    border-color: rgba(0,0,0,0.25);
+}
+
 
 /****************************************/
 /*************** PROJECTS ***************/
@@ -1053,6 +1115,14 @@ footer {
     .stack-item:hover i {
         filter: none !important;
         transform: none !important;
+    }
+
+    .who-item {
+    border: 1px solid rgba(236, 236, 236, 0.15);
+    }
+
+    .who-item:hover {
+    box-shadow: 0 8px 25px rgba(221, 221, 221, 0.1);
     }
 
     /* Project cards */
