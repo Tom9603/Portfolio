@@ -983,6 +983,17 @@ footer {
     }
 }
 
+@media (hover: none) {
+  .stack-item:hover {
+    transform: none !important;
+  }
+
+  .stack-item:hover img,
+  .stack-item:hover i {
+    filter: none !important;
+  }
+}
+
 /****************************************/
 /****************************************/
 /**************** DARK MODE *************/
@@ -1113,17 +1124,6 @@ footer {
     /* Logo menu */
     .logo-menu:hover {
         transform: translateY(-50%) !important;
-    }
-
-    /* Stack items (technologies) */
-    .stack-item:hover {
-        transform: none !important;
-    }
-
-    .stack-item:hover img,
-    .stack-item:hover i {
-        filter: none !important;
-        transform: none !important;
     }
 
     .who-item {
