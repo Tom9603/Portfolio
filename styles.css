@@ -710,12 +710,27 @@ p {
     box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.10);
 }
 
+.select-offer {
+    padding: 0.9rem 1.2rem;
+    border: 1.5px solid #d3d6e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: var(--primary_police);
+    color: var(--color1);
+    background: #f6f7fb;
+    transition: all 0.25s ease;
+    outline: none;
+    box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.10);
+}
+
 .contact-form input:focus,
-.contact-form textarea:focus {
+.contact-form textarea:focus,
+.contact-form select:focus {
     border-color: var(--color3);
     background: white;
     box-shadow: 0 0 0 4px rgba(44, 87, 231, 0.15);
 }
+
 
 .contact-form button {
     background: var(--color3);
