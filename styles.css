@@ -74,6 +74,12 @@ h2 {
     color: var(--color1);
 }
 
+h3 {
+    font-size: 2rem;
+    color: var(--color1);
+    text-align: center;
+}
+
 a {
     text-decoration: none;
     color: inherit;
@@ -94,6 +100,10 @@ p {
     color: var(--color1);
 }
 
+.button.mobile-only {
+  display: none;
+}
+
 /****************************************/
 /****************************************/
 /************** COMPONENTS **************/
@@ -102,7 +112,7 @@ p {
 
 /* ------ BOUTONS FLOTANTS ------ */
 
-/* Bouton Retour en Hautack to top */
+/* Bouton Back to Top */
 #topBtn {
     position: fixed;
     right: 25px;
@@ -146,6 +156,7 @@ p {
     background: var(--color3);
 }
 
+/* Bouton Thème */
 .theme-btn {
     position: fixed;
     right: 25px;
@@ -168,6 +179,7 @@ p {
     background: var(--color3);
 }
 
+/* Bouton Langue */
 #langBtn {
     position: fixed;
     right: 25px;
@@ -283,12 +295,13 @@ p {
     display: block;
     width: fit-content;
     margin: 0 auto;
-    margin-bottom: 5rem;
-    padding: 0.75rem 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 4rem;
+    padding: 1.50rem 2rem;
     background: var(--bg1);
     color: var(--color3);
     border: 1px solid var(--color3);
-    border-radius: 30px;
+    border-radius: 40px;
     font-weight: bold;
     text-align: center;
     transition: background-color 0.3s ease;
@@ -413,6 +426,96 @@ p {
     border-color: rgba(0,0,0,0.25);
 }
 
+/****************************************/
+/*************** PRICE ***************/
+/****************************************/
+
+#tarifs {
+  scroll-margin-top: 7rem;
+}
+
+.price-title {
+    margin-bottom: 3rem;
+    margin-top: 3rem;
+}
+
+.price-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    padding: 2rem;
+}
+
+.price-item {
+    display: flex;
+    flex-direction: column;
+    background: var(--color2);
+    border: 2px solid rgba(53, 39, 175, 0.15);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+}
+
+.price-item:hover {
+    transform: scale(1.05);
+    transition: transform 0.9s ease, box-shadow 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.30);
+}
+
+.vitrine {
+    color: #3852c7;
+}
+
+.standard {
+    color: #289208;
+}
+
+.e-commerce {
+    color: #883fe7;
+}
+
+.premium {
+    color: #D4AF37;
+}
+
+.price-item ul {
+    margin-bottom: 3rem;
+    color: var(--color1);
+    list-style-position: inside;
+    padding-left: 0;
+}
+
+.price-item ul li {
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+}
+
+.price-info {
+    margin-top: auto;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color3);
+    text-align: center;
+}
+
+.info {
+    font-size: 0.9rem;
+    color: var(--color1);
+    font-style: italic;
+    margin-bottom: 7rem;
+}
+
+.info p {
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: left;
+    margin-top: 1rem;
+}
 
 /****************************************/
 /*************** PROJECTS ***************/
@@ -430,7 +533,6 @@ p {
 
 .projects-title {
     margin-bottom: 2rem;
-
 }
 
 .projects-grid {
@@ -759,10 +861,20 @@ footer {
 /****************************************/
 /****************************************/
 
-@media (max-width: 1000px) {
+@media (max-width: 768px) {
+  *:hover {
+    transform: none !important;
+  }
+}
+
+@media (max-width: 1200px) {
     
     section {
-    scroll-margin-top: 115px;
+        scroll-margin-top: 115px;
+    }
+
+    #tarifs {
+        scroll-margin-top: 11.5rem;
     }
 
     main {
@@ -772,6 +884,7 @@ footer {
     .menu {
         flex-direction: column;
         padding: 1.7rem;
+        font-size: 0.8rem;
     }
 
     .logo-menu {
@@ -784,7 +897,7 @@ footer {
     }
 
     .menu ul {
-        gap: 1.35rem;
+        gap: 1.70rem;
     }
 
     .menu ul li a:hover {
@@ -946,8 +1059,6 @@ footer {
         font-size: 1.2rem;
     }
 
- 
-
     #themeToggle i {
         padding-top: 4px;
     }
@@ -993,6 +1104,97 @@ footer {
   .stack-item:hover i {
     filter: none !important;
   }
+}
+
+@media (max-width: 596px) {
+
+    body:hover {
+        overflow-x: hidden;
+    }    
+
+    #tarifs {
+    scroll-margin-top: 11rem;
+    }
+
+    .price-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    padding: 0.6rem;
+    }
+
+    .price-item {
+    display: flex;
+    flex-direction: column;
+
+    background: var(--color2);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .price-item > div {
+    padding: 0.9rem 0.9rem 1rem;
+    text-align: left;
+    }
+
+    .price-item h3 {
+    margin: 0 0 0.4rem;
+    font-size: 2rem;
+    line-height: 1.15;
+    text-align: left;
+    }
+
+    .price-info {
+    margin: 0 0 0.75rem;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--color3);
+    text-align: left;
+    }
+
+    .price-item ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    }
+
+    .price-item ul li {
+    margin: 0.5rem 0;
+    padding-left: 0.9rem;
+    position: relative;
+    font-size: 0.95rem;
+    line-height: 1.35;
+    color: var(--color1);
+    }
+
+    .price-item ul li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0.6;
+    }
+
+    .info {
+    font-size: 0.85rem;
+    margin-top: 0.4rem;
+    margin-left: 0.9rem;
+    }
+
+    .button.mobile-only {
+    display: inline-flex;
+    width: fit-content;
+    padding: 0.8rem 1rem;
+    margin: 0 auto;
+    margin-top: 2.5rem;
+    border-radius: 15px;
+    }
+
+    .desktop-only {
+    display: none;
+    }
 }
 
 /****************************************/
@@ -1127,12 +1329,22 @@ footer {
         transform: translateY(-50%) !important;
     }
 
+    /* Who cards */
     .who-item {
-    border: 1px solid rgba(236, 236, 236, 0.15);
+    border: 1px solid rgba(241, 241, 241, 0.15);
     }
 
     .who-item:hover {
-    box-shadow: 0 8px 25px rgba(221, 221, 221, 0.1);
+    box-shadow: 0 8px 25px rgba(221, 241, 241, 0.15);
+    }
+
+    /* Price cards */
+    .price-item {
+    border: 1px solid rgba(241, 241, 241, 0.15);
+    }
+
+    .price-item:hover{
+    box-shadow: 0 8px 25px rgba(221, 241, 241, 0.15);
     }
 
     /* Project cards */
