@@ -466,15 +466,15 @@ p {
 }
 
 .vitrine {
-    color: #3852c7;
+    color: #566ccc;
 }
 
 .standard {
-    color: #289208;
+    color: #95C11E;
 }
 
 .e-commerce {
-    color: #883fe7;
+    color: #865aec;
 }
 
 .premium {
@@ -1113,7 +1113,7 @@ footer {
     }    
 
     #tarifs {
-    scroll-margin-top: 11rem;
+    scroll-margin-top: 9rem;
     }
 
     .price-grid {
