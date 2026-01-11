@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tomochietti.com/sitemap.xml
+Sitemap: https://by-tom.fr/sitemap.xml
