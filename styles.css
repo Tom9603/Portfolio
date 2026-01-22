@@ -321,16 +321,13 @@ p {
     padding: 1rem 0;
 }
 
-.stacks {
-    padding-bottom: 4rem;
-}
-
 .stack-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: 2rem;
     max-width: 900px;
     margin: 0 auto;
+    margin-top: 5rem;
 }
 
 .stack-item {
@@ -522,10 +519,10 @@ p {
 }
 
 .price-item ul li:first-child {
-    position: absolute;   /* NEW */
-    top: 2rem;            /* NEW → ajuste si besoin */
-    left: 2rem;           /* NEW (ou 0 si tu préfères) */
-    width: calc(100% - 4rem); /* NEW pour éviter overflow */
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    width: calc(100% - 4rem);
     font-weight: normal;
     margin-left: -4rem;
     width: 100%;
@@ -620,10 +617,20 @@ p {
     box-shadow: 0 8px 25px rgba(0,0,0,0.30);
 }
 
-.project-img img {
-    width: 100%;
-    display: block;
+.project-img{
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
 }
+
+.project-img img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
 
 .project-content {
     padding: 1.5rem;
@@ -711,6 +718,7 @@ p {
 
 .contact {
     padding: 10rem 1rem;
+    padding-top: 3rem;
     max-width: 900px;
     margin: 0 auto;
 }
@@ -1159,6 +1167,13 @@ footer {
     }
 }
 
+@media (min-width: 598px) and (max-width: 1150px) {
+    .info {
+        margin-left: 1.5rem;
+        margin-right: 1.5rem;
+    }
+}
+
 @media (hover: none) {
   .stack-item:hover {
     transform: none !important;
@@ -1215,6 +1230,7 @@ footer {
     font-weight: 800;
     color: var(--color3);
     text-align: left;
+    margin-bottom: 1rem;
     }
 
     .price-item ul {
@@ -1261,7 +1277,9 @@ footer {
     .info {
     font-size: 0.85rem;
     margin-top: 0.4rem;
-    margin-left: 0.9rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 3rem;
     }
 
     .button.mobile-only {
