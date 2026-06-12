@@ -315,31 +315,31 @@ p {
 }
 
 .hero-blob:nth-child(1) {
-    width: 550px;
-    height: 550px;
+    width: 1280px;
+    height: 1280px;
     background: rgba(44, 87, 231, 0.28);
     top: -100px;
     right: -80px;
-    animation: blobDrift 3.8s ease-in-out infinite alternate;
+    animation: blobDrift 1.7s ease-in-out infinite alternate;
 }
 
 .hero-blob:nth-child(2) {
-    width: 500px;
-    height: 500px;
+    width: 1190px;
+    height: 1190px;
     background: rgba(222, 88, 226, 0.24);
     bottom: -80px;
     left: -80px;
-    animation: blobDrift 4.8s ease-in-out infinite alternate-reverse;
+    animation: blobDrift 2.25s ease-in-out infinite alternate-reverse;
     animation-delay: -4s;
 }
 
 .hero-blob:nth-child(3) {
-    width: 280px;
-    height: 280px;
+    width: 650px;
+    height: 650px;
     background: rgba(44, 87, 231, 0.18);
     top: 45%;
     left: 35%;
-    animation: blobDrift 3.5s ease-in-out infinite alternate;
+    animation: blobDrift 1.6s ease-in-out infinite alternate;
     animation-delay: -2s;
 }
 
@@ -381,6 +381,15 @@ p {
 @keyframes heroFadeIn {
     from { opacity: 0; transform: translateY(22px); }
     to   { opacity: 1; transform: translateY(0); }
+}
+
+/* 'both' fige le to-keyframe (translateY(0)) a vie, et une
+   animation ecrase le transform d'un :hover : la levee du CTA
+   ne s'appliquait jamais. 'backwards' garde le masquage pendant
+   le delay puis rend la main au CSS normal une fois l'entree
+   jouee (etat final identique : opacity 1, pas de transform). */
+.hero-content > .hero-cta {
+    animation-fill-mode: backwards;
 }
 
 .hero h1 {
@@ -502,7 +511,8 @@ p {
 
 .header-icons i {
     font-size: clamp(1.3rem, 2vw, 2rem);
-    background: var(--color1);
+    /* Le bleu signature, theme-aware via la variable */
+    background: var(--color3);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     transition: transform .4s ease, color .7s ease;
@@ -510,11 +520,9 @@ p {
     filter: drop-shadow(0 -2px 30px rgba(0, 0, 0, 0.75));
 }
 
+/* Au survol : zoom seul, la couleur ne bouge plus */
 .header-icons i:hover {
     transform: scale(1.08);
-    background: linear-gradient(to right, #2c57e7, #a552a8);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
 }
 
 .about {
@@ -561,6 +569,8 @@ p {
     font-weight: 700;
 }
 
+/* Etat de repos = l'ancien style survole : fond bleu plein,
+   comme il l'etait deja sur mobile. L'allure "outline" disparait. */
 .button {
     display: block;
     width: fit-content;
@@ -568,19 +578,26 @@ p {
     margin-top: 1rem;
     margin-bottom: 4rem;
     padding: 1.50rem 2rem;
-    background: var(--bg1);
-    color: var(--color3);
+    background: var(--bg3);
+    color: var(--color2);
     border: 1px solid var(--color3);
     border-radius: 40px;
     font-weight: bold;
     text-align: center;
-    transition: background-color 0.3s ease;
+    transition: transform 0.3s ease, background-color 0.3s ease;
     box-shadow: 0 -2px 30px rgba(0, 0, 0, 0.25);
 }
 
-.button:hover {
-        background: var(--bg3);
-        color: var(--color2)
+/* Survol desktop : simple levee, sans changement de couleur.
+   Gate sous hover:hover, un tap iOS le collerait apres le scroll. */
+@media (hover: hover) {
+    .button:hover {
+        transform: translateY(-4px);
+        /* Le a:hover global (bleu) repeindrait le texte : sur le
+           fond bleu du bouton il deviendrait illisible */
+        color: var(--color2);
+    }
+
 }
 
 /******************** GRID ********************/
@@ -918,7 +935,11 @@ p {
     margin-bottom: .5rem;
     font-size: 1.4rem;
     color: var(--color1);
-    min-height: 3.2rem;
+    /* Zone titre figee a 2 lignes : meme les titres longs
+       (Miss Pin-up sur 2 lignes) ne decalent pas la suite,
+       et les textes commencent au meme niveau partout */
+    line-height: 1.2;
+    min-height: calc(1.4rem * 1.2 * 2);
 }
 
 .project-content p {
@@ -926,14 +947,19 @@ p {
     line-height: 1.5rem;
     font-size: 1rem;
     color: var(--color1);
+    /* Zone texte figee (4 lignes aux largeurs desktop) : les
+       tags demarrent au meme niveau dans toutes les cartes */
+    min-height: calc(1.5rem * 4);
 }
 
 .project-tags {
     display: flex;
     flex-wrap: wrap;
     gap: .5rem;
-    margin-bottom: 1.25rem;
-    margin-left: 2rem;
+    /* Marges symetriques, alignees sur le padding du texte
+       au-dessus (1.5rem) : les pastilles ne frolent plus le
+       bord droit de la carte, elles passent a la ligne */
+    margin: 0 1.5rem 1.25rem;
     align-content: flex-start;
 }
 
@@ -989,6 +1015,7 @@ p {
     background: var(--color1);
     color: var(--color2);
 }
+
 
 
 /****************************************/
@@ -1212,9 +1239,9 @@ p {
     box-shadow: 0 -2px 30px rgba(0, 0, 0, 0.25);
 }
 
+/* Pas de levee ici, choix assume : Envoyer reste pose */
 .contact-form button:hover {
     background: var(--color1);
-    transform: translateY(-2px);
 }
 
 .form-message {
@@ -1578,16 +1605,16 @@ body.drawer-open {
 
   /* Mouvement plus rapide et plus ample sur petit ecran */
   .hero-blob:nth-child(1) {
-    width: 350px;
-    height: 350px;
+    width: 675px;
+    height: 675px;
     background: rgba(44, 87, 231, 0.32);
-    animation: blobDriftMobile 2.8s ease-in-out infinite alternate;
+    animation: blobDriftMobile 1.3s ease-in-out infinite alternate;
   }
   .hero-blob:nth-child(2) {
-    width: 300px;
-    height: 300px;
+    width: 570px;
+    height: 570px;
     background: rgba(222, 88, 226, 0.28);
-    animation: blobDriftMobile 3.5s ease-in-out infinite alternate-reverse;
+    animation: blobDriftMobile 1.65s ease-in-out infinite alternate-reverse;
     animation-delay: -2.5s;
   }
   .hero-blob:nth-child(3) { display: none; }
@@ -1713,10 +1740,10 @@ body.drawer-open {
         transform: none !important;
     }
 
-    /* Icons sociaux */
+    /* Icons sociaux : au tap, on reste sur le bleu de repos */
     .header-icons i:hover {
         transform: none !important;
-        background: var(--color1) !important;
+        background: var(--color3) !important;
         -webkit-background-clip: text !important;
         -webkit-text-fill-color: transparent !important;
     }
@@ -2065,24 +2092,10 @@ body.drawer-open {
     }
 
     .header-icons i {
-        background: linear-gradient(to right, #2c57e7, #a552a8);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        filter: none;
-    }
-
-    .header-icons i:hover {
         background: var(--color3);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-    }
-
-    /* Icons sociaux */
-    .header-icons i:hover {
-        transform: none !important;
-        background: linear-gradient(to right, #2c57e7, #a552a8) !important;
-        -webkit-background-clip: text !important;
-        -webkit-text-fill-color: transparent !important;
+        filter: none;
     }
 
     /* Boutons projets */
@@ -2246,6 +2259,20 @@ body.drawer-open {
     .project-card {
         flex: 0 0 86%;
         scroll-snap-align: center;
+    }
+
+    /* Pastilles un cran plus compactes : les paires de tags
+       ("Galerie photo" + "Navigation simple") tiennent cote a
+       cote dans la carte a 86% au lieu de s'empiler en liste */
+    .project-tags span {
+        font-size: .8rem;
+        padding: .25rem .6rem;
+    }
+
+    /* Cartes plus etroites en mobile : les memes textes font
+       jusqu'a 5 lignes, on aligne les tags sur cette base */
+    .project-content p {
+        min-height: calc(1.5rem * 5);
     }
 
     /* Points indicateurs sous les carrousels (injectes en JS) */
@@ -2575,10 +2602,10 @@ body.drawer-open {
         transform: none !important;
     }
 
-    /* Boutons */
+    /* Boutons : au tap, on reste sur le fond bleu de repos */
     .button:hover {
-        background: var(--bg1);
-        color: var(--color3);
+        background: var(--bg3);
+        color: var(--color2);
     }
 
     .btn-outline:hover {
@@ -2613,7 +2640,7 @@ body.drawer-open {
     }
 
     .header-icons i:hover {
-        background: var(--color1);
+        background: var(--color3);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
