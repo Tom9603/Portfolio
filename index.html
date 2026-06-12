@@ -4,42 +4,96 @@
 <head>
     <!-- META -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="byTom - Développeur Web Full Stack">
-    <meta property="og:description" content="Développeur web développant des sites modernes et fonctionnels. Découvrez mes projets et compétences.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Développeur web freelance à Quimper (Finistère). Sites vitrines, boutiques en ligne et applications sur mesure pour associations, indépendants et petites entreprises. Devis gratuit.">
+    <meta name="author" content="byTom">
+    <meta name="theme-color" content="#1b1b1d">
     <meta name="google-site-verification" content="Q-K2pX-5EMo41wh510m504eS_thhIO53BsEKrlc4sk0" />
-    <meta property="og:image" content="images/byTom_link.png">
+    <!-- Open Graph (partage reseaux sociaux) -->
+    <meta property="og:site_name" content="byTom">
+    <meta property="og:title" content="byTom - Création de sites web à Quimper">
+    <meta property="og:description" content="Sites vitrines, boutiques en ligne et applications sur mesure pour associations, indépendants et petites entreprises. Devis gratuit.">
+    <meta property="og:image" content="https://by-tom.fr/images/byTom_link.png">
+    <meta property="og:image:alt" content="Logo byTom, développeur web freelance">
     <meta property="og:url" content="https://by-tom.fr/">
     <meta property="og:type" content="website">
-    <meta name="author" content="byTom">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:locale:alternate" content="en_US">
+    <!-- Twitter cards -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@byTom">
-    <meta name="twitter:description" content="Développeur web développant des sites modernes et fonctionnels. Découvrez mes projets et compétences.">
-    <meta name="twitter:title" content="byTom - Développeur Web Full Stack">
-    <meta name="twitter:image" content="images/byTom_link.png">
+    <meta name="twitter:description" content="Sites vitrines, boutiques en ligne et applications sur mesure. Devis gratuit.">
+    <meta name="twitter:title" content="byTom - Création de sites web à Quimper">
+    <meta name="twitter:image" content="https://by-tom.fr/images/byTom_link.png">
     <!-- TITLE & LINKS -->
-    <title>byTom</title>
+    <title>byTom | Création de sites web à Quimper - Développeur freelance</title>
+    <link rel="canonical" href="https://by-tom.fr/">
+    <link rel="alternate" hreflang="fr" href="https://by-tom.fr/">
+    <link rel="alternate" hreflang="en" href="https://by-tom.fr/en/">
+    <link rel="alternate" hreflang="x-default" href="https://by-tom.fr/">
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=47">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-
+    <!-- Donnees structurees (référencement local et fiches enrichies) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "byTom",
+        "description": "Création de sites web sur mesure : sites vitrines, boutiques en ligne et applications web pour associations, indépendants et petites entreprises.",
+        "url": "https://by-tom.fr/",
+        "image": "https://by-tom.fr/images/byTom_link.png",
+        "email": "bytom.dev@gmail.com",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Quimper",
+            "addressRegion": "Bretagne",
+            "addressCountry": "FR"
+        },
+        "areaServed": "France",
+        "priceRange": "499€-1399€",
+        "founder": {
+            "@type": "Person",
+            "name": "Tom Ochietti",
+            "jobTitle": "Développeur web freelance"
+        },
+        "sameAs": [
+            "https://github.com/Tom9603/",
+            "https://www.linkedin.com/in/tom-ochietti",
+            "https://www.instagram.com/__bytom/"
+        ],
+        "makesOffer": [
+            { "@type": "Offer", "name": "Site vitrine Essentiel", "price": "499", "priceCurrency": "EUR" },
+            { "@type": "Offer", "name": "Site Standard avec gestion de contenu", "price": "699", "priceCurrency": "EUR" },
+            { "@type": "Offer", "name": "Site de vente en ligne", "price": "1399", "priceCurrency": "EUR" }
+        ]
+    }
+    </script>
 </head>
-<body>
+<body class="dark-mode">
+    <script>
+        // Sombre par defaut, des le premier rendu (zero flash blanc).
+        // On ne repasse en clair que si le visiteur l'a deja choisi.
+        if (localStorage.getItem("darkMode") === "false") {
+            document.body.classList.remove("dark-mode");
+        }
+    </script>
+    <!-- Lien d'evitement : premier element focusable au clavier -->
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
     <!---------------------------- HEADER --------------------------------->
     <header>
-        <nav class="menu">
-            <a href="https://by-tom.fr/">
-            <img src="images/byTom_cut.png" alt="Logo" class="logo-menu">
+        <nav class="menu" aria-label="Navigation principale">
+            <a href="https://by-tom.fr/" aria-label="byTom, retour à l'accueil">
+            <img src="images/byTom_cut.png" alt="" class="logo-menu">
             </a>
             <ul>
-                <li><a href="#">Accueil</a></li>
+                <li><a href="#accueil">Accueil</a></li>
                 <li><a href="#a-propos">À propos</a></li>
                 <li><a href="#tarifs">Tarifs</a></li>
                 <li><a href="#projets">Projets</a></li>
@@ -47,40 +101,111 @@
             </ul>
         </nav>
     </header>
-    <!---------------------------- MAIN --------------------------------->
-    <main>
-        <div class="header-main">
-            <img src="images/byTom.png" alt="Logo" class="header-main-logo">
-            <div class="header-icons">
-                <a href="https://github.com/Tom9603/" target="_blank" aria-label="GitHub">
-                    <i class="fa-brands fa-github"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/tom-ochietti" target="_blank" aria-label="LinkedIn">
-                    <i class="fa-brands fa-linkedin-in"></i>
-                </a>
-                <a href="https://www.instagram.com/__bytom/" target="_blank" aria-label="Instagram">
-                    <i class="fa-brands fa-instagram"></i>
-                </a>
-            </div>
-            <i class="fa-regular fa-hand-pointer click" aria-label="Pointer"></i>
-            <h1>Développeur Web <br> Full Stack</h1>
+
+    <!---------------------------- NAVIGATION MOBILE --------------------------------->
+    <!-- Barre d'onglets en bas (a portee de pouce) -->
+    <nav class="mobile-tabbar" aria-label="Navigation rapide">
+        <a href="#accueil" class="mobile-tabbar__item">
+            <i class="fa-solid fa-house" aria-hidden="true"></i>
+            <span>Accueil</span>
+        </a>
+        <a href="#tarifs" class="mobile-tabbar__item">
+            <i class="fa-solid fa-tags" aria-hidden="true"></i>
+            <span>Tarifs</span>
+        </a>
+        <a href="#projets" class="mobile-tabbar__item">
+            <i class="fa-solid fa-diagram-project" aria-hidden="true"></i>
+            <span>Projets</span>
+        </a>
+        <a href="#contact" class="mobile-tabbar__item">
+            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+            <span>Contact</span>
+        </a>
+        <button type="button" class="mobile-tabbar__item" data-drawer-open aria-controls="mobile-drawer" aria-expanded="false">
+            <i class="fa-solid fa-bars" aria-hidden="true"></i>
+            <span>Menu</span>
+        </button>
+    </nav>
+
+    <!-- Voile + tiroir lateral droit -->
+    <div class="mobile-drawer-overlay" id="mobile-drawer-overlay" hidden></div>
+
+    <aside class="mobile-drawer" id="mobile-drawer" aria-hidden="true" aria-label="Menu principal" inert>
+        <div class="mobile-drawer__head">
+            <img src="images/byTom_cut.png" alt="byTom" class="mobile-drawer__logo">
+            <button type="button" class="mobile-drawer__close" data-drawer-close aria-label="Fermer le menu">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
         </div>
+
+        <div class="mobile-drawer__actions">
+            <button type="button" id="drawerThemeBtn" class="mobile-drawer__square">
+                <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
+                <span>Jour / nuit</span>
+            </button>
+            <a href="/en/" class="mobile-drawer__square">
+                <i class="fa-solid fa-language" aria-hidden="true"></i>
+                <span>English</span>
+            </a>
+        </div>
+
+        <nav class="mobile-drawer__links" aria-label="Liens du menu mobile">
+            <a href="#accueil">Accueil</a>
+            <a href="#a-propos">À propos</a>
+            <a href="#tarifs">Tarifs</a>
+            <a href="#projets">Projets</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="mobile-drawer__foot">
+            <a href="#contact" class="mobile-drawer__btn mobile-drawer__btn--primary">
+                <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Discutons de votre projet
+            </a>
+        </div>
+    </aside>
+    <!---------------------------- MAIN --------------------------------->
+    <main id="contenu">
+        <!-- HERO -->
+        <section class="hero" id="accueil">
+            <div class="hero-blob"></div>
+            <div class="hero-blob"></div>
+            <div class="hero-blob"></div>
+            <div class="hero-content">
+                <img src="images/byTom.png" alt="Logo byTom" class="header-main-logo" width="448" height="450" fetchpriority="high">
+                <h1>Votre site web,<br>sans vous prendre la tête.</h1>
+                <p class="hero-sub">Un projet sur mesure : vous exprimez vos besoins,<br>on cadre ensemble, je m'occupe du reste.</p>
+                <div class="header-icons">
+                    <a href="https://www.linkedin.com/in/tom-ochietti" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (nouvel onglet)">
+                        <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://www.instagram.com/__bytom/" target="_blank" rel="noopener noreferrer" aria-label="Instagram (nouvel onglet)">
+                        <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <a href="#contact" class="button hero-cta">Discutons de votre projet<i class="fa-regular fa-hand-pointer hero-hand" aria-hidden="true"></i></a>
+            </div>
+            <button type="button" class="hero-scroll" id="heroScroll" aria-label="Défiler vers la section À propos">
+                <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+            </button>
+        </section>
         <!-- A PROPOS -->
         <section class="about" id="a-propos">
             <h2>À propos</h2>
             <article class="about-text">
                 <p>
-                    Développeur web, j'aime traduire une idée en code pour réaliser des plateformes simples, 
-                    propres, modernes et agréables à utiliser. <br><br>
-                    Avec une maîtrise de différents langages,
-                    je me donne les moyens de relever des défis et concevoir chaque jour 
-                    des projets de plus en plus ambitieux. <br><br><br>
+                    Développeur web indépendant, j'accompagne les <strong>associations</strong>, les <strong>indépendants</strong>
+                    et les <strong>petites entreprises</strong> qui veulent exister en ligne sans s'embarrasser de la technique.
+                </p>
+                <p>
+                    Comprendre votre activité, cadrer votre besoin, livrer un site propre et rapide
+                    que vous pouvez faire évoluer : c'est ma façon de travailler,
+                    <strong>simple et transparente</strong>, du premier échange à la mise en ligne.
                 </p>
             </article>
         </section>
         <!-- À QUI S'ADRESSE MES SERVICES ?-->
         <section>
-            <h2>À qui s'adresse mes services ?</h2>
+            <h2>À qui s'adressent mes services ?</h2>
             <article>
                 <p class="who">
                     J'accompagne différents profils, selon leurs besoins et leurs projets. Du professionnel, au particulier. <br><br>
@@ -91,32 +216,32 @@
             <div class="who-grid">
                 <!--  Type 1  -->
                 <div class="who-item">
-                    <i class="fa-solid fa-cart-shopping"></i>
+                    <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
                     <p>E-commerçant</p>
                 </div>
                 <!--  Type 2  -->
                 <div class="who-item">
-                    <i class="fa-solid fa-shop"></i>
+                    <i class="fa-solid fa-shop" aria-hidden="true"></i>
                     <p>TPE</p>
                 </div>
                 <!--  Type 3  -->
                 <div class="who-item">
-                    <i class="fa-solid fa-building"></i>
+                    <i class="fa-solid fa-building" aria-hidden="true"></i>
                     <p>PME</p>
                 </div>
                 <!--  Type 4 -->
                 <div class="who-item">
-                    <i class="fa-solid fa-users"></i>
+                    <i class="fa-solid fa-users" aria-hidden="true"></i>
                     <p>Association</p>
                 </div>
                 <!--  Type 4  -->
                 <div class="who-item">
-                    <i class="fa-solid fa-user"></i>
+                    <i class="fa-solid fa-user" aria-hidden="true"></i>
                     <p>Indépendant</p>
                 </div>
                 <!--  Type 5  -->
                 <div class="who-item">
-                    <i class="fa-solid fa-house-user"></i>
+                    <i class="fa-solid fa-house-user" aria-hidden="true"></i>
                     <p>Particulier</p>
                 </div>
             </div>
@@ -124,134 +249,129 @@
         <!-- TARIFS -->
         <section id="tarifs">
             <h2 class="price-title">Tarifs</h2>
-            <p class="paiement">Parce qu'un projet web est un investissement, des facilités de paiement sont tout à fait négociables.</p>
+            <p class="paiement">Devis gratuit et sans engagement. Paiement en 2 ou 3 fois possible.</p>
             <!--  PRICE 1  -->
             <div class="price-grid">
                 <div class="price-item">
                     <div>
-                        <h3 class="vitrine">Vitrine</h3>
-                        <p class="price-info">499€ <br></p>
+                        <h3 class="essentiel">Essentiel</h3>
+                        <p class="price-info">499€</p>
                         <ul>
                             <li>
-                                Site vitrine, idéal pour présenter votre activité en ligne sans avoir à gérer de contenu
+                                Le site vitrine qui présente votre activité, simplement et efficacement
                             </li>
                             <li>
-                                Jusqu'à 3 pages
+                                1 à 3 pages
                             </li>
                             <li>
-                                Hébergement gratuit
+                                Design sur mesure, adapté mobile et tablette
                             </li>
-                            <a href="#contact"
-                                class="button mobile-only"
-                                aria-label="Discutons de votre projet">
-                                Discutons de votre projet
-                            </a>
-
+                            <li>
+                                Formulaire de contact
+                            </li>
+                            <li>
+                                Mentions légales et RGPD inclus
+                            </li>
+                            <li>
+                                Mise en ligne incluse, hébergement offert
+                            </li>
+                            <li>
+                                Livré en 2 à 3 semaines
+                            </li>
                         </ul>
+                        <a href="#contact"
+                            class="button price-cta"
+                            data-offer="Offre Essentiel">
+                            Discutons de votre projet
+                        </a>
                     </div>
                 </div>
-                <!--  PRICE 2  -->
-                <div class="price-item">
+                <!--  STANDARD (mise en avant)  -->
+                <div class="price-item price-item--featured">
+                    <span class="price-badge">Le plus choisi</span>
                     <div>
                         <h3 class="standard">Standard</h3>
-                        <p class="price-info">999€<br></p>
+                        <p class="price-info">699€</p>
                         <ul>
                             <li>
-                                Site avec base de données, idéal pour blogs, associations ou petites entreprises
+                                Le site complet dont vous gérez le contenu vous-même, idéal pour associations et petites entreprises
                             </li>
                             <li>
-                                Jusqu'à 4 pages
+                                Jusqu'à 6 pages
                             </li>
                             <li>
-                                Espace connexion sécurisé
+                                Modifiez vos textes et photos en toute autonomie
                             </li>
                             <li>
-                                Adapté pour une gestion de votre contenu
+                                Espace membre sécurisé possible
                             </li>
-                            <a href="#contact"
-                                class="button mobile-only"
-                                aria-label="Discutons de votre projet">
-                                Discutons de votre projet
-                            </a>
+                            <li>
+                                Tout l'Essentiel inclus
+                            </li>
+                            <li>
+                                Accompagnement à la prise en main
+                            </li>
+                            <li>
+                                Livré en 3 à 5 semaines
+                            </li>
                         </ul>
+                        <a href="#contact"
+                            class="button price-cta"
+                            data-offer="Offre Standard">
+                            Discutons de votre projet
+                        </a>
                     </div>
                 </div>
-                <!--  PRICE 3  -->
+                <!--  VENTE EN LIGNE  -->
                 <div class="price-item">
                     <div>
-                        <h3 class="e-commerce">E-commerce</h3>
-                        <p class="price-info">999€<br></p>
+                        <h3 class="vente">Vente en ligne</h3>
+                        <p class="price-info"><span class="price-from">à partir de</span>1399€</p>
                         <ul>
                             <li>
-                                Plateforme de commerce, idéal pour lancer votre activité de vente en ligne
+                                Vendez vos produits ou vos services directement depuis votre site
                             </li>
                             <li>
-                                Espace connexion sécurisé
+                                Catalogue de produits ou de prestations
                             </li>
                             <li>
-                                Catalogue de produits personnalisable
+                                Paiement en ligne sécurisé
                             </li>
                             <li>
                                 Gestion des commandes et des clients
                             </li>
                             <li>
-                                Paiement en ligne sécurisé
+                                Tout le Standard inclus
                             </li>
-                            <a href="#contact"
-                                class="button mobile-only"
-                                aria-label="Discutons de votre projet">
-                                Discutons de votre projet
-                            </a>
+                            <li>
+                                Formation à l'outil incluse
+                            </li>
+                            <li>
+                                Devis personnalisé selon vos besoins
+                            </li>
                         </ul>
-                    </div>
-                </div>
-                <!--  PRICE 4  -->
-                <div class="price-item">
-                    <div>
-                        <h3 class="premium">Premium</h3>
-                        <p class="price-info">1399€</p>
-                        <ul>
-                            <li>
-                                Site avec base de données et un e-commerce intégré, idéal pour blogs, associations ou entreprises vendant services et/ou produits
-                            </li>
-                            <li>
-                                Jusqu'à 10 pages
-                            </li>
-                            <li>
-                                Espace connexion sécurisé
-                            </li>
-                            <li>
-                                Catalogue de produits personnalisable
-                            </li>
-                            <li>
-                                Gestion des commandes et des clients
-                            </li>
-                            <li>
-                                Paiement en ligne sécurisé
-                            </li>
-                            <a href="#contact"
-                                class="button mobile-only"
-                                aria-label="Discutons de votre projet">
-                                Discutons de votre projet
-                            </a>
-                        </ul>
+                        <a href="#contact"
+                            class="button price-cta"
+                            data-offer="Offre Vente en ligne">
+                            Discutons de votre projet
+                        </a>
                     </div>
                 </div>
             </div>     
+            <div class="maintenance-banner">
+                <i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i>
+                <p><strong>Maintenance et tranquillité : à partir de 29€/mois.</strong> Hébergement, sauvegardes, mises à jour et petites modifications : je m'occupe de tout, vous restez concentré sur votre activité.</p>
+            </div>
         </section>
-        <a href="#contact" class="button desktop-only" aria-label="Discutons de votre projet">Discutons de votre projet</a>
         <div class="info">
             <p>
-                * Les tarifs indiqués sont donnés à titre indicatif. Si des fonctionnalités plus complexes sont souhaitées, le tarif peut être réévalué lors de l’établissement d’un devis.
+                * Chaque projet commence par un devis gratuit et personnalisé ; les tarifs affichés couvrent les besoins les plus courants.
             </p>
             <p>
                 * Un acompte de 30% est demandé à la signature du devis, le solde à la livraison du projet.
             </p>
             <p>
-                * L’hébergement (hors site vitrine) et le nom de domaine ne sont pas inclus dans les tarifs et sont à la charge du client.
-            </p>
-            <p>
-                * Les plateformes sont adaptées à tous les appareils (mobiles, tablettes, ordinateurs).
+                * Le nom de domaine reste à la charge du client. L'hébergement est offert avec l'offre Essentiel et compris dans le forfait maintenance.
             </p>
         </div>
 
@@ -263,275 +383,314 @@
                     <!-- PROJET 1 -->
                     <article class="project-card">
                         <div class="project-img">
-                            <img src="images/projets/Windsurf.png" alt="Projet 1">
-                        </div>
-                        <div class="project-content">
-                            <h3>Windsurfing</h3>
-
-                            <p>
-                                Mon premier site web après un mois d'apprentissage du HTML et CSS.
-                                Site vitrine avec galerie photo style Pinterest pour un particulier pratiquant le windsurf.
-                            </p>
-                        </div>
-                        
-                        <div class="project-tags">
-                            <span>HTML</span>
-                            <span>CSS</span>
-                            <span>JS</span>
-                            <span>Git</span>
-                            <span>VS Code</span>
-                        </div>
-
-                        <div class="project-buttons">
-                            <a href="https://tom9603.github.io/SiteWindsurf/" class="btn-outline" target="_blank">URL</a>
-                            <a href="https://github.com/Tom9603/SiteWindsurf" class="btn-fill" target="_blank">Code</a>
-                        </div>
-                    </article>
-                    <!-- PROJET 2 -->
-                    <article class="project-card">
-                        <div class="project-img">
-                            <img src="images/projets/Feuille-de-match.png" alt="Projet 2">
-                        </div>
-                        <div class="project-content">
-                            <h3>Feuille de match</h3>
-
-                            <p>
-                                Plateforme succinte d'une feuille de match avec sa base de données Firebase pour un club de foot, permettant aux joueurs d'indiquer leur placement sur le terrain.
-                            </p>
-                        </div>
-                        
-                        <div class="project-tags">
-                            <span>HTML</span>
-                            <span>CSS</span>
-                            <span>JS</span>
-                            <span>Git</span>
-                            <span>Firebase</span>
-                            <span>VS Code</span>
-                            <span>Mobile first</span>
-                        </div>
-
-                        <div class="project-buttons">
-                            <a href="https://tom9603.github.io/Feuille-de-match/" class="btn-outline" target="_blank">URL</a>
-                            <a href="https://github.com/Tom9603/Feuille-de-match" class="btn-fill" target="_blank">Code</a>
-                        </div>
-                    </article>
-                    <!-- PROJET 3 -->
-                    <article class="project-card">
-                        <div class="project-img">
-                            <img src="images/projets/Pin-up.png" alt="Projet 3">
+                            <span class="project-type">Site associatif</span>
+                            <img src="images/projets/Pin-up.png" alt="Page d'accueil du site du Comité Miss Pin-up Bretagne" width="1690" height="976" loading="lazy" decoding="async">
                         </div>
                         <div class="project-content">
                             <h3>Comité Miss Pin-up Bretagne</h3>
 
                             <p>
-                                Plateforme communautaire pour le comité Miss Pin-up Bretagne, avec espace administrateur pour gérer les candidates et les événements.
+                                L'association gère ses candidates, son calendrier d'événements et son contenu en toute autonomie, grâce à un espace d'administration sur mesure.
                             </p>
                         </div>
-                        
+
                         <div class="project-tags">
-                            <span>TWIG</span>
-                            <span>SCSS</span>
-                            <span>JS</span>
-                            <span>API FullCalendar</span>
-                            <span>PHP</span>
-                            <span>Symfony</span>
-                            <span>MySQL</span>
-                            <span>Git</span>
-                            <span>PHPStorm</span>
-                            <span>Mobile first</span>
+                            <span>Espace membres</span>
+                            <span>Calendrier d'événements</span>
+                            <span>Gestion autonome du contenu</span>
                         </div>
 
                         <div class="project-buttons">
-                            <a href="https://misspinupbretagne.fr/" class="btn-outline" target="_blank">URL</a>
-                            <a href="https://github.com/Tom9603/pin-up" class="btn-fill" target="_blank">Code</a>
+                            <a href="https://misspinupbretagne.fr/" class="btn-fill" target="_blank" rel="noopener noreferrer">Voir le site</a>
+                        </div>
+                    </article>
+                    <!-- PROJET 2 -->
+                    <article class="project-card">
+                        <div class="project-img project-img--placeholder">
+                            <span class="project-type">Site d'entreprise</span>
+                            <i class="fa-solid fa-paw" aria-hidden="true"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>Les patounes du glazik</h3>
+
+                            <p>
+                                Le site complet d'une entreprise de garde d'animaux : espace personnel pour les clients, factures en ligne et contenu géré en toute autonomie.
+                            </p>
+                        </div>
+
+                        <div class="project-tags">
+                            <span>Espace client sécurisé</span>
+                            <span>Factures en ligne</span>
+                            <span>Administration sur mesure</span>
+                        </div>
+
+                        <div class="project-buttons">
+                            <span class="btn-fill btn-soon">Bientôt en ligne</span>
+                        </div>
+                    </article>
+                    <!-- PROJET 3 -->
+                    <article class="project-card">
+                        <div class="project-img">
+                            <span class="project-type">Application web</span>
+                            <img src="images/projets/Feuille-de-match.png" alt="Écran de composition d'équipe de l'application Feuille de match" width="1786" height="875" loading="lazy" decoding="async">
+                        </div>
+                        <div class="project-content">
+                            <h3>Feuille de match</h3>
+
+                            <p>
+                                Le club gagne du temps : chaque joueur remplit la feuille de match depuis son téléphone et se positionne sur le terrain en temps réel.
+                            </p>
+                        </div>
+
+                        <div class="project-tags">
+                            <span>Temps réel</span>
+                            <span>Utilisable sur le terrain</span>
+                            <span>Pensé pour mobile</span>
+                        </div>
+
+                        <div class="project-buttons">
+                            <a href="https://tom9603.github.io/Feuille-de-match/" class="btn-fill" target="_blank" rel="noopener noreferrer">Voir le site</a>
                         </div>
                     </article>
                     <!-- PROJET 4 -->
                     <article class="project-card">
                         <div class="project-img">
-                            <img src="images/projets/Portfolio.png" alt="Projet 3">
+                            <span class="project-type">Site vitrine</span>
+                            <img src="images/projets/Windsurf.png" alt="Galerie photo du site vitrine Windsurfing" width="1899" height="908" loading="lazy" decoding="async">
                         </div>
                         <div class="project-content">
-                            <h3>Portfolio</h3>
+                            <h3>Windsurfing</h3>
 
                             <p>
-                                Mon propre portfolio personnel.
-                                Seulement réalisé en front-end simple. 
+                                Un site vitrine épuré pour partager une passion : grande galerie photo et navigation simple, pensé pour mettre les images en valeur.
                             </p>
                         </div>
-                        
+
                         <div class="project-tags">
-                            <span>HTML</span>
-                            <span>CSS</span>
-                            <span>JS</span>
-                            <span>Git</span>
-                            <span>VS Code</span>
+                            <span>Galerie photo</span>
+                            <span>Navigation simple</span>
+                            <span>Adapté mobile</span>
                         </div>
 
                         <div class="project-buttons">
-                            <a href="https://by-tom.fr/" class="btn-outline" target="_blank">URL</a>
-                            <a href="https://github.com/Tom9603/Portfolio" class="btn-fill" target="_blank">Code</a>
+                            <a href="https://tom9603.github.io/SiteWindsurf/" class="btn-fill" target="_blank" rel="noopener noreferrer">Voir le site</a>
                         </div>
                     </article>
+                </div>
+
+                <div class="projects-banner">
+                    <p><strong>Votre projet pourrait être le prochain.</strong> Décrivez-moi votre besoin, le devis est gratuit.</p>
+                    <a href="#contact" class="button">Parlons-en</a>
                 </div>
             </div>
         </section>
 
         <!-- TECH STACKS -->
-        <section class="stacks">
+        <section class="stacks" aria-label="Technologies et outils">
+            <h2 class="visually-hidden">Technologies et outils</h2>
+            <div class="stack-marquee">
             <div class="stack-grid">
                 <!--  TECH 1  -->
-                <a href="https://fr.wikipedia.org/wiki/HTML" target="_blank">
+                <a href="https://fr.wikipedia.org/wiki/HTML" target="_blank" rel="noopener noreferrer">
                     <div class="stack-item">              
                         <i class="devicon-html5-plain colored"></i>
                         <p>HTML5</p>
                     </div>
                 </a>
                 <!--  TECH 2  -->
-                <a href="https://fr.wikipedia.org/wiki/Twig" target="_blank">
+                <a href="https://fr.wikipedia.org/wiki/Twig" target="_blank" rel="noopener noreferrer">
                     <div class="stack-item">
-                        <img src="images/twig.png" alt="Twig">
+                        <img src="images/twig.png" alt="" loading="lazy">
                         <p>TWIG</p>
                     </div>
                 </a>
                 <!--  TECH 3  -->
-                <a href="https://fr.wikipedia.org/wiki/Feuilles_de_style_en_cascade#CSS" target="_blank">
+                <a href="https://fr.wikipedia.org/wiki/Feuilles_de_style_en_cascade#CSS" target="_blank" rel="noopener noreferrer">
                     <div class="stack-item">
                         <i class="devicon-css3-plain colored"></i>
                         <p>CSS3</p>
                     </div>
                 </a>
                 <!--  TECH 4  -->
-                <a href="https://fr.wikipedia.org/wiki/Sass_(langage)" target="_blank">
+                <a href="https://fr.wikipedia.org/wiki/Sass_(langage)" target="_blank" rel="noopener noreferrer">
                     <div class="stack-item">
                         <i class="devicon-sass-original colored"></i>
                         <p>SCSS/SASS</p>
                     </div>
                 </a>
                 <!--  TECH 5  -->
-                <a href="https://fr.wikipedia.org/wiki/JavaScript" target="_blank">
+                <a href="https://fr.wikipedia.org/wiki/JavaScript" target="_blank" rel="noopener noreferrer">
                     <div class="stack-item">
                         <i class="devicon-javascript-plain colored"></i>
                         <p>JavaScript</p>
                     </div>
                 </a>
                 <!--  TECH 6  -->
-                <a href="https://fr.wikipedia.org/wiki/PHP" target="_blank">
+                <a href="https://fr.wikipedia.org/wiki/PHP" target="_blank" rel="noopener noreferrer">
                     <div class="stack-item">
                         <i class="devicon-php-plain colored"></i>
                         <p>PHP</p>
                     </div>
                 </a>
                 <!--  TECH 7  -->
-                <a href="https://fr.wikipedia.org/wiki/Symfony" target="_blank">
+                <a href="https://fr.wikipedia.org/wiki/Symfony" target="_blank" rel="noopener noreferrer">
                     <div class="stack-item">
                         <i class="devicon-symfony-original colored symfony-dark"></i>
                         <p>Symfony</p>
                     </div>
                 </a>
                 <!--  TECH 8  -->
-                <a href="https://fr.wikipedia.org/wiki/MySQL" target="_blank">
+                <a href="https://fr.wikipedia.org/wiki/MySQL" target="_blank" rel="noopener noreferrer">
                     <div class="stack-item">
                         <i class="devicon-mysql-plain colored"></i>
                         <p>MySQL</p>
                     </div>
                 </a>
                 <!--  TECH 9  -->
-                <a href="https://fr.wikipedia.org/wiki/Firebase" target="_blank">
+                <a href="https://fr.wikipedia.org/wiki/Firebase" target="_blank" rel="noopener noreferrer">
                     <div class="stack-item">
                         <i class="devicon-firebase-plain colored"></i>
                         <p>Firebase</p>
                     </div>
                 </a>
                 <!--  TECH 10  -->
-                <a href="https://fr.wikipedia.org/wiki/Git" target="_blank">
+                <a href="https://fr.wikipedia.org/wiki/Git" target="_blank" rel="noopener noreferrer">
                     <div class="stack-item">
                         <i class="devicon-git-plain colored"></i>
                         <p>Git</p>
                     </div>
                 </a>
                 <!--  TECH 11  -->
-                <a href="https://fr.wikipedia.org/wiki/GitHub" target="_blank">
+                <a href="https://fr.wikipedia.org/wiki/GitHub" target="_blank" rel="noopener noreferrer">
                     <div class="stack-item">
                         <i class="devicon-github-plain colored github-dark"></i>
                         <p>GitHub</p>
                     </div>
                 </a>
                 <!--  TECH 12  -->
-                <a href="https://fr.wikipedia.org/wiki/Figma" target="_blank">
+                <a href="https://fr.wikipedia.org/wiki/Figma" target="_blank" rel="noopener noreferrer">
                     <div class="stack-item">  
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" />
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" alt="" loading="lazy" />
                         <p>Figma</p>
                     </div>
                 </a>
                 <!--  TECH 13  -->
-                <a href="https://fr.wikipedia.org/wiki/Visual_Studio_Code" target="_blank">
+                <a href="https://fr.wikipedia.org/wiki/Visual_Studio_Code" target="_blank" rel="noopener noreferrer">
                     <div class="stack-item">
                         <i class="devicon-visualstudio-plain colored"></i>
                         <p>VS Code</p>
                     </div>
                 </a>
                 <!--  TECH 14  -->
-                <a href="https://fr.wikipedia.org/wiki/PhpStorm" target="_blank">
+                <a href="https://fr.wikipedia.org/wiki/PhpStorm" target="_blank" rel="noopener noreferrer">
                     <div class="stack-item">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/phpstorm/phpstorm-original.svg" />
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/phpstorm/phpstorm-original.svg" alt="" loading="lazy" />
                         <p>PHPStorm</p>
                     </div>
                 </a>
                 <!--  TECH 15  -->
-                <a href="https://fr.wikipedia.org/wiki/WordPress" target="_blank">
+                <a href="https://fr.wikipedia.org/wiki/WordPress" target="_blank" rel="noopener noreferrer">
                     <div class="stack-item">
                         <i class="devicon-wordpress-plain colored wordpress-dark"></i>
                         <p>WordPress</p>
                     </div>
                 </a>
                 <!--  TECH 16  -->
-                <a href="https://fr.wikipedia.org/wiki/Wix.com" target="_blank">
+                <a href="https://fr.wikipedia.org/wiki/Wix.com" target="_blank" rel="noopener noreferrer">
                     <div class="stack-item wix-dark">
-                        <img src="https://img.icons8.com/?size=100&id=cQfKnWABsKk9&format=png&color=000000" alt="Wix">
+                        <img src="https://img.icons8.com/?size=100&id=cQfKnWABsKk9&format=png&color=000000" alt="" loading="lazy">
                         <p>Wix</p>
                     </div>
                 </a>
+            </div>
             </div>
         </section>
         
         <!-- CONTACT -->
         <section class="contact" id="contact">
-            <form id="contactForm" action="https://formsubmit.co/tom.ochietti@gmail.com" method="POST" class="contact-form">
-                <h2>Contact</h2>
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="">
+            <h2>Parlons de votre projet</h2>
+            <div class="contact-layout">
+                <div class="contact-aside">
+                    <p class="contact-intro">
+                        Une idée, un besoin, une simple question ? Décrivez-moi votre projet en quelques lignes et on en discute.
+                    </p>
+                    <ul class="contact-points">
+                        <li>
+                            <i class="fa-solid fa-reply" aria-hidden="true"></i>
+                            <div>
+                                <strong>Réponse sous 24h</strong>
+                                <span>Une réponse personnalisée, pas un message automatique.</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-file-signature" aria-hidden="true"></i>
+                            <div>
+                                <strong>Devis gratuit et sans engagement</strong>
+                                <span>Vous savez où vous allez avant de vous décider.</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                            <div>
+                                <strong>Basé à Quimper</strong>
+                                <span>Déplacement possible en Cornouaille, à distance partout en France.</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                            <div>
+                                <strong>Par email si vous préférez</strong>
+                                <a href="mailto:bytom.dev@gmail.com">bytom.dev@gmail.com</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
 
-                <label>
-                    Nom
-                    <input type="text" name="Nom" placeholder="Saisissez votre nom" required>
-                </label>
+                <form id="contactForm" action="https://formsubmit.co/bytom.dev@gmail.com" method="POST" class="contact-form">
+                    <input type="hidden" name="_subject" value="Nouveau message depuis by-tom.fr">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="text" name="_honey" class="honey-field" tabindex="-1" autocomplete="off">
 
-                <label>
-                    Email
-                    <input type="email" name="Email" placeholder="Saisissez votre email" required>
-                </label>
+                    <div class="form-row">
+                        <label>
+                            Nom
+                            <input type="text" name="Nom" placeholder="Saisissez votre nom" autocomplete="name" required>
+                        </label>
 
-                <label for="offer">Séléctionnez votre choix</label>
-                    <select id="offer" name="Choix" class="select-offer" required>
-                        <option value="">-- Votre choix ici --</option>
-                        <option value="Offre vitrine">Offre vitrine</option>
-                        <option value="Offre standard">Offre standard</option>
-                        <option value="Offre e-commerce">Offre e-commerce</option>
-                        <option value="Offre premium">Offre premium</option>
-                        <option value="Refonte de site déjà existant">Refonte de site déjà existant</option>
-                        <option value="Demande de renseignements">Demande de renseignements</option>
-                        <option value="Autre">Autre</option>
-                    </select>
-                </label>
-                <label>
-                    Message
-                    <textarea name="Message" rows="5" placeholder="Votre message ici..." required></textarea>
-                </label>
+                        <label>
+                            Email
+                            <input type="email" name="Email" placeholder="Saisissez votre email" autocomplete="email" required>
+                        </label>
+                    </div>
 
-                <button type="submit" aria-label="Envoyer">Envoyer</button>
-                <p id="formMessage" class="form-message"></p>
-            </form>
+                    <label>
+                        Téléphone <span class="optional">(facultatif)</span>
+                        <input type="tel" name="Téléphone" placeholder="Si vous préférez être rappelé" autocomplete="tel">
+                    </label>
+
+                    <label>
+                        Votre demande
+                        <select id="offer" name="Demande" class="select-offer" required>
+                            <option value="">Choisissez une option</option>
+                            <option value="Offre Essentiel">Offre Essentiel</option>
+                            <option value="Offre Standard">Offre Standard</option>
+                            <option value="Offre Vente en ligne">Offre Vente en ligne</option>
+                            <option value="Forfait maintenance">Forfait maintenance</option>
+                            <option value="Refonte de site déjà existant">Refonte de site déjà existant</option>
+                            <option value="Demande de renseignements">Demande de renseignements</option>
+                            <option value="Autre">Autre</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        Message
+                        <textarea name="Message" rows="5" placeholder="Parlez-moi de votre projet..." required></textarea>
+                    </label>
+
+                    <button type="submit">Envoyer</button>
+                    <p id="formMessage" class="form-message" role="status" aria-live="polite"></p>
+                </form>
+            </div>
         </section>
     </main>
     <!---------------------------- FOOTER --------------------------------->
@@ -540,15 +699,15 @@
         <p>SIREN : 994 640 779</p>
         <p><a href="mailto:bytom.dev@gmail.com"><span class="mail">bytom.dev@gmail.com</span></a></p>
         <p>
-            <span class="link-modal" data-modal="mentions">Mentions légales</span> - 
-            <span class="link-modal" data-modal="privacy">Politique de confidentialité</span>
+            <button type="button" class="link-modal" data-modal="mentions">Mentions légales</button> -
+            <button type="button" class="link-modal" data-modal="privacy">Politique de confidentialité</button>
         </p>
     </footer>
     <!---- MENTIONS LÉGALES ---->
-    <div id="modal-mentions" class="modal">
-    <div class="modal-content">
-        <span class="close" data-close="mentions">&times;</span>
-        <h2>Mentions légales</h2>
+    <div id="modal-mentions" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-mentions-title">
+    <div class="modal-content" tabindex="-1">
+        <button type="button" class="close" data-close="mentions" aria-label="Fermer les mentions légales">&times;</button>
+        <h2 id="modal-mentions-title">Mentions légales</h2>
 
         <p><strong>Éditeur du site</strong><br>
             byTom – Micro-entrepreneur<br>
@@ -564,10 +723,10 @@
     </div>
 </div>
     <!---- POLITIQUE DE CONFIDENTIALITÉ ---->
-<div id="modal-privacy" class="modal">
-    <div class="modal-content">
-        <span class="close" data-close="privacy">&times;</span>
-        <h2>Politique de confidentialité</h2>
+<div id="modal-privacy" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-privacy-title">
+    <div class="modal-content" tabindex="-1">
+        <button type="button" class="close" data-close="privacy" aria-label="Fermer la politique de confidentialité">&times;</button>
+        <h2 id="modal-privacy-title">Politique de confidentialité</h2>
 
         <p>
             Les données envoyées via le formulaire (nom, email, message) sont utilisées
@@ -576,7 +735,7 @@
 
         <p>
             Le service FormSubmit peut conserver temporairement les messages
-            pour les transmettre par email. <br> Ce site n'a pas de base de données, par conséquent il ne stock pas la moindre donnée. <br><br> Vous pouvez toutefois demander la suppression
+            pour les transmettre par email. <br> Ce site n'a pas de base de données, par conséquent il ne stocke pas la moindre donnée. <br><br> Vous pouvez toutefois demander la suppression
             de l'historique de nos échanges par mail en m'écrivant à : <a href="mailto:bytom.dev@gmail.com"><span class="mail">bytom.dev@gmail.com</span></a>
         </p>
     </div>
@@ -584,19 +743,16 @@
 
 
     <!-- BOUTONS ACCESSIBILITÉ -->
-    <button id="themeToggle" class="theme-btn" aria-label="basculer en mode nuit / jour">
-        <i class="fa-solid fa-circle-half-stroke"></i>
+    <button id="themeToggle" class="theme-btn" aria-label="Basculer entre thème sombre et thème clair">
+        <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
     </button>
-    <button id="langBtn" class="lang-btn" aria-label="Changer la langue">
-        <img src="images/language.svg" alt="Changer la langue">
+    <button id="langBtn" class="lang-btn" aria-label="Switch to English">
+        <img src="images/language.svg" alt="">
     </button>
      <button id="topBtn" aria-label="Remonter en haut de page">
-        <i class="fa-solid fa-arrow-up-long"></i>
+        <i class="fa-solid fa-arrow-up-long" aria-hidden="true"></i>
      </button>
-     <button target="_blank" id="cvBtn" aria-label="Télécharger le CV">
-        <i class="fa-solid fa-file-arrow-down"></i>
-    </button>
     <!-- SCRIPT JS -->
-    <script src="script.js"></script>
+    <script src="script.js?v=47"></script>
 </body>
 </html>

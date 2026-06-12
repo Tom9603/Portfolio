@@ -69,9 +69,31 @@ h1 {
 
 h2 {
     font-size: 2rem;
+    /* margin-top explicite : sans lui chaque navigateur applique son
+       defaut et les titres de sections ne tombent pas tous pareil */
+    margin-top: 1.5rem;
     margin-bottom: 2rem;
     text-align: center;
     color: var(--color1);
+}
+
+/* Barre degradee sous les titres de section : rappel du hero.
+   (les h2 des modales ne sont pas dans des sections, donc epargnes) */
+section h2 {
+    position: relative;
+    padding-bottom: 0.85rem;
+}
+
+section h2::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 56px;
+    height: 4px;
+    border-radius: 999px;
+    background: linear-gradient(to right, #2c57e7, #de58e2);
 }
 
 h3 {
@@ -83,7 +105,14 @@ h3 {
 a {
     text-decoration: none;
     color: inherit;
-    &:hover {
+}
+
+/* Lien bleu au survol : reserve aux peripheriques qui survolent vraiment.
+   Sur tactile, iOS colle un :hover persistant sur le lien tape ; comme
+   var(--color3) est aussi la couleur de .active, l'item tape de la barre
+   du bas restait "allume" apres le scroll (deuxieme actif fantome). */
+@media (hover: hover) {
+    a:hover {
         color: var(--color3);
     }
 }
@@ -96,12 +125,67 @@ textarea {
     resize: none;
 }
 
-p {
-    color: var(--color1);
+/****************************************/
+/************ ACCESSIBILITE *************/
+/****************************************/
+
+/* Lien d'evitement : invisible jusqu'au premier Tab clavier */
+.skip-link {
+    position: fixed;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color3);
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 0 0 10px 10px;
+    font-weight: 600;
+    z-index: 2000;
+    transition: top 0.2s ease;
 }
 
-.button.mobile-only {
-  display: none;
+.skip-link:focus {
+    top: 0;
+    color: #fff;
+}
+
+/* Texte present pour les lecteurs d'ecran, invisible a l'oeil */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Contour de focus visible uniquement a la navigation clavier */
+:focus-visible {
+    outline: 2px solid var(--color3);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Respect du reglage systeme "reduire les animations" */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    html {
+        scroll-behavior: auto !important;
+    }
+}
+
+p {
+    color: var(--color1);
 }
 
 /****************************************/
@@ -126,32 +210,19 @@ p {
     font-size: 1.4rem;
     cursor: pointer;
     box-shadow: 0 -2px 30px rgba(0, 0, 0, 0.55);
-    transition: transform .2s ease, background .7s ease;
+    /* invisible tant qu'on n'a pas scrolle (classe posee en JS) */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .3s ease, visibility .3s ease,
+                transform .2s ease, background .7s ease;
+}
+
+#topBtn.is-visible {
+    opacity: 1;
+    visibility: visible;
 }
 
 #topBtn:hover {
-    transform: scale(1.1);
-    background: var(--color3);
-}
-
-/* Bouton Télécharger CV */
-#cvBtn {
-    position: fixed;
-    right: 25px;
-    bottom: 80px;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    border: none;
-    background: var(--color1);
-    color: var(--color2);
-    font-size: 1.4rem;
-    cursor: pointer;
-    box-shadow: 0 -2px 30px rgba(0, 0, 0, 0.55);
-    transition: transform .2s ease, background .7s ease;
-}
-
-#cvBtn:hover {
     transform: scale(1.1);
     background: var(--color3);
 }
@@ -160,7 +231,7 @@ p {
 .theme-btn {
     position: fixed;
     right: 25px;
-    bottom: 140px;
+    bottom: 80px;
     width: 45px;
     height: 45px;
     border-radius: 50%;
@@ -183,7 +254,7 @@ p {
 #langBtn {
     position: fixed;
     right: 25px;
-    bottom: 200px;
+    bottom: 140px;
     width: 45px;
     height: 45px;
     border-radius: 50%;
@@ -215,12 +286,206 @@ p {
 /****************************************/
 
 /****************************************/
-/***************** ABOUT ****************/
+/***************** HERO *****************/
 /****************************************/
 
-.header-main {
+.hero {
+    box-sizing: border-box;
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
+    overflow: hidden;
+    padding: 5rem 2rem;
 }
+
+.hero-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.hero-blob:nth-child(1) {
+    width: 550px;
+    height: 550px;
+    background: rgba(44, 87, 231, 0.28);
+    top: -100px;
+    right: -80px;
+    animation: blobDrift 3.8s ease-in-out infinite alternate;
+}
+
+.hero-blob:nth-child(2) {
+    width: 500px;
+    height: 500px;
+    background: rgba(222, 88, 226, 0.24);
+    bottom: -80px;
+    left: -80px;
+    animation: blobDrift 4.8s ease-in-out infinite alternate-reverse;
+    animation-delay: -4s;
+}
+
+.hero-blob:nth-child(3) {
+    width: 280px;
+    height: 280px;
+    background: rgba(44, 87, 231, 0.18);
+    top: 45%;
+    left: 35%;
+    animation: blobDrift 3.5s ease-in-out infinite alternate;
+    animation-delay: -2s;
+}
+
+@keyframes blobDrift {
+    0%   { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(70px, 55px) scale(1.12); }
+}
+
+/* Variante mobile : amplitude doublee pour rester visible en petit */
+@keyframes blobDriftMobile {
+    0%   { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(-105px, 80px) scale(1.25); }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* Le PNG du logo est carre avec beaucoup de transparent : on compense */
+.hero .header-main-logo {
+    margin: -80px auto -95px;
+}
+
+.hero-content > * {
+    animation: heroFadeIn 0.8s ease both;
+}
+
+.hero-content > *:nth-child(1) { animation-delay: 0.1s; }
+.hero-content > *:nth-child(2) { animation-delay: 0.3s; }
+.hero-content > *:nth-child(3) { animation-delay: 0.5s; }
+.hero-content > *:nth-child(4) { animation-delay: 0.65s; }
+.hero-content > *:nth-child(5) { animation-delay: 0.8s; }
+
+@keyframes heroFadeIn {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.25;
+    max-width: 750px;
+    margin: 0;
+}
+
+.hero-sub {
+    font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+    max-width: 600px;
+    line-height: 1.65;
+    color: var(--color1);
+    opacity: 0.8;
+    margin: 0;
+}
+
+.button.hero-cta {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+    /* ancre de la main animee */
+    position: relative;
+}
+
+/* Desktop seulement : la zone sociale se detache du bloc texte,
+   et le CTA descend encore d'un cran (le mobile garde son gap) */
+@media (min-width: 769px) {
+    .hero .header-icons {
+        margin-top: 1.25rem;
+    }
+
+    .button.hero-cta {
+        margin-top: 2rem;
+    }
+}
+
+/* La main "clic" du site d'origine : posee sous le CTA (absolue,
+   zero impact sur le flux), elle fait des va-et-vient fluides en
+   diagonale vers le bouton. Inerte (pointer-events none) et coupee
+   par prefers-reduced-motion comme le reste. */
+.hero-hand {
+    position: absolute;
+    top: calc(100% + 24px);
+    left: 80%;
+    font-size: 1.5rem;
+    color: var(--color1);
+    animation: handBounce 1.5s ease-in-out infinite;
+    pointer-events: none;
+}
+
+/* Desktop : encore un peu plus d'air entre le bouton et la main */
+@media (min-width: 769px) {
+    .hero-hand {
+        top: calc(100% + 36px);
+    }
+}
+
+@keyframes handBounce {
+    0%, 100% { transform: rotate(-20deg) translateY(0); }
+    50%      { transform: rotate(-20deg) translateY(-12px); }
+}
+
+.hero-scroll {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    color: var(--color1);
+    opacity: 0.45;
+    font-size: 1.2rem;
+    cursor: pointer;
+    animation: scrollBounce 2s ease-in-out infinite;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+@keyframes scrollBounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%       { transform: translateX(-50%) translateY(8px); }
+}
+
+/****************************************/
+/************ SCROLL ANIMATIONS *********/
+/****************************************/
+
+[data-animate] {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                background-color .6s ease, color .6s ease,
+                border-color .6s ease, box-shadow .6s ease;
+}
+
+[data-animate].visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/****************************************/
+/***************** ABOUT ****************/
+/****************************************/
 
 .header-main-logo {
     width: 300px;
@@ -229,20 +494,10 @@ p {
     margin: 0 auto;
 }
 
-.logo {
-    width: 25%;
-    display: block;
-    margin: 0 auto;
-    margin-bottom: -6rem;
-    margin-top: -5rem;
-}
-
 .header-icons {
     display: flex;
     justify-content: center;
     gap: 2rem;
-    top: -80px;
-    position: relative;
 }
 
 .header-icons i {
@@ -262,33 +517,48 @@ p {
     -webkit-text-fill-color: transparent;
 }
 
-@keyframes bounce {
-  0%, 100% { transform: rotate(-20deg) translateY(-20px) translateX(50px); }
-  50%      { transform: rotate(-20deg) translateY(-40px) translateX(50px); }
-}
-
-.click {
-    font-size: 1.5rem;
-    animation: bounce 1.5s infinite;
-    color: var(--color1);
-}
-
 .about {
     padding-top: 1rem;
-    p {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 2rem;
-        padding-bottom: 1rem;
-        line-height: 1.5rem;
-        font-size: 1.3rem;
-        color: var(--color1);
-        font-weight: 500;
-    }
 }
 
 .about-text {
-    margin-bottom: 1rem;
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto 1rem;
+    padding: 1.6rem 2rem;
+    background: var(--color2);
+    border: 1px solid rgba(53, 39, 175, 0.12);
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+}
+
+/* Filet degrade vertical sur la gauche de la carte */
+.about-text::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+    background: linear-gradient(to bottom, #2c57e7, #de58e2);
+}
+
+.about-text p {
+    margin: 0 0 1.25rem;
+    line-height: 1.65;
+    font-size: 1.1rem;
+    color: var(--color1);
+    font-weight: 500;
+}
+
+.about-text p:last-child {
+    margin-bottom: 0;
+}
+
+.about-text strong {
+    color: var(--color3);
+    font-weight: 700;
 }
 
 .button {
@@ -321,13 +591,30 @@ p {
     padding: 1rem 0;
 }
 
+/* Bande defilante infinie (les items sont dupliques en JS) */
+.stack-marquee {
+    overflow: hidden;
+    margin-top: 1rem;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+            mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+}
+
 .stack-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 2rem;
-    max-width: 900px;
-    margin: 0 auto;
-    margin-top: 5rem;
+    display: flex;
+    width: max-content;
+    animation: stackScroll 35s linear infinite;
+    /* Air au-dessus des icones : le zoom du survol (scale 1.1) fait
+       deborder l'item de quelques pixels, l'overflow du bandeau le
+       couperait. 2rem + la marge du parent = le rythme de 3rem. */
+    padding: 2rem 0 0.75rem;
+}
+
+.stack-grid:hover {
+    animation-play-state: paused;
+}
+
+@keyframes stackScroll {
+    to { transform: translateX(-50%); }
 }
 
 .stack-item {
@@ -335,16 +622,15 @@ p {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    padding: 0 1.6rem;
 }
 
+/* Pas de halo lumineux au survol : drop-shadow rend un rectangle
+   sur les <img> SVG et tout effet qui depasse se fait couper par
+   l'overflow du bandeau. On garde uniquement le zoom. */
 .stack-item:hover {
     transform: scale(1.1);
     transition: transform 0.4s ease;
-}
-
-.stack-item:hover img,
-.stack-item:hover i {
-    filter: drop-shadow(0 -2px 20px rgba(0, 0, 0, 0.35));
 }
 
 .stack-item i,
@@ -374,8 +660,8 @@ p {
     margin-bottom: 1rem;
     padding: 2rem;
     padding-bottom: 1rem;
-    line-height: 1.5rem;
-    font-size: 1.3rem;
+    line-height: 1.65;
+    font-size: 1.1rem;
     color: var(--color1);
     font-weight: 500;
     text-align: left;
@@ -392,10 +678,6 @@ p {
 
 .who-item {
     width: 220px;
-    min-height: 160px;
-    border: 1px solid rgba(0,0,0,0.15);
-    border-radius: 12px;
-    background: transparent;
 
     display: flex;
     flex-direction: column;
@@ -404,23 +686,16 @@ p {
     gap: 0.7rem;
 
     text-align: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .who-item i {
-    font-size: 40px;
-    padding: 0;
-    color: var(--color1);
+    font-size: 1.5rem;
+    color: var(--color3);
 }
 
 .who-item p{
     margin: 0;
-}
-
-.who-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.10);
-    border-color: rgba(0,0,0,0.25);
+    font-weight: 600;
 }
 
 /****************************************/
@@ -429,11 +704,6 @@ p {
 
 #tarifs {
   scroll-margin-top: 7rem;
-}
-
-.price-title {
-    margin-bottom: 3rem;
-    margin-top: 3rem;
 }
 
 .paiement {
@@ -462,15 +732,24 @@ p {
     border-radius: 16px;
     padding: 2rem;
     box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.3s ease;
+}
+
+/* L'interieur en colonne : la liste pousse le bouton en bas de carte */
+.price-item > div {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 .price-item:hover {
     transform: scale(1.05);
-    transition: transform 0.9s ease, box-shadow 0.3s ease;
     box-shadow: 0 8px 25px rgba(0,0,0,0.30);
 }
 
-.vitrine {
+.essentiel {
     color: #566ccc;
 }
 
@@ -478,30 +757,24 @@ p {
     color: #95C11E;
 }
 
-.e-commerce {
+.vente {
     color: #865aec;
 }
 
-.premium {
-    color: #D4AF37;
-}
-
 .price-item ul {
-    position: relative;
-    margin-bottom: 3rem;
+    flex: 1;
+    margin: 1.2rem 0 1.8rem;
     color: var(--color1);
     list-style: none;
-    padding-left: 0;
-    padding-top: 15.5rem;
+    padding: 0;
 }
 
 .price-item ul li {
-    margin-bottom: 3rem;
-    font-size: 1.1rem;
-    font-weight: bold;
+    margin-bottom: 1.1rem;
+    font-size: 1rem;
+    font-weight: 600;
     position: relative;
     padding-left: 32px;
-    min-height: 2.6em;
     display: flex;
     align-items: flex-start;
 }
@@ -519,13 +792,11 @@ p {
 }
 
 .price-item ul li:first-child {
-    position: absolute;
-    top: 2rem;
-    left: 2rem;
-    width: calc(100% - 4rem);
+    padding-left: 0;
+    margin-bottom: 1.4rem;
     font-weight: normal;
-    margin-left: -4rem;
-    width: 100%;
+    font-size: 0.95rem;
+    line-height: 1.5;
     color: #444444;
 }
 
@@ -535,20 +806,19 @@ p {
 }
 
 .price-info {
-    margin-top: auto;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    font-size: 1.5rem;
+    margin: 0.4rem 0 0.2rem;
+    font-size: 1.6rem;
     font-weight: bold;
     color: var(--color3);
     text-align: center;
+    position: relative; /* ancre la mention "a partir de" */
 }
 
 .info {
     font-size: 0.9rem;
     color: var(--color1);
     font-style: italic;
-    margin-bottom: 7rem;
+    margin-bottom: 3rem;
 }
 
 .info p {
@@ -562,18 +832,11 @@ p {
 /*************** PROJECTS ***************/
 /****************************************/
 
+/* Plus de bandeau plein ecran derriere la section : son fond etait
+   deja celui de la page et son ombre dessinait une fausse ligne.
+   Le titre suit le rythme commun des h2 */
 .projects {
-    width: 100vw;
-    padding: 2rem 0;
-    background-color: var(--bg1);
-    box-shadow: 0 -2px 30px rgba(0, 0, 0, 0.15);
-    color: var(--color2);
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
-}
-
-.projects-title {
-    margin-bottom: 2rem;
+    padding: 0;
 }
 
 .projects-grid {
@@ -586,13 +849,18 @@ p {
 }
 
 /* COMMUN (light + dark) */
-.project-card { 
+.project-card {
     position: relative;
+    /* colonne : le bouton se cale en bas, les cartes restent uniformes */
+    display: flex;
+    flex-direction: column;
     background: var(--color2);
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.3s ease;
 }
 
 /* Contour dégradé */
@@ -600,6 +868,7 @@ p {
     content: "";
     position: absolute;
     inset: 0;
+    z-index: 2; /* au-dessus des images, sinon elles cachent le liseré en haut */
     padding: 3px;
     border-radius: inherit;
     background: linear-gradient(to right, #2c57e7, #a552a8);
@@ -618,6 +887,7 @@ p {
 }
 
 .project-img{
+  position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
   overflow: hidden;
@@ -629,6 +899,12 @@ p {
   object-fit: cover;
   object-position: center;
   display: block;
+  transition: transform 0.45s ease;
+}
+
+/* Zoom doux de l'image au survol de la carte */
+.project-card:hover .project-img img {
+    transform: scale(1.06);
 }
 
 
@@ -656,16 +932,18 @@ p {
     display: flex;
     flex-wrap: wrap;
     gap: .5rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.25rem;
     margin-left: 2rem;
     align-content: flex-start;
-    min-height: 6.5rem;
 }
 
+/* Pastille bordee translucide : un vocabulaire d'etiquette,
+   pour ne pas se confondre avec le bouton plein "Voir le site" */
 .project-tags span {
-    background: var(--bg4);
-    padding: .35rem .7rem;
-    border-radius: 6px;
+    background: rgba(44, 87, 231, 0.08);
+    border: 1px solid rgba(44, 87, 231, 0.25);
+    padding: .3rem .7rem;
+    border-radius: 999px;
     font-size: .85rem;
     font-weight: 600;
     color: var(--color3);
@@ -675,6 +953,7 @@ p {
     display: flex;
     justify-content: center;
     gap: 1rem;
+    margin-top: auto;
     margin-bottom: 2rem;
 }
 
@@ -717,9 +996,9 @@ p {
 /****************************************/
 
 .contact {
-    padding: 10rem 1rem;
-    padding-top: 3rem;
-    max-width: 900px;
+    /* bas reduit : un grand vide separait le bouton Envoyer du footer */
+    padding: 1.5rem 1rem 2.5rem;
+    max-width: 1100px;
     margin: 0 auto;
 }
 
@@ -729,28 +1008,164 @@ p {
     margin-bottom: 2rem;
 }
 
+/* Deux colonnes : reassurance a gauche, formulaire a droite */
+.contact-layout {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 2.5rem;
+    align-items: start;
+}
+
+.contact-intro {
+    margin: 0 0 1.8rem;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--color1);
+}
+
+.contact-points {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+
+.contact-points li {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.contact-points i {
+    /* Pastille identique pour chaque icone : les glyphes ont des
+       silhouettes trop differentes pour s'aligner seuls a l'oeil,
+       la boite visible cree une colonne parfaitement reguliere */
+    flex: 0 0 2.3rem;
+    width: 2.3rem;
+    height: 2.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(44, 87, 231, 0.08);
+    border: 1px solid rgba(44, 87, 231, 0.18);
+    font-size: 1.05rem;
+    /* Glyphe couleur texte (sombre en clair, blanc en sombre) :
+       plus lisible et plus sobre que le degrade signature */
+    color: var(--color1);
+}
+
+.contact-points strong {
+    display: block;
+    margin-bottom: 0.15rem;
+    font-size: 1rem;
+    color: var(--color1);
+}
+
+.contact-points span {
+    font-size: 0.92rem;
+    line-height: 1.45;
+    color: var(--color1);
+    opacity: 0.75;
+}
+
+.contact-points a {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color3);
+}
+
+/* Nom + email cote a cote en desktop */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+/* Mention discrete sur le champ facultatif */
+.optional {
+    font-weight: 400;
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+/* Piege a bots FormSubmit : invisible pour les humains */
+.honey-field {
+    display: none;
+}
+
+/* Tablette etroite : les deux colonnes s'empilent */
+@media (max-width: 899px) {
+    .contact-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .contact-intro {
+        font-size: 1rem;
+        margin-bottom: 1.2rem;
+    }
+
+    /* Sur mobile chaque point garde son titre, le detail est masque :
+       l'aside tient en un demi-ecran avant le formulaire */
+    .contact-points {
+        gap: 0.75rem;
+    }
+
+    .contact-points span {
+        display: none;
+    }
+
+    .contact-points li {
+        align-items: center;
+    }
+
+    .contact-points i {
+        flex-basis: 2.1rem;
+        width: 2.1rem;
+        height: 2.1rem;
+        font-size: 0.95rem;
+        border-radius: 9px;
+    }
+
+    .contact-points strong {
+        margin-bottom: 0;
+    }
+}
+
 .contact-form {
     background: var(--color2);
-    padding: 3rem 2.5rem;
+    padding: 2.25rem 2rem;
     border-radius: 16px;
     box-shadow: 0 6px 25px rgba(0,0,0,0.08);
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.1rem;
 }
 
 .contact-form label {
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 600;
     color: var(--color1);
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.4rem;
 }
 
+/* Champs sobres : bordure + fond suffisent, pas d'ombre portee.
+   font-size 1rem minimum, sinon iOS zoome au focus */
 .contact-form input,
 .contact-form textarea {
-    padding: 0.9rem 1.2rem;
+    padding: 0.75rem 1rem;
     border: 1.5px solid #d3d6e0;
     border-radius: 10px;
     font-size: 1rem;
@@ -759,11 +1174,10 @@ p {
     background: #f6f7fb;
     transition: all 0.25s ease;
     outline: none;
-    box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.10);
 }
 
 .select-offer {
-    padding: 0.9rem 1.2rem;
+    padding: 0.75rem 1rem;
     border: 1.5px solid #d3d6e0;
     border-radius: 10px;
     font-size: 1rem;
@@ -772,7 +1186,6 @@ p {
     background: #f6f7fb;
     transition: all 0.25s ease;
     outline: none;
-    box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.10);
 }
 
 .contact-form input:focus,
@@ -788,8 +1201,8 @@ p {
     background: var(--color3);
     color: var(--color2);
     border: none;
-    padding: 1rem 1.5rem;
-    font-size: 1.1rem;
+    padding: 0.85rem 1.4rem;
+    font-size: 1.05rem;
     font-weight: 600;
     border-radius: 12px;
     cursor: pointer;
@@ -811,6 +1224,11 @@ p {
     color: green;
     opacity: 0;
     transition: opacity .4s ease;
+}
+
+/* Vide, le message ne reserve aucune place sous le bouton Envoyer */
+.form-message:empty {
+    display: none;
 }
 
 /****************************************/
@@ -911,19 +1329,237 @@ footer {
     max-width: 600px;
     border-radius: 12px;
 }
+/* Devenus de vrais <button> pour le clavier : on gomme le style natif */
 .link-modal {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    color: inherit;
     cursor: pointer;
     text-decoration: underline;
 }
 .close {
     float: right;
+    background: none;
+    border: none;
+    padding: 0;
+    color: inherit;
     cursor: pointer;
     font-size: 28px;
+    line-height: 1;
 }
 
 .mail {
     color: var(--color3);
     font-weight: bold;
+}
+
+/****************************************/
+/********** NAVIGATION MOBILE ***********/
+/***** barre du bas + tiroir lateral ****/
+/****************************************/
+
+.mobile-tabbar {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1400;
+    height: 3.75rem;
+    padding-bottom: env(safe-area-inset-bottom);
+    box-sizing: content-box;
+    background: var(--color2);
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.10);
+}
+
+.mobile-tabbar__item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    height: 3.75rem;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color1);
+    font-size: 0.66rem;
+    font-weight: 600;
+    font-family: var(--primary_police);
+    transition: color 0.2s ease;
+    touch-action: manipulation;
+}
+
+.mobile-tabbar__item i {
+    font-size: 1.25rem;
+}
+
+.mobile-tabbar__item span {
+    white-space: nowrap;
+}
+
+/* Etat actif pilote uniquement par la classe .active (JS) :
+   le pseudo :active reste colle apres un tap sur iOS (sticky state),
+   l'item tape ne s'eteignait jamais en quittant la section */
+.mobile-tabbar__item.active {
+    color: var(--color3);
+}
+
+/* Voile sombre derriere le tiroir */
+.mobile-drawer-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1450;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+.mobile-drawer-overlay.is-open {
+    opacity: 1;
+}
+
+/* Tiroir qui glisse depuis la droite */
+.mobile-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 78%;
+    max-width: 285px;
+    background: var(--bg1);
+    z-index: 1460;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -8px 0 40px rgba(0, 0, 0, 0.18);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.mobile-drawer.is-open {
+    transform: translateX(0);
+}
+
+.mobile-drawer__head {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* safe-area : le tiroir passe sous l'encoche iOS (viewport-fit=cover) */
+    padding: calc(2.4rem + env(safe-area-inset-top)) 0.5rem 1rem;
+}
+
+.mobile-drawer__logo {
+    height: 32px;
+}
+
+.mobile-drawer__close {
+    position: absolute;
+    /* alignee sur la ligne du logo, loin du bord haut de l'ecran :
+       iOS avale les taps dans les ~20px sous la barre de statut
+       (et safe-area-inset-top vaut 0 en Safari classique) */
+    top: calc(1.7rem + env(safe-area-inset-top));
+    right: 0.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color1);
+    padding: 0.7rem 0.85rem;
+    display: flex;
+    font-size: 1.6rem;
+    touch-action: manipulation;
+}
+
+.mobile-drawer__links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0.5rem 0;
+    flex: 1;
+}
+
+.mobile-drawer__links a {
+    padding: 0.85rem 1.5rem;
+    text-align: center;
+    color: var(--color1);
+    font-size: 1.05rem;
+    font-weight: 500;
+}
+
+/* Rangee de carres (theme + langue) sous le logo */
+.mobile-drawer__actions {
+    padding: 3.2rem 1.25rem 0.75rem;
+    display: flex;
+    flex-direction: row;
+    gap: 0.6rem;
+}
+
+.mobile-drawer__square {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    padding: 0.5rem 0;
+    border: none;
+    background: transparent;
+    color: var(--color1);
+    font-family: var(--primary_police);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.mobile-drawer__square i {
+    font-size: 1.6rem;
+    color: var(--color3);
+}
+
+/* Bouton CV tout en bas */
+.mobile-drawer__foot {
+    padding: 0.6rem 1.25rem calc(0.8rem + env(safe-area-inset-bottom));
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-drawer__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-align: center;
+    padding: 0.85rem 1rem;
+    border-radius: 0.6rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    font-family: var(--primary_police);
+    cursor: pointer;
+}
+
+.mobile-drawer__btn--primary {
+    background: var(--color3);
+    color: var(--color2);
+}
+
+.mobile-drawer__btn--ghost {
+    background: transparent;
+    color: var(--color1);
+    border: 1px solid rgba(0, 0, 0, 0.18);
+}
+
+/* Verrou de defilement quand le tiroir est ouvert */
+body.drawer-open {
+    overflow: hidden;
 }
 
 /****************************************/
@@ -934,8 +1570,43 @@ footer {
 /****************************************/
 
 @media (max-width: 768px) {
-  *:hover {
-    transform: none !important;
+  /* Surtout pas de *:hover generique ici : il donne un etat hover a
+     TOUS les elements, donc iOS exige deux taps (le premier "survole")
+     et son !important ecrase meme les transforms d'animation (la
+     fleche du hero sautait a droite au tap). Les neutralisations de
+     hover vivent, ciblees, dans le bloc @media (hover: none). */
+
+  /* Mouvement plus rapide et plus ample sur petit ecran */
+  .hero-blob:nth-child(1) {
+    width: 350px;
+    height: 350px;
+    background: rgba(44, 87, 231, 0.32);
+    animation: blobDriftMobile 2.8s ease-in-out infinite alternate;
+  }
+  .hero-blob:nth-child(2) {
+    width: 300px;
+    height: 300px;
+    background: rgba(222, 88, 226, 0.28);
+    animation: blobDriftMobile 3.5s ease-in-out infinite alternate-reverse;
+    animation-delay: -2.5s;
+  }
+  .hero-blob:nth-child(3) { display: none; }
+
+  .hero {
+    /* La barre du bas recouvre le bas de l'ecran : on la deduit */
+    min-height: calc(100svh - 3.75rem - env(safe-area-inset-bottom));
+    /* Padding asymetrique : le contenu reste centre par flex mais
+       remonte nettement au-dessus du centre reel de l'ecran */
+    padding: 1rem 1.5rem 6rem;
+  }
+
+  .hero-content {
+    /* Plus aere qu'en desktop : l'ecran etroit tasse visuellement */
+    gap: 1.65rem;
+  }
+
+  .hero-scroll {
+    bottom: 1.75rem;
   }
 }
 
@@ -950,7 +1621,7 @@ footer {
     }
 
     main {
-        padding-top: 4rem;
+        padding-top: 0;
     }
 
     .menu {
@@ -1001,11 +1672,6 @@ footer {
         box-shadow: 0 -2px 30px rgba(0, 0, 0, 0.55);
     }
 
-    .stack-grid {
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-        gap: 1rem;
-    }
-
     .who-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -1019,23 +1685,17 @@ footer {
         box-shadow: 0 -2px 30px rgba(0, 0, 0, 0.25);
     }
 
-    .contact-form input,
-    .contact-form textarea {
-    box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.15);
-    }
-
     .contact {
-        padding: 4rem 1rem;
+        padding: 1.5rem 1rem 1rem;
     }
 
-    #themeBtn:hover, #langBtn:hover, #cvBtn:hover, #topBtn:hover {
+    #themeBtn:hover, #langBtn:hover, #topBtn:hover {
         transform: none;
         background: none;
     }
 
     #themeToggle:hover,
     #langBtn:hover,
-    #cvBtn:hover,
     #topBtn:hover {
         transform: none !important;
         background: var(--color1) !important;
@@ -1047,8 +1707,7 @@ footer {
         transform: none !important;
     }
 
-    /* Forcer CV et Back to Top à rester gris en mobile */
-    #cvBtn.btn-active,
+    /* Forcer Back to Top à rester gris en mobile */
     #topBtn.btn-active {
         background: var(--color1) !important;
         transform: none !important;
@@ -1084,14 +1743,8 @@ footer {
         transform: translateY(-50%) !important;
     }
 
-    /* Stack items (technologies) */
+    /* Stack items (technologies) : pas de zoom au tap */
     .stack-item:hover {
-        transform: none !important;
-    }
-
-    .stack-item:hover img,
-    .stack-item:hover i {
-        filter: none !important;
         transform: none !important;
     }
 
@@ -1146,14 +1799,6 @@ footer {
         font-size: 1.2rem;
     }
 
-    #cvBtn {
-        right: 15px;
-        bottom: 80px;
-        width: 40px;
-        height: 40px;
-        font-size: 1.2rem;
-    }
-
     #topBtn {
         right: 15px;
         bottom: 25px;
@@ -1174,25 +1819,54 @@ footer {
     }
 }
 
-@media (hover: none) {
-  .stack-item:hover {
-    transform: none !important;
-  }
-
-  .stack-item:hover img,
-  .stack-item:hover i {
-    filter: none !important;
-  }
-}
-
-@media (max-width: 596px) {
+@media (max-width: 768px) {
 
     body:hover {
         overflow-x: hidden;
-    }    
+    }
 
     #tarifs {
     scroll-margin-top: 9rem;
+    }
+
+    /* La carte A propos respire sur les cotes */
+    .about-text {
+    margin: 0 1.1rem 1rem;
+    padding: 1.4rem 1.3rem;
+    }
+
+    /* Texte courant un cran plus petit sur mobile */
+    .about-text p,
+    .who {
+    font-size: 1rem;
+    }
+
+    /* Section profils compacte : 3 colonnes de petites vignettes */
+    .who {
+    padding: 1.25rem 1.5rem 0.5rem;
+    }
+
+    .who-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+    padding: 0.5rem 1.1rem 0;
+    margin-bottom: 1.5rem;
+    }
+
+    .who-item {
+    width: 100%;
+    max-width: none;
+    padding: 0.35rem 0.25rem;
+    gap: 0.45rem;
+    }
+
+    .who-item i {
+    font-size: 1.3rem;
+    }
+
+    .who-item p {
+    font-size: 0.78rem;
+    line-height: 1.25;
     }
 
     .price-grid {
@@ -1205,6 +1879,7 @@ footer {
     .price-item {
     display: flex;
     flex-direction: column;
+    padding: 0;
 
     background: var(--color2);
     border: 1px solid rgba(255,255,255,0.08);
@@ -1213,54 +1888,70 @@ footer {
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 
+    /* Carte compacte : titre et prix sur la meme ligne, liste serree,
+       bouton epingle en bas pour des cartes uniformes */
     .price-item > div {
-    padding: 0.9rem 0.9rem 1rem;
+    flex: 1;
+    /* Haut commun a toutes les cartes : le bandeau "Le plus choisi"
+       loge dans cet espace sans decaler le contenu */
+    padding: 1.7rem 1.15rem 1.1rem;
     text-align: left;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto 1fr auto;
+    align-items: baseline;
+    column-gap: 0.75rem;
     }
 
     .price-item h3 {
-    margin: 0 0 0.4rem;
-    font-size: 2rem;
+    margin: 0;
+    font-size: 1.35rem;
     line-height: 1.15;
     text-align: left;
     }
 
     .price-info {
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     font-weight: 800;
     color: var(--color3);
-    text-align: left;
-    margin-bottom: 1rem;
+    text-align: right;
+    margin: 0;
+    padding: 0;
     }
 
     .price-item ul {
-    margin: 0;
+    grid-column: 1 / -1;
+    /* la liste reste collee sous le descriptif, jamais etiree
+       pour remplir la hauteur de la carte */
+    align-self: start;
+    align-content: start;
+    margin: 0.5rem 0 0;
     padding: 0;
     list-style: none;
     position: static;
     display: grid;
-    gap: 0.9rem;
+    gap: 0.45rem;
     }
 
     .price-item ul li {
     display: flex;
     align-items: flex-start;
-    margin: 0.5rem 0;
+    margin: 0;
     padding-left: 0;
     position: relative;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     line-height: 1.35;
-    min-height: 2.7em;
+    min-height: 0;
     color: var(--color1);
     }
 
     .price-item ul li::before {
     position: static;
-    margin-top: 0;
+    margin-top: 0.2em;
     margin-right: 0.5rem;
-    width: 20px;
-    height: 20px;
-    flex: 0 0 20px;
+    width: 16px;
+    height: 16px;
+    flex: 0 0 16px;
 }
 
 
@@ -1269,9 +1960,11 @@ footer {
     width: auto;
     left: auto;
     top: auto;
-    margin: 0 0 0.75rem;
+    margin: 0 0 0.35rem;
     padding-left: 0;
     font-weight: normal;
+    font-size: 0.88rem;
+    line-height: 1.4;
 }
 
     .info {
@@ -1282,17 +1975,14 @@ footer {
     margin-bottom: 3rem;
     }
 
-    .button.mobile-only {
+    .button.price-cta {
+    grid-column: 1 / -1;
+    align-self: end;
     display: inline-flex;
     width: fit-content;
-    padding: 0.8rem 1rem;
-    margin: 0 auto;
-    margin-top: 1.5rem;
+    padding: 0.7rem 1rem;
+    margin: 0.75rem auto 0;
     border-radius: 15px;
-    }
-
-    .desktop-only {
-    display: none;
     }
 }
 
@@ -1387,23 +2077,6 @@ footer {
         -webkit-text-fill-color: transparent;
     }
 
-    .stack-item:hover img,
-    .stack-item:hover i:hover {
-        filter: drop-shadow(0 -2px 30px rgba(231, 231, 231, 0.75));
-    }
-
-    /* Specific for dark mode icons */
-    .stack-item:hover img.github-dark,
-    .stack-item:hover i.github-dark,
-    .stack-item:hover img.symfony-dark,
-    .stack-item:hover i.symfony-dark,
-    .stack-item:hover img.wordpress-dark,
-    .stack-item:hover i.wordpress-dark,
-    .stack-item:hover img.wix-dark,
-    .stack-item:hover i.wix-dark {
-        filter: invert(1) drop-shadow(0 -2px 20px rgba(231,231,231,.75));
-    }
-
     /* Icons sociaux */
     .header-icons i:hover {
         transform: none !important;
@@ -1428,13 +2101,9 @@ footer {
         transform: translateY(-50%) !important;
     }
 
-    /* Who cards */
-    .who-item {
-    border: 1px solid rgba(241, 241, 241, 0.15);
-    }
-
-    .who-item:hover {
-    box-shadow: 0 8px 25px rgba(221, 241, 241, 0.15);
+    /* Carte A propos */
+    .about-text {
+    border-color: rgba(241, 241, 241, 0.15);
     }
 
     /* Price cards */
@@ -1472,32 +2141,29 @@ footer {
     }
 }
 
+.dark-mode .hero-blob:nth-child(1) { background: rgba(44, 87, 231, 0.38); }
+.dark-mode .hero-blob:nth-child(2) { background: rgba(222, 88, 226, 0.32); }
+.dark-mode .hero-blob:nth-child(3) { background: rgba(44, 87, 231, 0.24); }
+
+/* Navigation mobile en dark mode */
+.dark-mode .mobile-tabbar {
+    border-top-color: rgba(255, 255, 255, 0.10);
+}
+
+.dark-mode .mobile-drawer__logo {
+    content: url("images/byTom_dark_cut.png");
+}
+
+
 .dark-mode .project-tags span {
-    background: var(--bg4);
-    color: var(--color4);
+    background: rgba(138, 180, 248, 0.10);
+    border-color: rgba(138, 180, 248, 0.35);
+    color: var(--color3);
 }
 
-.dark-mode .contact-form {
-    position: relative;
-    z-index: 0;
-    background: var(--color2);
-    padding: 3rem 2.5rem;
-    border-radius: 16px;
-}
-
-.dark-mode .contact-form::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    padding: 3px;
-    border-radius: inherit;
-    background: linear-gradient(to right, #2c57e7, #a552a8);
-    -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-            mask-composite: exclude;
-    z-index: -1;
+.dark-mode .contact-points i {
+    background: rgba(138, 180, 248, 0.10);
+    border-color: rgba(138, 180, 248, 0.35);
 }
 
 .dark-mode .lang-btn img {
@@ -1516,4 +2182,439 @@ footer {
 /* Le :has() isole et cible mon a.active dans le parent li */
 .menu ul li:has(a.active)::after {
     width: 100% !important;
+}
+
+/****************************************/
+/****** BASCULE NAVIGATION MOBILE *******/
+/* (en fin de fichier pour primer sur   */
+/* les blocs responsive plus haut)      */
+/****************************************/
+
+@media (max-width: 768px) {
+    .mobile-tabbar {
+        display: flex;
+    }
+
+    /* Place pour la barre du bas */
+    body {
+        padding-bottom: calc(3.75rem + env(safe-area-inset-bottom));
+    }
+
+    /* La nav du haut disparait : la barre du bas la remplace */
+    header {
+        display: none;
+    }
+
+    /* Sans header fixe, les ancres se calent en haut */
+    section {
+        scroll-margin-top: 1rem;
+    }
+
+    #tarifs {
+        scroll-margin-top: 1rem;
+    }
+
+    /* Theme et langue sont dans le tiroir ; seul "remonter" reste */
+    #themeToggle,
+    #langBtn {
+        display: none;
+    }
+
+    #topBtn {
+        bottom: calc(3.75rem + env(safe-area-inset-bottom) + 0.9rem);
+        right: 15px;
+    }
+
+    /* ----- Carrousels (tarifs + projets) ----- */
+    .price-grid,
+    .projects-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 1rem;
+        padding: 1rem 1.25rem 0.75rem;
+    }
+
+    .price-grid::-webkit-scrollbar,
+    .projects-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    .price-item,
+    .project-card {
+        flex: 0 0 86%;
+        scroll-snap-align: center;
+    }
+
+    /* Points indicateurs sous les carrousels (injectes en JS) */
+    .carousel-dots {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin: 0 0 0.75rem;
+    }
+
+    .carousel-dots__dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        border: none;
+        padding: 0;
+        background: var(--bg4);
+        cursor: pointer;
+        transition: background 0.25s ease, transform 0.25s ease;
+    }
+
+    .carousel-dots__dot.active {
+        background: var(--color3);
+        transform: scale(1.3);
+    }
+
+    /* Bande stack un peu plus rapide en mobile */
+    .stack-grid {
+        animation-duration: 26s;
+    }
+}
+
+/* Au-dela de 768px : rien de tout ca */
+@media (min-width: 769px) {
+    .mobile-tabbar,
+    .mobile-drawer,
+    .mobile-drawer-overlay {
+        display: none !important;
+    }
+}
+
+/****************************************/
+/****************************************/
+/******** TARIFS : MISE EN AVANT ********/
+/****************************************/
+/****************************************/
+
+/* Carte recommandee : bordure degradee + bandeau "Le plus choisi" */
+.price-item--featured {
+    position: relative;
+    overflow: hidden;
+    border: 2px solid transparent;
+    background:
+        linear-gradient(var(--color2), var(--color2)) padding-box,
+        linear-gradient(135deg, #2c57e7, #de58e2) border-box;
+}
+
+.dark-mode .price-item--featured {
+    border: 2px solid transparent;
+}
+
+.price-badge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 0.28rem 0;
+    text-align: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #F3F3F5;
+    background: linear-gradient(to right, #2c57e7, #de58e2);
+}
+
+/* Mention "a partir de" : flotte au-dessus du prix sans le decaler,
+   les prix des trois cartes restent ainsi a la meme hauteur */
+.price-from {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--color1);
+    opacity: 0.75;
+}
+
+/* En mobile le prix est aligne a droite face au titre, la mention suit */
+@media (max-width: 768px) {
+    .price-from {
+        left: auto;
+        right: 0;
+        transform: none;
+    }
+}
+
+/* Bouton par carte en desktop, centre et colle en bas */
+@media (min-width: 769px) {
+    .price-item .button.price-cta {
+        align-self: center;
+        margin-top: auto;
+        width: fit-content;
+    }
+}
+
+/* Bandeau maintenance sous la grille des tarifs */
+.maintenance-banner {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto 2.5rem;
+    padding: 1.4rem 1.8rem;
+    background: var(--color2);
+    border: 1px solid rgba(53, 39, 175, 0.12);
+    border-radius: 16px;
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    text-align: left;
+}
+
+.maintenance-banner::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 5px;
+    background: linear-gradient(to bottom, #2c57e7, #de58e2);
+}
+
+.maintenance-banner i {
+    font-size: 1.9rem;
+    color: var(--color3);
+    flex: 0 0 auto;
+}
+
+.maintenance-banner p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color1);
+}
+
+.maintenance-banner strong {
+    color: var(--color3);
+    font-weight: 700;
+}
+
+.dark-mode .maintenance-banner {
+    border-color: rgba(241, 241, 241, 0.15);
+}
+
+@media (max-width: 768px) {
+    .maintenance-banner {
+        margin: 0 1.1rem 2rem;
+        padding: 1.1rem 1.2rem;
+        gap: 0.85rem;
+    }
+
+    .maintenance-banner i {
+        font-size: 1.6rem;
+    }
+
+    .maintenance-banner p {
+        font-size: 0.95rem;
+    }
+}
+
+/****************************************/
+/****************************************/
+/****** PROJETS : BADGE + BANDEAU *******/
+/****************************************/
+/****************************************/
+
+/* Badge type de projet, pose sur l'image */
+.project-type {
+    position: absolute;
+    top: 0.8rem;
+    left: 0.8rem;
+    z-index: 1;
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #F3F3F5;
+    background: linear-gradient(to right, #2c57e7, #de58e2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* Carte sans visuel : pictogramme en attendant la capture */
+.project-img--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(44, 87, 231, 0.14), rgba(222, 88, 226, 0.14));
+}
+
+.project-img--placeholder i {
+    font-size: 3.2rem;
+    background: linear-gradient(to right, #2c57e7, #de58e2);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Projet pas encore en ligne : bouton neutralise */
+.btn-soon {
+    opacity: 0.6;
+    cursor: default;
+    pointer-events: none;
+}
+
+/* Bandeau CTA sous la grille des projets */
+.projects-banner {
+    position: relative;
+    max-width: 800px;
+    margin: 0.5rem auto 1.5rem;
+    padding: 1.4rem 1.8rem;
+    background: var(--color2);
+    border: 1px solid rgba(53, 39, 175, 0.12);
+    border-radius: 16px;
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    text-align: left;
+}
+
+.projects-banner::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 5px;
+    background: linear-gradient(to bottom, #2c57e7, #de58e2);
+}
+
+.projects-banner p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color1);
+}
+
+.projects-banner strong {
+    color: var(--color3);
+    font-weight: 700;
+}
+
+.projects-banner .button {
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 0.85rem 1.6rem;
+    white-space: nowrap;
+}
+
+.dark-mode .projects-banner {
+    border-color: rgba(241, 241, 241, 0.15);
+}
+
+@media (max-width: 768px) {
+    .projects-banner {
+        flex-direction: column;
+        margin: 0 1.1rem 1rem;
+        padding: 1.2rem 1.2rem 1.3rem;
+        gap: 0.9rem;
+        text-align: center;
+    }
+
+    .projects-banner p {
+        font-size: 0.95rem;
+    }
+}
+
+/****************************************/
+/****************************************/
+/********** TACTILE : PAS DE HOVER ******/
+/****************************************/
+/****************************************/
+
+/* Sur ecran tactile, un tap declenche un :hover qui reste colle :
+   on ramene tous les effets de survol a l'etat de repos.
+   Les :active colorants (tabbar, tiroir) ont ete retires : sur iOS
+   ils restent colles apres le tap, comme les :hover. */
+@media (hover: none) {
+
+    /* Surtout pas de a:hover generique ici : donner un etat hover a tous
+       les liens pousse iOS a exiger deux taps (le premier ne fait que
+       "survoler") et colle une couleur heritee (noir UA) apres le tap. */
+
+    /* La bande des technologies ne se fige pas au toucher */
+    .stack-grid:hover {
+        animation-play-state: running;
+    }
+
+    .stack-item:hover {
+        transform: none !important;
+    }
+
+    /* Cartes tarifs : ombre de repos */
+    .price-item:hover {
+        transform: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .dark-mode .price-item:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Cartes projets */
+    .project-card:hover {
+        transform: none !important;
+        box-shadow: 0 -2px 30px rgba(0, 0, 0, 0.25) !important;
+    }
+
+    .project-card:hover .project-img img {
+        transform: none !important;
+    }
+
+    /* Boutons */
+    .button:hover {
+        background: var(--bg1);
+        color: var(--color3);
+    }
+
+    .btn-outline:hover {
+        background: transparent;
+        color: #2c57e7;
+    }
+
+    .btn-fill:hover {
+        background: #2c57e7;
+        color: var(--color2);
+    }
+
+    .contact-form button:hover {
+        background: var(--color3);
+        transform: none;
+    }
+
+    /* Header desktop sur tablette tactile */
+    .menu ul li:hover::after {
+        width: 0;
+    }
+
+    .logo-menu:hover {
+        transform: translateY(-50%);
+    }
+
+    #topBtn:hover,
+    .theme-btn:hover,
+    #langBtn:hover {
+        transform: none;
+        background: var(--color1);
+    }
+
+    .header-icons i:hover {
+        background: var(--color1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
 }

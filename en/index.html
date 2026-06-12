@@ -4,406 +4,754 @@
 <head>
     <!-- META -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="Tom Ochietti - Full-Stack Web Developer">
-    <meta property="og:description" content="Web developer creating modern and functional websites. Discover my projects and skills.">
-    <meta name="keywords" content="web developer, mobile web, SEO, responsive, full stack, JavaScript, React, HTML, CSS, Figma, PHP, Symfony, portfolio, Tom Ochietti, Tom Occhietti, Tom Ochieti, Tom Occieti, bytom, byTom, developer">
-    <meta name="google-site-verification" content="Q-K2pX-5EMo41wh510m504eS_thhIO53BsEKrlc4sk0" />
-    <meta property="og:image" content="../images/byTom_link.png">
-    <meta property="og:url" content="https://tomochietti.com/">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Freelance web developer based in Quimper, Brittany (France). Custom showcase websites, online stores and web applications for non-profits, freelancers and small businesses. Free quote.">
+    <meta name="author" content="byTom">
+    <meta name="theme-color" content="#1b1b1d">
+    <!-- Open Graph (social sharing) -->
+    <meta property="og:site_name" content="byTom">
+    <meta property="og:title" content="byTom - Website creation in Quimper, France">
+    <meta property="og:description" content="Custom showcase websites, online stores and web applications for non-profits, freelancers and small businesses. Free quote.">
+    <meta property="og:image" content="https://by-tom.fr/images/byTom_link.png">
+    <meta property="og:image:alt" content="byTom logo, freelance web developer">
+    <meta property="og:url" content="https://by-tom.fr/en/">
     <meta property="og:type" content="website">
-    <meta name="author" content="Tom Ochietti">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="fr_FR">
+    <!-- Twitter cards -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@TomOchietti">
-    <meta name="twitter:description" content="Web developer creating modern and functional websites. Discover my projects and skills.">
-    <meta name="twitter:title" content="Tom Ochietti - Full-Stack Web Developer">
-    <meta name="twitter:image" content="../images/byTom_link.png">
+    <meta name="twitter:site" content="@byTom">
+    <meta name="twitter:description" content="Custom showcase websites, online stores and web applications. Free quote.">
+    <meta name="twitter:title" content="byTom - Website creation in Quimper, France">
+    <meta name="twitter:image" content="https://by-tom.fr/images/byTom_link.png">
     <!-- TITLE & LINKS -->
-    <title>Tom Ochietti</title>
-    <link rel="icon" type="image/x-icon" href="../images/byTom_favicon.png">
-    <link rel="stylesheet" href="../styles.css">
+    <title>byTom | Website creation in Quimper, France - Freelance web developer</title>
+    <link rel="canonical" href="https://by-tom.fr/en/">
+    <link rel="alternate" hreflang="fr" href="https://by-tom.fr/">
+    <link rel="alternate" hreflang="en" href="https://by-tom.fr/en/">
+    <link rel="alternate" hreflang="x-default" href="https://by-tom.fr/">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="stylesheet" href="/styles.css?v=47">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+    <!-- Structured data (local SEO and rich results) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "byTom",
+        "description": "Custom website creation: showcase websites, online stores and web applications for non-profits, freelancers and small businesses.",
+        "url": "https://by-tom.fr/en/",
+        "image": "https://by-tom.fr/images/byTom_link.png",
+        "email": "bytom.dev@gmail.com",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Quimper",
+            "addressRegion": "Brittany",
+            "addressCountry": "FR"
+        },
+        "areaServed": "France",
+        "priceRange": "499€-1399€",
+        "founder": {
+            "@type": "Person",
+            "name": "Tom Ochietti",
+            "jobTitle": "Freelance web developer"
+        },
+        "sameAs": [
+            "https://github.com/Tom9603/",
+            "https://www.linkedin.com/in/tom-ochietti",
+            "https://www.instagram.com/__bytom/"
+        ],
+        "makesOffer": [
+            { "@type": "Offer", "name": "Essential showcase website", "price": "499", "priceCurrency": "EUR" },
+            { "@type": "Offer", "name": "Standard website with content management", "price": "699", "priceCurrency": "EUR" },
+            { "@type": "Offer", "name": "Online store", "price": "1399", "priceCurrency": "EUR" }
+        ]
+    }
+    </script>
 </head>
-<body>
+<body class="dark-mode">
+    <script>
+        // Dark by default, from the very first paint (no white flash).
+        // We only switch back to light if the visitor already chose it.
+        if (localStorage.getItem("darkMode") === "false") {
+            document.body.classList.remove("dark-mode");
+        }
+    </script>
+    <!-- Skip link: first focusable element for keyboard users -->
+    <a class="skip-link" href="#contenu">Skip to content</a>
     <!---------------------------- HEADER --------------------------------->
     <header>
-        <nav class="menu">
-            <a href="https://tomochietti.com/">
-            <img src="../images/byTom_menu_light.png" alt="Logo" class="logo-menu">
+        <nav class="menu" aria-label="Main navigation">
+            <a href="https://by-tom.fr/en/" aria-label="byTom, back to homepage">
+            <img src="/images/byTom_cut.png" alt="" class="logo-menu">
             </a>
             <ul>
-                <li><a href="#">Home</a></li>
+                <li><a href="#accueil">Home</a></li>
                 <li><a href="#a-propos">About</a></li>
+                <li><a href="#tarifs">Pricing</a></li>
                 <li><a href="#projets">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
-    <!---------------------------- MAIN --------------------------------->
-    <main>
-        <div class="header-main">
-            <img src="../images/byTom_light.png" alt="Logo" class="header-main-logo">
-            <div class="header-icons">
-                <a href="https://github.com/Tom9603/" target="_blank" aria-label="GitHub">
-                    <i class="fa-brands fa-github"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/tom-ochietti" target="_blank" aria-label="LinkedIn">
-                    <i class="fa-brands fa-linkedin-in"></i>
-                </a>
-                <a href="https://www.instagram.com/__bytom/" target="_blank" aria-label="Instagram">
-                    <i class="fa-brands fa-instagram"></i>
-                </a>
-            </div>
-            <i class="fa-regular fa-hand-pointer click" aria-label="Pointer"></i>
-            <h1>Full Stack <br>Web Developer</h1>
+
+    <!---------------------------- MOBILE NAVIGATION --------------------------------->
+    <!-- Bottom tab bar (within thumb's reach) -->
+    <nav class="mobile-tabbar" aria-label="Quick navigation">
+        <a href="#accueil" class="mobile-tabbar__item">
+            <i class="fa-solid fa-house" aria-hidden="true"></i>
+            <span>Home</span>
+        </a>
+        <a href="#tarifs" class="mobile-tabbar__item">
+            <i class="fa-solid fa-tags" aria-hidden="true"></i>
+            <span>Pricing</span>
+        </a>
+        <a href="#projets" class="mobile-tabbar__item">
+            <i class="fa-solid fa-diagram-project" aria-hidden="true"></i>
+            <span>Projects</span>
+        </a>
+        <a href="#contact" class="mobile-tabbar__item">
+            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+            <span>Contact</span>
+        </a>
+        <button type="button" class="mobile-tabbar__item" data-drawer-open aria-controls="mobile-drawer" aria-expanded="false">
+            <i class="fa-solid fa-bars" aria-hidden="true"></i>
+            <span>Menu</span>
+        </button>
+    </nav>
+
+    <!-- Overlay + right-hand drawer -->
+    <div class="mobile-drawer-overlay" id="mobile-drawer-overlay" hidden></div>
+
+    <aside class="mobile-drawer" id="mobile-drawer" aria-hidden="true" aria-label="Main menu" inert>
+        <div class="mobile-drawer__head">
+            <img src="/images/byTom_cut.png" alt="byTom" class="mobile-drawer__logo">
+            <button type="button" class="mobile-drawer__close" data-drawer-close aria-label="Close the menu">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
         </div>
-        <!-- A PROPOS -->
+
+        <div class="mobile-drawer__actions">
+            <button type="button" id="drawerThemeBtn" class="mobile-drawer__square">
+                <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
+                <span>Day / night</span>
+            </button>
+            <a href="/" class="mobile-drawer__square" lang="fr">
+                <i class="fa-solid fa-language" aria-hidden="true"></i>
+                <span>Français</span>
+            </a>
+        </div>
+
+        <nav class="mobile-drawer__links" aria-label="Mobile menu links">
+            <a href="#accueil">Home</a>
+            <a href="#a-propos">About</a>
+            <a href="#tarifs">Pricing</a>
+            <a href="#projets">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="mobile-drawer__foot">
+            <a href="#contact" class="mobile-drawer__btn mobile-drawer__btn--primary">
+                <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Let's talk about your project
+            </a>
+        </div>
+    </aside>
+    <!---------------------------- MAIN --------------------------------->
+    <main id="contenu">
+        <!-- HERO -->
+        <section class="hero" id="accueil">
+            <div class="hero-blob"></div>
+            <div class="hero-blob"></div>
+            <div class="hero-blob"></div>
+            <div class="hero-content">
+                <img src="/images/byTom.png" alt="byTom logo" class="header-main-logo" width="448" height="450" fetchpriority="high">
+                <h1>Your website,<br>without the headache.</h1>
+                <p class="hero-sub">A tailor-made project: you share your needs,<br>we scope it together, I take care of the rest.</p>
+                <div class="header-icons">
+                    <a href="https://www.linkedin.com/in/tom-ochietti" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)">
+                        <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://www.instagram.com/__bytom/" target="_blank" rel="noopener noreferrer" aria-label="Instagram (opens in a new tab)">
+                        <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <a href="#contact" class="button hero-cta">Let's talk about your project<i class="fa-regular fa-hand-pointer hero-hand" aria-hidden="true"></i></a>
+            </div>
+            <button type="button" class="hero-scroll" id="heroScroll" aria-label="Scroll to the About section">
+                <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+            </button>
+        </section>
+        <!-- ABOUT -->
         <section class="about" id="a-propos">
             <h2>About</h2>
             <article class="about-text">
                 <p>
-                    Web developer, I enjoy turning ideas into code to create platforms that are simple, clean, modern, and pleasant to use.
-                    <br><br>
-                    With proficiency in various languages, I give myself the means to take on challenges and build increasingly ambitious projects every day.
-                    <br><br><br>
+                    As an independent web developer, I help <strong>non-profits</strong>, <strong>freelancers</strong>
+                    and <strong>small businesses</strong> get online without worrying about the technical side.
                 </p>
-                <a href="#contact" class="button" aria-label="Let's discuss your project">Let's discuss your project</a>
+                <p>
+                    Understanding your activity, scoping your needs, delivering a clean and fast website
+                    you can build on: that's how I work,
+                    <strong>simply and transparently</strong>, from our first conversation to launch day.
+                </p>
             </article>
-                <!-- TECH STACKS -->
-            <section class="stacks">
-                <div class="stack-grid">
-                    <!--  TECH 1  -->
-                    <a href="https://fr.wikipedia.org/wiki/HTML" target="_blank">
-                        <div class="stack-item">              
-                            <i class="devicon-html5-plain colored"></i>
-                            <p>HTML5</p>
-                        </div>
-                    </a>
-                    <!--  TECH 2  -->
-                    <a href="https://fr.wikipedia.org/wiki/Twig" target="_blank">
-                        <div class="stack-item">
-                            <img src="../images/twig.png" alt="Twig">
-                            <p>TWIG</p>
-                        </div>
-                    </a>
-                    <!--  TECH 3  -->
-                    <a href="https://fr.wikipedia.org/wiki/Feuilles_de_style_en_cascade#CSS" target="_blank">
-                        <div class="stack-item">
-                            <i class="devicon-css3-plain colored"></i>
-                            <p>CSS3</p>
-                        </div>
-                    </a>
-                    <!--  TECH 4  -->
-                    <a href="https://fr.wikipedia.org/wiki/Sass_(langage)" target="_blank">
-                        <div class="stack-item">
-                            <i class="devicon-sass-original colored"></i>
-                            <p>SCSS/SASS</p>
-                        </div>
-                    </a>
-                    <!--  TECH 5  -->
-                    <a href="https://fr.wikipedia.org/wiki/JavaScript" target="_blank">
-                        <div class="stack-item">
-                            <i class="devicon-javascript-plain colored"></i>
-                            <p>JavaScript</p>
-                        </div>
-                    </a>
-                    <!--  TECH 6  -->
-                    <a href="https://fr.wikipedia.org/wiki/PHP" target="_blank">
-                        <div class="stack-item">
-                            <i class="devicon-php-plain colored"></i>
-                            <p>PHP</p>
-                        </div>
-                    </a>
-                    <!--  TECH 7  -->
-                    <a href="https://fr.wikipedia.org/wiki/Symfony" target="_blank">
-                        <div class="stack-item">
-                            <i class="devicon-symfony-original colored symfony-dark"></i>
-                            <p>Symfony</p>
-                        </div>
-                    </a>
-                    <!--  TECH 8  -->
-                    <a href="https://fr.wikipedia.org/wiki/MySQL" target="_blank">
-                        <div class="stack-item">
-                            <i class="devicon-mysql-plain colored"></i>
-                            <p>MySQL</p>
-                        </div>
-                    </a>
-                    <!--  TECH 9  -->
-                    <a href="https://fr.wikipedia.org/wiki/Firebase" target="_blank">
-                        <div class="stack-item">
-                            <i class="devicon-firebase-plain colored"></i>
-                            <p>Firebase</p>
-                        </div>
-                    </a>
-                    <!--  TECH 10  -->
-                    <a href="https://fr.wikipedia.org/wiki/Git" target="_blank">
-                        <div class="stack-item">
-                            <i class="devicon-git-plain colored"></i>
-                            <p>Git</p>
-                        </div>
-                    </a>
-                    <!--  TECH 11  -->
-                    <a href="https://fr.wikipedia.org/wiki/GitHub" target="_blank">
-                        <div class="stack-item">
-                            <i class="devicon-github-plain colored github-dark"></i>
-                            <p>GitHub</p>
-                        </div>
-                    </a>
-                    <!--  TECH 12  -->
-                    <a href="https://fr.wikipedia.org/wiki/Figma" target="_blank">
-                        <div class="stack-item">  
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" />
-                            <p>Figma</p>
-                        </div>
-                    </a>
-                    <!--  TECH 13  -->
-                    <a href="https://fr.wikipedia.org/wiki/Visual_Studio_Code" target="_blank">
-                        <div class="stack-item">
-                            <i class="devicon-visualstudio-plain colored"></i>
-                            <p>VS Code</p>
-                        </div>
-                    </a>
-                    <!--  TECH 14  -->
-                    <a href="https://fr.wikipedia.org/wiki/PhpStorm" target="_blank">
-                        <div class="stack-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/phpstorm/phpstorm-original.svg" />
-                            <p>PHPStorm</p>
-                        </div>
-                    </a>
-                    <!--  TECH 15  -->
-                    <a href="https://fr.wikipedia.org/wiki/WordPress" target="_blank">
-                        <div class="stack-item">
-                            <i class="devicon-wordpress-plain colored wordpress-dark"></i>
-                            <p>WordPress</p>
-                        </div>
-                    </a>
-                    <!--  TECH 16  -->
-                    <a href="https://fr.wikipedia.org/wiki/Wix.com" target="_blank">
-                        <div class="stack-item wix-dark">
-                            <img src="https://img.icons8.com/?size=100&id=cQfKnWABsKk9&format=png&color=000000" alt="Wix">
-                            <p>Wix</p>
-                        </div>
-                    </a>
-                </div>
-            </section>
         </section>
-        <!-- PROJETS -->
+        <!-- WHO ARE MY SERVICES FOR? -->
+        <section>
+            <h2>Who are my services for?</h2>
+            <article>
+                <p class="who">
+                    I work with all kinds of clients, from professionals to individuals, depending on their needs and projects. <br><br>
+                    My goal is simple: understand the request, propose something clear and achievable, and move forward transparently throughout the project.
+                </p>
+
+            </article>
+            <div class="who-grid">
+                <!--  Type 1  -->
+                <div class="who-item">
+                    <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                    <p>E-commerce</p>
+                </div>
+                <!--  Type 2  -->
+                <div class="who-item">
+                    <i class="fa-solid fa-shop" aria-hidden="true"></i>
+                    <p>Small business</p>
+                </div>
+                <!--  Type 3  -->
+                <div class="who-item">
+                    <i class="fa-solid fa-building" aria-hidden="true"></i>
+                    <p>SME</p>
+                </div>
+                <!--  Type 4 -->
+                <div class="who-item">
+                    <i class="fa-solid fa-users" aria-hidden="true"></i>
+                    <p>Non-profit</p>
+                </div>
+                <!--  Type 5  -->
+                <div class="who-item">
+                    <i class="fa-solid fa-user" aria-hidden="true"></i>
+                    <p>Freelancer</p>
+                </div>
+                <!--  Type 6  -->
+                <div class="who-item">
+                    <i class="fa-solid fa-house-user" aria-hidden="true"></i>
+                    <p>Individual</p>
+                </div>
+            </div>
+        </section>
+        <!-- PRICING -->
+        <section id="tarifs">
+            <h2 class="price-title">Pricing</h2>
+            <p class="paiement">Free, no-obligation quote. Payment in 2 or 3 instalments available.</p>
+            <!--  PRICE 1  -->
+            <div class="price-grid">
+                <div class="price-item">
+                    <div>
+                        <h3 class="essentiel">Essential</h3>
+                        <p class="price-info">€499</p>
+                        <ul>
+                            <li>
+                                The showcase website that presents your activity, simply and effectively
+                            </li>
+                            <li>
+                                1 to 3 pages
+                            </li>
+                            <li>
+                                Custom design, mobile and tablet friendly
+                            </li>
+                            <li>
+                                Contact form
+                            </li>
+                            <li>
+                                Legal notice and GDPR included
+                            </li>
+                            <li>
+                                Launch included, free hosting
+                            </li>
+                            <li>
+                                Delivered in 2 to 3 weeks
+                            </li>
+                        </ul>
+                        <a href="#contact"
+                            class="button price-cta"
+                            data-offer="Essential package">
+                            Let's talk about your project
+                        </a>
+                    </div>
+                </div>
+                <!--  STANDARD (featured)  -->
+                <div class="price-item price-item--featured">
+                    <span class="price-badge">Most popular</span>
+                    <div>
+                        <h3 class="standard">Standard</h3>
+                        <p class="price-info">€699</p>
+                        <ul>
+                            <li>
+                                The complete website you manage yourself, ideal for non-profits and small businesses
+                            </li>
+                            <li>
+                                Up to 6 pages
+                            </li>
+                            <li>
+                                Edit your texts and photos on your own
+                            </li>
+                            <li>
+                                Secure member area available
+                            </li>
+                            <li>
+                                Everything in Essential included
+                            </li>
+                            <li>
+                                Personal onboarding and guidance
+                            </li>
+                            <li>
+                                Delivered in 3 to 5 weeks
+                            </li>
+                        </ul>
+                        <a href="#contact"
+                            class="button price-cta"
+                            data-offer="Standard package">
+                            Let's talk about your project
+                        </a>
+                    </div>
+                </div>
+                <!--  ONLINE STORE  -->
+                <div class="price-item">
+                    <div>
+                        <h3 class="vente">Online store</h3>
+                        <p class="price-info"><span class="price-from">from</span>€1399</p>
+                        <ul>
+                            <li>
+                                Sell your products or services directly from your website
+                            </li>
+                            <li>
+                                Product or service catalogue
+                            </li>
+                            <li>
+                                Secure online payment
+                            </li>
+                            <li>
+                                Order and customer management
+                            </li>
+                            <li>
+                                Everything in Standard included
+                            </li>
+                            <li>
+                                Training included
+                            </li>
+                            <li>
+                                Custom quote based on your needs
+                            </li>
+                        </ul>
+                        <a href="#contact"
+                            class="button price-cta"
+                            data-offer="Online store package">
+                            Let's talk about your project
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="maintenance-banner">
+                <i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i>
+                <p><strong>Maintenance and peace of mind: from €29/month.</strong> Hosting, backups, updates and small changes: I take care of everything, you stay focused on your business.</p>
+            </div>
+        </section>
+        <div class="info">
+            <p>
+                * Every project starts with a free, personalised quote; the prices shown cover the most common needs.
+            </p>
+            <p>
+                * A 30% deposit is due when the quote is signed, the balance upon delivery.
+            </p>
+            <p>
+                * The domain name remains at the client's expense. Hosting is free with the Essential package and included in the maintenance plan.
+            </p>
+        </div>
+
+        <!-- PROJECTS -->
         <section class="projects" id="projets">
-            <h2 class="projects-title">Completed projects</h2>
+            <h2 class="projects-title">Recent projects</h2>
             <div class="container">
                 <div class="projects-grid">
-                    <!-- PROJET 1 -->
+                    <!-- PROJECT 1 -->
                     <article class="project-card">
                         <div class="project-img">
-                            <img src="../images/projets/Windsurf.png" alt="Projet 1">
+                            <span class="project-type">Non-profit website</span>
+                            <img src="/images/projets/Pin-up.png" alt="Homepage of the Comité Miss Pin-up Bretagne website" width="1690" height="976" loading="lazy" decoding="async">
+                        </div>
+                        <div class="project-content">
+                            <h3>Comité Miss Pin-up Bretagne</h3>
+
+                            <p>
+                                The organisation manages its contestants, event calendar and content entirely on its own, thanks to a custom-built admin area.
+                            </p>
+                        </div>
+
+                        <div class="project-tags">
+                            <span>Member area</span>
+                            <span>Event calendar</span>
+                            <span>Self-managed content</span>
+                        </div>
+
+                        <div class="project-buttons">
+                            <a href="https://misspinupbretagne.fr/" class="btn-fill" target="_blank" rel="noopener noreferrer">Visit website</a>
+                        </div>
+                    </article>
+                    <!-- PROJECT 2 -->
+                    <article class="project-card">
+                        <div class="project-img project-img--placeholder">
+                            <span class="project-type">Business website</span>
+                            <i class="fa-solid fa-paw" aria-hidden="true"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>Les patounes du glazik</h3>
+
+                            <p>
+                                The complete website of a pet-sitting business: personal client area, online invoices and fully self-managed content.
+                            </p>
+                        </div>
+
+                        <div class="project-tags">
+                            <span>Secure client area</span>
+                            <span>Online invoices</span>
+                            <span>Custom admin area</span>
+                        </div>
+
+                        <div class="project-buttons">
+                            <span class="btn-fill btn-soon">Coming soon</span>
+                        </div>
+                    </article>
+                    <!-- PROJECT 3 -->
+                    <article class="project-card">
+                        <div class="project-img">
+                            <span class="project-type">Web application</span>
+                            <img src="/images/projets/Feuille-de-match.png" alt="Team line-up screen of the Feuille de match application" width="1786" height="875" loading="lazy" decoding="async">
+                        </div>
+                        <div class="project-content">
+                            <h3>Feuille de match</h3>
+
+                            <p>
+                                The club saves time: every player fills in the match sheet from their phone and takes position on the pitch in real time.
+                            </p>
+                        </div>
+
+                        <div class="project-tags">
+                            <span>Real time</span>
+                            <span>Usable on the pitch</span>
+                            <span>Mobile-first</span>
+                        </div>
+
+                        <div class="project-buttons">
+                            <a href="https://tom9603.github.io/Feuille-de-match/" class="btn-fill" target="_blank" rel="noopener noreferrer">Visit website</a>
+                        </div>
+                    </article>
+                    <!-- PROJECT 4 -->
+                    <article class="project-card">
+                        <div class="project-img">
+                            <span class="project-type">Showcase website</span>
+                            <img src="/images/projets/Windsurf.png" alt="Photo gallery of the Windsurfing showcase website" width="1899" height="908" loading="lazy" decoding="async">
                         </div>
                         <div class="project-content">
                             <h3>Windsurfing</h3>
 
                             <p>
-                                My first website, created after one month of learning HTML and CSS.
-                                A showcase site with a Pinterest-style photo gallery for a private client who practices windsurfing.
+                                A clean showcase website built around a passion: a large photo gallery and simple navigation, designed to make the images shine.
                             </p>
                         </div>
-                        
+
                         <div class="project-tags">
-                            <span>HTML</span>
-                            <span>CSS</span>
-                            <span>JS</span>
-                            <span>Git</span>
-                            <span>VS Code</span>
+                            <span>Photo gallery</span>
+                            <span>Simple navigation</span>
+                            <span>Mobile friendly</span>
                         </div>
 
                         <div class="project-buttons">
-                            <a href="https://tom9603.github.io/SiteWindsurf/" class="btn-outline" target="_blank">URL</a>
-                            <a href="https://github.com/Tom9603/SiteWindsurf" class="btn-fill" target="_blank">Code</a>
-                        </div>
-                    </article>
-                    <!-- PROJET 2 -->
-                    <article class="project-card">
-                        <div class="project-img">
-                            <img src="../images/projets/Feuille-de-match.png" alt="Projet 2">
-                        </div>
-                        <div class="project-content">
-                            <h3>Match sheet</h3>
-
-                            <p>
-                                A concise match sheet platform with a Firebase database for a football club, allowing players to indicate their position on the field.
-                            </p>
-                        </div>
-                        
-                        <div class="project-tags">
-                            <span>HTML</span>
-                            <span>CSS</span>
-                            <span>JS</span>
-                            <span>Git</span>
-                            <span>Firebase</span>
-                            <span>VS Code</span>
-                            <span>Mobile first</span>
-                        </div>
-
-                        <div class="project-buttons">
-                            <a href="https://tom9603.github.io/Feuille-de-match/" class="btn-outline" target="_blank">URL</a>
-                            <a href="https://github.com/Tom9603/Feuille-de-match" class="btn-fill" target="_blank">Code</a>
-                        </div>
-                    </article>
-                    <!-- PROJET 3 -->
-                    <article class="project-card">
-                        <div class="project-img">
-                            <img src="../images/projets/Pin-up.png" alt="Projet 3">
-                        </div>
-                        <div class="project-content">
-                            <h3>Brittany Pin-up Committee</h3>
-
-                            <p>
-                                A community platform for the Miss Pin-up Bretagne committee, featuring an admin area to manage candidates, blog, comments and events.
-                            </p>
-                        </div>
-                        
-                        <div class="project-tags">
-                            <span>TWIG</span>
-                            <span>SCSS</span>
-                            <span>JS</span>
-                            <span>API FullCalendar</span>
-                            <span>PHP</span>
-                            <span>Symfony</span>
-                            <span>MySQL</span>
-                            <span>Git</span>
-                            <span>PHPStorm</span>
-                            <span>Mobile first</span>
-                        </div>
-
-                        <div class="project-buttons">
-                            <a href="https://misspinupbretagne.fr/" class="btn-outline" target="_blank">URL</a>
-                            <a href="https://github.com/Tom9603/pin-up" class="btn-fill" target="_blank">Code</a>
-                        </div>
-                    </article>
-                    <!-- PROJET 4 -->
-                    <article class="project-card">
-                        <div class="project-img">
-                            <img src="../images/projets/Portfolio.png" alt="Projet 3">
-                        </div>
-                        <div class="project-content">
-                            <h3>Portfolio</h3>
-
-                            <p>
-                                My personal portfolio.
-                                Built solely with a simple front-end approach.
-
-                            </p>
-                        </div>
-                        
-                        <div class="project-tags">
-                            <span>HTML</span>
-                            <span>CSS</span>
-                            <span>JS</span>
-                            <span>Git</span>
-                            <span>VS Code</span>
-                        </div>
-
-                        <div class="project-buttons">
-                            <a href="https://tom9603.github.io/Portfolio/" class="btn-outline" target="_blank">URL</a>
-                            <a href="https://github.com/Tom9603/Portfolio" class="btn-fill" target="_blank">Code</a>
+                            <a href="https://tom9603.github.io/SiteWindsurf/" class="btn-fill" target="_blank" rel="noopener noreferrer">Visit website</a>
                         </div>
                     </article>
                 </div>
+
+                <div class="projects-banner">
+                    <p><strong>Your project could be next.</strong> Tell me what you need, the quote is free.</p>
+                    <a href="#contact" class="button">Let's talk</a>
+                </div>
             </div>
         </section>
+
+        <!-- TECH STACKS -->
+        <section class="stacks" aria-label="Technologies and tools">
+            <h2 class="visually-hidden">Technologies and tools</h2>
+            <div class="stack-marquee">
+            <div class="stack-grid">
+                <!--  TECH 1  -->
+                <a href="https://en.wikipedia.org/wiki/HTML" target="_blank" rel="noopener noreferrer">
+                    <div class="stack-item">
+                        <i class="devicon-html5-plain colored"></i>
+                        <p>HTML5</p>
+                    </div>
+                </a>
+                <!--  TECH 2  -->
+                <a href="https://en.wikipedia.org/wiki/Twig_(template_engine)" target="_blank" rel="noopener noreferrer">
+                    <div class="stack-item">
+                        <img src="/images/twig.png" alt="" loading="lazy">
+                        <p>TWIG</p>
+                    </div>
+                </a>
+                <!--  TECH 3  -->
+                <a href="https://en.wikipedia.org/wiki/CSS" target="_blank" rel="noopener noreferrer">
+                    <div class="stack-item">
+                        <i class="devicon-css3-plain colored"></i>
+                        <p>CSS3</p>
+                    </div>
+                </a>
+                <!--  TECH 4  -->
+                <a href="https://en.wikipedia.org/wiki/Sass_(style_sheet_language)" target="_blank" rel="noopener noreferrer">
+                    <div class="stack-item">
+                        <i class="devicon-sass-original colored"></i>
+                        <p>SCSS/SASS</p>
+                    </div>
+                </a>
+                <!--  TECH 5  -->
+                <a href="https://en.wikipedia.org/wiki/JavaScript" target="_blank" rel="noopener noreferrer">
+                    <div class="stack-item">
+                        <i class="devicon-javascript-plain colored"></i>
+                        <p>JavaScript</p>
+                    </div>
+                </a>
+                <!--  TECH 6  -->
+                <a href="https://en.wikipedia.org/wiki/PHP" target="_blank" rel="noopener noreferrer">
+                    <div class="stack-item">
+                        <i class="devicon-php-plain colored"></i>
+                        <p>PHP</p>
+                    </div>
+                </a>
+                <!--  TECH 7  -->
+                <a href="https://en.wikipedia.org/wiki/Symfony" target="_blank" rel="noopener noreferrer">
+                    <div class="stack-item">
+                        <i class="devicon-symfony-original colored symfony-dark"></i>
+                        <p>Symfony</p>
+                    </div>
+                </a>
+                <!--  TECH 8  -->
+                <a href="https://en.wikipedia.org/wiki/MySQL" target="_blank" rel="noopener noreferrer">
+                    <div class="stack-item">
+                        <i class="devicon-mysql-plain colored"></i>
+                        <p>MySQL</p>
+                    </div>
+                </a>
+                <!--  TECH 9  -->
+                <a href="https://en.wikipedia.org/wiki/Firebase" target="_blank" rel="noopener noreferrer">
+                    <div class="stack-item">
+                        <i class="devicon-firebase-plain colored"></i>
+                        <p>Firebase</p>
+                    </div>
+                </a>
+                <!--  TECH 10  -->
+                <a href="https://en.wikipedia.org/wiki/Git" target="_blank" rel="noopener noreferrer">
+                    <div class="stack-item">
+                        <i class="devicon-git-plain colored"></i>
+                        <p>Git</p>
+                    </div>
+                </a>
+                <!--  TECH 11  -->
+                <a href="https://en.wikipedia.org/wiki/GitHub" target="_blank" rel="noopener noreferrer">
+                    <div class="stack-item">
+                        <i class="devicon-github-plain colored github-dark"></i>
+                        <p>GitHub</p>
+                    </div>
+                </a>
+                <!--  TECH 12  -->
+                <a href="https://en.wikipedia.org/wiki/Figma" target="_blank" rel="noopener noreferrer">
+                    <div class="stack-item">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" alt="" loading="lazy" />
+                        <p>Figma</p>
+                    </div>
+                </a>
+                <!--  TECH 13  -->
+                <a href="https://en.wikipedia.org/wiki/Visual_Studio_Code" target="_blank" rel="noopener noreferrer">
+                    <div class="stack-item">
+                        <i class="devicon-visualstudio-plain colored"></i>
+                        <p>VS Code</p>
+                    </div>
+                </a>
+                <!--  TECH 14  -->
+                <a href="https://en.wikipedia.org/wiki/PhpStorm" target="_blank" rel="noopener noreferrer">
+                    <div class="stack-item">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/phpstorm/phpstorm-original.svg" alt="" loading="lazy" />
+                        <p>PHPStorm</p>
+                    </div>
+                </a>
+                <!--  TECH 15  -->
+                <a href="https://en.wikipedia.org/wiki/WordPress" target="_blank" rel="noopener noreferrer">
+                    <div class="stack-item">
+                        <i class="devicon-wordpress-plain colored wordpress-dark"></i>
+                        <p>WordPress</p>
+                    </div>
+                </a>
+                <!--  TECH 16  -->
+                <a href="https://en.wikipedia.org/wiki/Wix.com" target="_blank" rel="noopener noreferrer">
+                    <div class="stack-item wix-dark">
+                        <img src="https://img.icons8.com/?size=100&id=cQfKnWABsKk9&format=png&color=000000" alt="" loading="lazy">
+                        <p>Wix</p>
+                    </div>
+                </a>
+            </div>
+            </div>
+        </section>
+
         <!-- CONTACT -->
         <section class="contact" id="contact">
-            <form id="contactForm" action="https://formsubmit.co/tom.ochietti@gmail.com" method="POST" class="contact-form">
-                <h2>Contact</h2>
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="">
+            <h2>Let's talk about your project</h2>
+            <div class="contact-layout">
+                <div class="contact-aside">
+                    <p class="contact-intro">
+                        An idea, a need, a simple question? Describe your project in a few lines and let's discuss it.
+                    </p>
+                    <ul class="contact-points">
+                        <li>
+                            <i class="fa-solid fa-reply" aria-hidden="true"></i>
+                            <div>
+                                <strong>Reply within 24 hours</strong>
+                                <span>A personal answer, not an automated message.</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-file-signature" aria-hidden="true"></i>
+                            <div>
+                                <strong>Free, no-obligation quote</strong>
+                                <span>You know where you stand before committing.</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                            <div>
+                                <strong>Based in Quimper, France</strong>
+                                <span>On-site meetings in Cornouaille (Brittany), remote work anywhere in France.</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                            <div>
+                                <strong>By email if you prefer</strong>
+                                <a href="mailto:bytom.dev@gmail.com">bytom.dev@gmail.com</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
 
-                <label>
-                    Nom
-                    <input type="text" name="Nom" placeholder="Enter your name" required>
-                </label>
+                <form id="contactForm" action="https://formsubmit.co/bytom.dev@gmail.com" method="POST" class="contact-form" data-msg-success="Your message has been sent." data-msg-error="Something went wrong. Please try again.">
+                    <input type="hidden" name="_subject" value="New message from by-tom.fr (English page)">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="text" name="_honey" class="honey-field" tabindex="-1" autocomplete="off">
 
-                <label>
-                    Email
-                    <input type="email" name="Email" placeholder="Enter your name" required>
-                </label>
+                    <div class="form-row">
+                        <label>
+                            Name
+                            <input type="text" name="Name" placeholder="Enter your name" autocomplete="name" required>
+                        </label>
 
-                <label>
-                    Message
-                    <textarea name="Message" rows="5" placeholder="Your message here..." required></textarea>
-                </label>
+                        <label>
+                            Email
+                            <input type="email" name="Email" placeholder="Enter your email" autocomplete="email" required>
+                        </label>
+                    </div>
 
-                <button type="submit" aria-label="Send">Send</button>
-                <p id="formMessage" class="form-message"></p>
-            </form>
+                    <label>
+                        Phone <span class="optional">(optional)</span>
+                        <input type="tel" name="Phone" placeholder="If you'd rather get a call back" autocomplete="tel">
+                    </label>
+
+                    <label>
+                        Your request
+                        <select id="offer" name="Request" class="select-offer" required>
+                            <option value="">Choose an option</option>
+                            <option value="Essential package">Essential package</option>
+                            <option value="Standard package">Standard package</option>
+                            <option value="Online store package">Online store package</option>
+                            <option value="Maintenance plan">Maintenance plan</option>
+                            <option value="Redesign of an existing website">Redesign of an existing website</option>
+                            <option value="General enquiry">General enquiry</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        Message
+                        <textarea name="Message" rows="5" placeholder="Tell me about your project..." required></textarea>
+                    </label>
+
+                    <button type="submit">Send</button>
+                    <p id="formMessage" class="form-message" role="status" aria-live="polite"></p>
+                </form>
+            </div>
         </section>
     </main>
     <!---------------------------- FOOTER --------------------------------->
     <footer>
-        <p>&copy; 2025 Tom Ochietti - Freelance developer</p>
-        <p>SIRET : to be provided</p>
-        <p><a href="mailto:tom.ochietti@gmail.com">tom.ochietti@gmail.com</a></p>
+        <p>&copy; 2026 byTom - Micro-Entrepreneur</p>
+        <p>SIREN: 994 640 779</p>
+        <p><a href="mailto:bytom.dev@gmail.com"><span class="mail">bytom.dev@gmail.com</span></a></p>
         <p>
-            <span class="link-modal" data-modal="mentions">Legal Notice</span> - 
-            <span class="link-modal" data-modal="privacy">Privacy Policy</span>
+            <button type="button" class="link-modal" data-modal="mentions">Legal notice</button> -
+            <button type="button" class="link-modal" data-modal="privacy">Privacy policy</button>
         </p>
     </footer>
-    <!---- MENTIONS LÉGALES ---->
-    <div id="modal-mentions" class="modal">
-    <div class="modal-content">
-        <span class="close" data-close="mentions">&times;</span>
-        <h2>Legal Notice</h2>
+    <!---- LEGAL NOTICE ---->
+    <div id="modal-mentions" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-mentions-title">
+    <div class="modal-content" tabindex="-1">
+        <button type="button" class="close" data-close="mentions" aria-label="Close the legal notice">&times;</button>
+        <h2 id="modal-mentions-title">Legal notice</h2>
 
         <p><strong>Website publisher</strong><br>
-            Tom Ochietti - Freelance developer<br>
-            SIRET : to be provided<br>
-            Email : tom.ochietti@gmail.com<br>
+            byTom – Micro-entrepreneur (French sole proprietorship)<br>
+            SIREN: 994 640 779<br>
+            Email: <a href="mailto:bytom.dev@gmail.com"><span class="mail">bytom.dev@gmail.com</span></a><br>
             Address: Elliant, France.
         </p>
 
-        <p><strong>Host</strong><br>
+        <p><strong>Hosting provider</strong><br>
             GitHub, Inc.<br>
             88 Colin P Kelly Jr St, San Francisco, CA 94107, USA.
         </p>
     </div>
 </div>
-    <!---- POLITIQUE DE CONFIDENTIALITÉ ---->
-<div id="modal-privacy" class="modal">
-    <div class="modal-content">
-        <span class="close" data-close="privacy">&times;</span>
-        <h2>Privacy Policy</h2>
+    <!---- PRIVACY POLICY ---->
+<div id="modal-privacy" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-privacy-title">
+    <div class="modal-content" tabindex="-1">
+        <button type="button" class="close" data-close="privacy" aria-label="Close the privacy policy">&times;</button>
+        <h2 id="modal-privacy-title">Privacy policy</h2>
 
         <p>
-            The data sent via the form (name, email, message) is used
-            only to respond and is not stored on this site.
+            The information sent through the form (name, email, message) is only used
+            to reply to you and is not stored on this website.
         </p>
 
         <p>
-            FormSubmit may temporarily store messages in order to forward them by email.
-            This website has no database and therefore does not store any data whatsoever.
-            <br><br>
-
-            However, you may request the deletion of our email exchange history by contacting me at:
-            <a href="mailto:tom.ochietti@gmail.com">tom.ochietti@gmail.com
-            </a>
+            The FormSubmit service may temporarily keep messages
+            in order to deliver them by email. <br> This website has no database, so it does not store any data at all. <br><br> You can nevertheless request the deletion
+            of our email history by writing to: <a href="mailto:bytom.dev@gmail.com"><span class="mail">bytom.dev@gmail.com</span></a>
         </p>
     </div>
 </div>
-    <!-- BOUTONS ACCESSIBILITÉ -->
-    <button id="themeToggle" class="theme-btn" aria-label="Toggle dark mode">
-        <i class="fa-solid fa-circle-half-stroke"></i>
+
+
+    <!-- ACCESSIBILITY BUTTONS -->
+    <button id="themeToggle" class="theme-btn" aria-label="Toggle between dark and light theme">
+        <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
     </button>
-    <button id="langBtn" class="lang-btn" aria-label="Toggle language">
-        <img src="../images/language.svg" alt="Change language">
+    <button id="langBtn" class="lang-btn" lang="fr" aria-label="Passer en français">
+        <img src="/images/language.svg" alt="">
     </button>
      <button id="topBtn" aria-label="Back to top">
-        <i class="fa-solid fa-arrow-up-long"></i>
+        <i class="fa-solid fa-arrow-up-long" aria-hidden="true"></i>
      </button>
-     <button id="cvBtn" aria-label="Download CV">
-        <i class="fa-solid fa-file-arrow-down"></i>
-    </button>
     <!-- SCRIPT JS -->
-    <script src="../script.js"></script>
+    <script src="/script.js?v=47"></script>
 </body>
 </html>
