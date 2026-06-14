@@ -1,6 +1,4 @@
-// pagehide : pose un flag sessionStorage + force y=0.
-// Le flag permet a l'inline <head> de cacher la page au prochain chargement
-// avant que iOS Safari restaure sa position – l'utilisateur ne voit pas le saut.
+// pagehide : sauvegarde un flag + force y=0 dans l'historique.
 window.addEventListener('pagehide', function () {
     sessionStorage.setItem('scrollReset', '1');
     window.scrollTo(0, 0);
@@ -8,20 +6,54 @@ window.addEventListener('pagehide', function () {
     document.documentElement.scrollTop = 0;
 });
 
-// pageshow : iOS Safari peut restaurer sa position apres cet evenement.
-// On supprime le flag, force y=0 immediatement et dans le prochain frame.
-// La page etait cachee (visibility:hidden en <head>) : on la revele apres le reset.
-window.addEventListener('pageshow', function () {
+// pageshow : iOS Safari ignore scrollRestoration='manual' et peut restaurer
+// sa position meme apres pageshow. Strategie : la page reste cachee (via <head>)
+// pendant qu'on surveille les scroll events. Des que iOS declenche sa restauration
+// (ou apres 300 ms), on remet y=0 et on revele.
+window.addEventListener('pageshow', function (e) {
+    var hadFlag = !!sessionStorage.getItem('scrollReset');
     sessionStorage.removeItem('scrollReset');
+
+    // BFCache restore sans flag : cacher aussi pour eviter le flash
+    if (!hadFlag && e.persisted) {
+        document.documentElement.style.visibility = 'hidden';
+    }
+
+    // Forcer y=0 immediatement
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
-    requestAnimationFrame(function () {
+
+    function reveal() {
+        // Verifier une derniere fois avant de montrer
         window.scrollTo(0, 0);
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
         document.documentElement.style.visibility = '';
-    });
+    }
+
+    if (hadFlag || e.persisted) {
+        // Ecouter le premier scroll event : c'est iOS qui restaure sa position.
+        // On le neutralise et on revele ensuite.
+        var caught = false;
+        function onRestorationScroll() {
+            if (caught) return;
+            caught = true;
+            window.removeEventListener('scroll', onRestorationScroll);
+            requestAnimationFrame(reveal);
+        }
+        window.addEventListener('scroll', onRestorationScroll, { passive: true });
+
+        // Timeout de securite : si iOS ne scrolle pas dans les 300 ms,
+        // on revele quand meme (on etait deja en haut).
+        setTimeout(function () {
+            window.removeEventListener('scroll', onRestorationScroll);
+            requestAnimationFrame(reveal);
+        }, 300);
+    } else {
+        // Premiere visite : pas de restoration possible, reveler immediatement.
+        document.documentElement.style.visibility = '';
+    }
 });
 
 // Empeche les liens d'ancre de modifier l'URL : si le hash reste dans l'URL,
