@@ -1723,6 +1723,7 @@ footer {
     padding: 0.6rem 1.25rem calc(0.8rem + env(safe-area-inset-bottom));
     display: flex;
     flex-direction: column;
+    gap: 0.6rem;
 }
 
 .mobile-drawer__btn {
