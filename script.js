@@ -1,25 +1,3 @@
-// iOS Safari ignore scrollRestoration='manual' et restaure la position au refresh.
-// On detecte le reload via PerformanceNavigationTiming et on ecrase la position
-// en boucle sur ~20 frames : quelle que soit la frame ou iOS restaure, la suivante corrige.
-window.addEventListener('pageshow', function (e) {
-    var isReload = false;
-    try {
-        var nav = performance.getEntriesByType('navigation')[0];
-        isReload = nav ? nav.type === 'reload' : performance.navigation.type === 1;
-    } catch (x) {}
-
-    if (!isReload && !e.persisted) return;
-
-    var frames = 0;
-    function lockTop() {
-        window.scrollTo(0, 0);
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-        if (++frames < 20) requestAnimationFrame(lockTop);
-    }
-    lockTop();
-});
-
 // Empeche les liens d'ancre de modifier l'URL : si le hash reste dans l'URL,
 // le navigateur y scrolle au refresh (scrollRestoration ne couvre pas ce cas).
 // #a-propos a son propre handler plus bas, on le saute ici.
