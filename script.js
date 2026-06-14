@@ -1,12 +1,28 @@
-// Toujours revenir en haut a chaque rechargement
-if ('scrollRestoration' in history) {
-    history.scrollRestoration = 'manual';
-}
-// pagehide : on remet y=0 juste avant de quitter la page.
-// Le navigateur sauvegarde donc 0 dans l'historique → la restauration ramene au top, sans saccade.
-window.addEventListener('pagehide', function () { window.scrollTo(0, 0); });
-// Filet de securite si le navigateur restaure malgre tout
-window.addEventListener('pageshow', function () { window.scrollTo(0, 0); });
+// pagehide : pose un flag sessionStorage + force y=0.
+// Le flag permet a l'inline <head> de cacher la page au prochain chargement
+// avant que iOS Safari restaure sa position – l'utilisateur ne voit pas le saut.
+window.addEventListener('pagehide', function () {
+    sessionStorage.setItem('scrollReset', '1');
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+});
+
+// pageshow : iOS Safari peut restaurer sa position apres cet evenement.
+// On supprime le flag, force y=0 immediatement et dans le prochain frame.
+// La page etait cachee (visibility:hidden en <head>) : on la revele apres le reset.
+window.addEventListener('pageshow', function () {
+    sessionStorage.removeItem('scrollReset');
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+    requestAnimationFrame(function () {
+        window.scrollTo(0, 0);
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+        document.documentElement.style.visibility = '';
+    });
+});
 
 // Empeche les liens d'ancre de modifier l'URL : si le hash reste dans l'URL,
 // le navigateur y scrolle au refresh (scrollRestoration ne couvre pas ce cas).
