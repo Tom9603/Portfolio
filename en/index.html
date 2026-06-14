@@ -35,7 +35,8 @@
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <link rel="stylesheet" href="/styles.css?v=58">
+    <script>document.documentElement.classList.add("preload");</script>
+    <link rel="stylesheet" href="/styles.css?v=74">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -94,6 +95,7 @@
             <ul>
                 <li><a href="#accueil">Home</a></li>
                 <li><a href="#a-propos">About</a></li>
+                <li><a href="#pour-qui">Who is it for?</a></li>
                 <li><a href="#tarifs">Pricing</a></li>
                 <li><a href="#projets">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -104,9 +106,13 @@
     <!---------------------------- MOBILE NAVIGATION --------------------------------->
     <!-- Bottom tab bar (within thumb's reach) -->
     <nav class="mobile-tabbar" aria-label="Quick navigation">
-        <a href="#accueil" class="mobile-tabbar__item">
-            <i class="fa-solid fa-house" aria-hidden="true"></i>
-            <span>Home</span>
+        <a href="#a-propos" class="mobile-tabbar__item">
+            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+            <span>About</span>
+        </a>
+        <a href="#pour-qui" class="mobile-tabbar__item">
+            <i class="fa-solid fa-users" aria-hidden="true"></i>
+            <span>For who?</span>
         </a>
         <a href="#tarifs" class="mobile-tabbar__item">
             <i class="fa-solid fa-tags" aria-hidden="true"></i>
@@ -151,9 +157,9 @@
         <nav class="mobile-drawer__links" aria-label="Mobile menu links">
             <a href="#accueil">Home</a>
             <a href="#a-propos">About</a>
+            <a href="#pour-qui">Who is it for?</a>
             <a href="#tarifs">Pricing</a>
             <a href="#projets">Projects</a>
-            <a href="#contact">Contact</a>
         </nav>
 
         <div class="mobile-drawer__foot">
@@ -187,6 +193,9 @@
                 <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
             </button>
         </section>
+        <div class="dev-banner" id="dev-banner">
+            <img src="/dev-banner.jpg" alt="Web developer working on VS Code" loading="lazy" fetchpriority="low">
+        </div>
         <!-- ABOUT -->
         <section class="about" id="a-propos">
             <h2>About</h2>
@@ -203,7 +212,7 @@
             </article>
         </section>
         <!-- WHO ARE MY SERVICES FOR? -->
-        <section>
+        <section id="pour-qui">
             <h2>Who are my services for?</h2>
             <article>
                 <p class="who">
@@ -243,6 +252,14 @@
                     <i class="fa-solid fa-house-user" aria-hidden="true"></i>
                     <p>Individual</p>
                 </div>
+            </div>
+            <div class="who-banner">
+                <div class="who-banner-img"><img src="/who-1.jpg" alt="Baker in his bakery" loading="lazy"></div>
+                <div class="who-banner-img"><img src="/who-8.jpg" alt="Photographer in studio" loading="lazy"></div>
+                <div class="who-banner-img"><img src="/who-5.jpg" alt="Chefs in restaurant" loading="lazy"></div>
+                <div class="who-banner-img"><img src="/who-3.jpg" alt="Tattoo artist at work" loading="lazy"></div>
+                <div class="who-banner-img"><img src="/who-4.jpg" alt="Blacksmith in his workshop" loading="lazy"></div>
+                <div class="who-banner-img"><img src="/who-2.jpg" alt="Mechanic in his garage" loading="lazy"></div>
             </div>
         </section>
         <!-- PRICING -->
@@ -752,6 +769,6 @@
         <i class="fa-solid fa-arrow-up-long" aria-hidden="true"></i>
      </button>
     <!-- SCRIPT JS -->
-    <script src="/script.js?v=58"></script>
+    <script src="/script.js?v=74"></script>
 </body>
 </html>

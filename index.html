@@ -36,7 +36,8 @@
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <link rel="stylesheet" href="styles.css?v=58">
+    <script>document.documentElement.classList.add("preload");</script>
+    <link rel="stylesheet" href="styles.css?v=74">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -95,6 +96,7 @@
             <ul>
                 <li><a href="#accueil">Accueil</a></li>
                 <li><a href="#a-propos">À propos</a></li>
+                <li><a href="#pour-qui">Pour qui ?</a></li>
                 <li><a href="#tarifs">Tarifs</a></li>
                 <li><a href="#projets">Projets</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -105,9 +107,13 @@
     <!---------------------------- NAVIGATION MOBILE --------------------------------->
     <!-- Barre d'onglets en bas (a portee de pouce) -->
     <nav class="mobile-tabbar" aria-label="Navigation rapide">
-        <a href="#accueil" class="mobile-tabbar__item">
-            <i class="fa-solid fa-house" aria-hidden="true"></i>
-            <span>Accueil</span>
+        <a href="#a-propos" class="mobile-tabbar__item">
+            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+            <span>À propos</span>
+        </a>
+        <a href="#pour-qui" class="mobile-tabbar__item">
+            <i class="fa-solid fa-users" aria-hidden="true"></i>
+            <span>Pour qui ?</span>
         </a>
         <a href="#tarifs" class="mobile-tabbar__item">
             <i class="fa-solid fa-tags" aria-hidden="true"></i>
@@ -152,9 +158,9 @@
         <nav class="mobile-drawer__links" aria-label="Liens du menu mobile">
             <a href="#accueil">Accueil</a>
             <a href="#a-propos">À propos</a>
+            <a href="#pour-qui">Pour qui ?</a>
             <a href="#tarifs">Tarifs</a>
             <a href="#projets">Projets</a>
-            <a href="#contact">Contact</a>
         </nav>
 
         <div class="mobile-drawer__foot">
@@ -188,6 +194,9 @@
                 <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
             </button>
         </section>
+        <div class="dev-banner" id="dev-banner">
+            <img src="dev-banner.jpg" alt="Développeur web travaillant sur VS Code" loading="lazy" fetchpriority="low">
+        </div>
         <!-- A PROPOS -->
         <section class="about" id="a-propos">
             <h2>À propos</h2>
@@ -204,7 +213,7 @@
             </article>
         </section>
         <!-- À QUI S'ADRESSE MES SERVICES ?-->
-        <section>
+        <section id="pour-qui">
             <h2>À qui s'adressent mes services ?</h2>
             <article>
                 <p class="who">
@@ -244,6 +253,14 @@
                     <i class="fa-solid fa-house-user" aria-hidden="true"></i>
                     <p>Particulier</p>
                 </div>
+            </div>
+            <div class="who-banner">
+                <div class="who-banner-img"><img src="who-1.jpg" alt="Boulanger dans sa boulangerie" loading="lazy"></div>
+                <div class="who-banner-img"><img src="who-8.jpg" alt="Photographe en studio" loading="lazy"></div>
+                <div class="who-banner-img"><img src="who-5.jpg" alt="Cuisiniers en restaurant" loading="lazy"></div>
+                <div class="who-banner-img"><img src="who-3.jpg" alt="Tatoueur au travail" loading="lazy"></div>
+                <div class="who-banner-img"><img src="who-4.jpg" alt="Forgeron dans son atelier" loading="lazy"></div>
+                <div class="who-banner-img"><img src="who-2.jpg" alt="Mécanicien dans son garage" loading="lazy"></div>
             </div>
         </section>
         <!-- TARIFS -->
@@ -753,6 +770,6 @@
         <i class="fa-solid fa-arrow-up-long" aria-hidden="true"></i>
      </button>
     <!-- SCRIPT JS -->
-    <script src="script.js?v=58"></script>
+    <script src="script.js?v=74"></script>
 </body>
 </html>

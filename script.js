@@ -1,3 +1,8 @@
+// Retire la classe preload apres le premier rendu pour reactiver les transitions de theme
+requestAnimationFrame(() => requestAnimationFrame(() => {
+    document.documentElement.classList.remove("preload");
+}));
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////// FORMULAIRE CONTACT /////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -69,12 +74,28 @@ toggleTopBtn();
 /////////////////////////////////////////// HERO SCROLL /////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// Scroll vers l'image : on utilise offsetTop du banner (position dans le layout CSS)
+// plutot que getBoundingClientRect, qui peut etre instable sur iOS Safari quand la
+// barre d'adresse se replie en meme temps que le scroll demarre.
+function scrollToDevBanner() {
+    const banner = document.getElementById('dev-banner');
+    if (!banner) return;
+    const headerH = document.querySelector('header')?.offsetHeight ?? 0;
+    window.scrollTo({ top: banner.offsetTop - headerH, behavior: 'smooth' });
+}
+
 const heroScroll = document.getElementById('heroScroll');
 if (heroScroll) {
-    heroScroll.addEventListener('click', () => {
-        document.getElementById('a-propos').scrollIntoView({ behavior: 'smooth' });
-    });
+    heroScroll.addEventListener('click', scrollToDevBanner);
 }
+
+// "À propos" dans nav/tabbar : scroll jusqu'à l'image
+document.querySelectorAll('a[href="#a-propos"]').forEach(link => {
+    link.addEventListener('click', e => {
+        e.preventDefault();
+        scrollToDevBanner();
+    });
+});
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////// STACK MARQUEE /////////////////////////////////////////////
@@ -439,4 +460,29 @@ document.querySelectorAll('.mobile-tabbar a').forEach(link => {
         link.classList.add('active');
         link.setAttribute('aria-current', 'true');
     });
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////// TRUNCATION PROJETS /////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Si la description d'une carte depasse 3 lignes (line-clamp CSS),
+// on injecte un bouton "Afficher plus / Reduire" entre le texte et les tags
+document.querySelectorAll('.project-card').forEach(card => {
+    const p = card.querySelector('.project-content p');
+    if (!p) return;
+    if (p.scrollHeight <= p.clientHeight) return;
+
+    const btn = document.createElement('button');
+    btn.className = 'project-read-more';
+    btn.textContent = 'Afficher plus';
+    btn.setAttribute('aria-expanded', 'false');
+
+    btn.addEventListener('click', () => {
+        const expanded = p.classList.toggle('expanded');
+        btn.textContent = expanded ? 'Réduire' : 'Afficher plus';
+        btn.setAttribute('aria-expanded', String(expanded));
+    });
+
+    p.after(btn);
 });
