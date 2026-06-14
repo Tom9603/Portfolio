@@ -1,6 +1,6 @@
 // iOS Safari ignore scrollRestoration='manual' et restaure la position au refresh.
-// On detecte le reload via PerformanceNavigationTiming pour n'intervenir
-// que dans ce cas precis (pas sur les navigations normales).
+// On detecte le reload via PerformanceNavigationTiming et on ecrase la position
+// en boucle sur ~20 frames : quelle que soit la frame ou iOS restaure, la suivante corrige.
 window.addEventListener('pageshow', function (e) {
     var isReload = false;
     try {
@@ -10,40 +10,14 @@ window.addEventListener('pageshow', function (e) {
 
     if (!isReload && !e.persisted) return;
 
-    // Reload ou BFCache : forcer y=0 puis surveiller une eventuelle
-    // restauration tardive d'iOS (qui declenche un scroll event).
-    window.scrollTo(0, 0);
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-    document.documentElement.style.visibility = 'hidden';
-
-    var done = false;
-    function reveal() {
-        if (done) return;
-        done = true;
-        // Reveler d'abord : iOS applique sa restauration synchroniquement
-        // au moment du changement de visibility. On ecrase ensuite.
-        document.documentElement.style.visibility = '';
+    var frames = 0;
+    function lockTop() {
         window.scrollTo(0, 0);
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
-        // Securite async : iOS peut aussi restaurer dans le frame suivant
-        requestAnimationFrame(function () {
-            window.scrollTo(0, 0);
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
-        });
+        if (++frames < 20) requestAnimationFrame(lockTop);
     }
-
-    function onScroll() {
-        window.removeEventListener('scroll', onScroll);
-        requestAnimationFrame(reveal);
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    setTimeout(function () {
-        window.removeEventListener('scroll', onScroll);
-        reveal();
-    }, 80);
+    lockTop();
 });
 
 // Empeche les liens d'ancre de modifier l'URL : si le hash reste dans l'URL,
