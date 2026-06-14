@@ -340,41 +340,70 @@ p {
 .hero-blob:nth-child(1) {
     width: 1280px;
     height: 1280px;
-    background: rgba(44, 87, 231, 0.28);
+    background: rgba(44, 87, 231, 0.50);
     top: -100px;
     right: -80px;
-    animation: blobDrift 1.2s ease-in-out infinite alternate;
+    animation: blob1Wander 8s ease-in-out infinite;
 }
 
 .hero-blob:nth-child(2) {
     width: 1190px;
     height: 1190px;
-    background: rgba(222, 88, 226, 0.24);
+    background: rgba(222, 88, 226, 0.45);
     bottom: -80px;
     left: -80px;
-    animation: blobDrift 1.6s ease-in-out infinite alternate-reverse;
+    animation: blob2Wander 11s ease-in-out infinite;
     animation-delay: -4s;
 }
 
 .hero-blob:nth-child(3) {
     width: 650px;
     height: 650px;
-    background: rgba(44, 87, 231, 0.18);
+    background: rgba(44, 87, 231, 0.32);
     top: 45%;
     left: 35%;
-    animation: blobDrift 1.15s ease-in-out infinite alternate;
+    animation: blob3Wander 6s ease-in-out infinite;
     animation-delay: -2s;
 }
 
-@keyframes blobDrift {
-    0%   { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(70px, 55px) scale(1.12); }
+@keyframes blob1Wander {
+    0%   { transform: translate(0,    0)    scale(1); }
+    20%  { transform: translate(100px, -60px) scale(1.08); }
+    40%  { transform: translate(50px,  90px) scale(0.95); }
+    60%  { transform: translate(-70px, 50px) scale(1.12); }
+    80%  { transform: translate(80px, -20px) scale(1.04); }
+    100% { transform: translate(0,    0)    scale(1); }
 }
 
-/* Variante mobile : amplitude doublee pour rester visible en petit */
-@keyframes blobDriftMobile {
-    0%   { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(-105px, 80px) scale(1.25); }
+@keyframes blob2Wander {
+    0%   { transform: translate(0,     0)    scale(1); }
+    25%  { transform: translate(-90px, 70px) scale(1.10); }
+    50%  { transform: translate(60px,  100px) scale(0.93); }
+    75%  { transform: translate(-50px, -70px) scale(1.08); }
+    100% { transform: translate(0,     0)    scale(1); }
+}
+
+@keyframes blob3Wander {
+    0%   { transform: translate(0,    0)    scale(1); }
+    33%  { transform: translate(70px, -70px) scale(1.15); }
+    66%  { transform: translate(-60px, 55px) scale(0.88); }
+    100% { transform: translate(0,    0)    scale(1); }
+}
+
+/* Variante mobile : trajectoires independantes, amplitude adaptee */
+@keyframes blob1WanderMobile {
+    0%   { transform: translate(0,     0)    scale(1); }
+    20%  { transform: translate(-90px,  70px) scale(1.15); }
+    45%  { transform: translate(70px,  -50px) scale(0.95); }
+    70%  { transform: translate(-50px, -90px) scale(1.20); }
+    100% { transform: translate(0,     0)    scale(1); }
+}
+
+@keyframes blob2WanderMobile {
+    0%   { transform: translate(0,     0)    scale(1); }
+    30%  { transform: translate(80px,   100px) scale(1.25); }
+    65%  { transform: translate(-100px, 40px) scale(0.90); }
+    100% { transform: translate(0,     0)    scale(1); }
 }
 
 .hero-content {
@@ -1716,14 +1745,14 @@ body.drawer-open {
   .hero-blob:nth-child(1) {
     width: 675px;
     height: 675px;
-    background: rgba(44, 87, 231, 0.32);
-    animation: blobDriftMobile 0.75s ease-in-out infinite alternate;
+    background: rgba(44, 87, 231, 0.55);
+    animation: blob1WanderMobile 5s ease-in-out infinite;
   }
   .hero-blob:nth-child(2) {
     width: 570px;
     height: 570px;
-    background: rgba(222, 88, 226, 0.28);
-    animation: blobDriftMobile 1.0s ease-in-out infinite alternate-reverse;
+    background: rgba(222, 88, 226, 0.50);
+    animation: blob2WanderMobile 7s ease-in-out infinite;
     animation-delay: -2.5s;
   }
   .hero-blob:nth-child(3) { display: none; }
