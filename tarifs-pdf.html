@@ -72,11 +72,7 @@
         }
 
         .card-name { font-size: 13pt; font-weight: 700; margin-bottom: 4pt; }
-        .card-name .gradient {
-            background: linear-gradient(to right, #2c57e7, #de58e2);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+        .card--featured .card-name { color: #2c57e7; }
 
         .card-price { font-size: 24pt; font-weight: 700; color: #2c57e7; line-height: 1.1; margin-bottom: 12pt; }
         .card-price .from { display: block; font-size: 7pt; font-weight: 400; color: #9ca3af; margin-bottom: 1pt; }
@@ -124,10 +120,15 @@
         @media screen {
             html {
                 width: 100%; height: auto;
-                min-height: 100svh; /* couvre toute la hauteur ecran, fond blanc */
-                background: #fff;
+                min-height: 100vh; min-height: 100svh;
+                background: #fff; color-scheme: light;
+                overflow-x: hidden;
             }
-            body { width: 100%; height: auto; overflow-x: hidden; background: #fff; }
+            body { width: 100%; height: auto; overflow: hidden; background: #fff; }
+        }
+        /* Annule le zoom JS lors de l'impression / generation PDF */
+        @media print {
+            .page { zoom: 1 !important; transform: none !important; }
         }
     </style>
 </head>
@@ -163,7 +164,7 @@
 
             <div class="card card--featured">
                 <div class="badge">Le plus choisi</div>
-                <div class="card-name"><span class="gradient">Standard</span></div>
+                <div class="card-name">Standard</div>
                 <div class="card-price"><span class="from" style="visibility:hidden">à partir de</span>699€</div>
                 <ul class="card-features">
                     <li>Tout l'Essentiel inclus</li>
@@ -213,7 +214,7 @@
 
 </div>
 <script>
-/* Scale la page A4 pour remplir l'ecran sur mobile (sans affecter l'impression) */
+/* Zoom la page A4 pour remplir l'ecran mobile sans marge droite ni espace noir */
 (function() {
     if (window.matchMedia('print').matches) return;
     var page = document.querySelector('.page');
@@ -221,10 +222,7 @@
     var vw = document.documentElement.clientWidth;
     var pw = page.offsetWidth;
     if (pw <= vw) return;
-    var scale = vw / pw;
-    page.style.transformOrigin = 'top left';
-    page.style.transform = 'scale(' + scale + ')';
-    document.body.style.height = Math.ceil(page.offsetHeight * scale) + 'px';
+    page.style.zoom = vw / pw;
 })();
 </script>
 </body>

@@ -1,8 +1,9 @@
-// Toujours revenir en haut a chaque rechargement (desactive la restauration navigateur)
+// Toujours revenir en haut a chaque rechargement
 if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
 }
-window.scrollTo(0, 0);
+// Fallback : appel dans load (apres que le navigateur ait pu restaurer sa position)
+window.addEventListener('load', function () { window.scrollTo(0, 0); });
 
 // Retire la classe preload apres le premier rendu pour reactiver les transitions de theme
 requestAnimationFrame(() => requestAnimationFrame(() => {
