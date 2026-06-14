@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>byTom — Tarifs 2025</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -71,12 +72,10 @@
         }
 
         .card-name { font-size: 13pt; font-weight: 700; margin-bottom: 4pt; }
-        .card-name.gradient {
+        .card-name .gradient {
             background: linear-gradient(to right, #2c57e7, #de58e2);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             background-clip: text;
-            display: inline-block;
-            padding-bottom: 2pt;
         }
 
         .card-price { font-size: 24pt; font-weight: 700; color: #2c57e7; line-height: 1.1; margin-bottom: 12pt; }
@@ -123,8 +122,12 @@
 
         /* ---- MOBILE SCREEN (pas print) ---- */
         @media screen {
-            html, body { width: 100%; height: auto; min-height: 100vh; overflow-y: auto; }
-            .page { width: 100%; height: auto; min-height: 100vh; }
+            html {
+                width: 100%; height: auto;
+                min-height: 100svh; /* couvre toute la hauteur ecran, fond blanc */
+                background: #fff;
+            }
+            body { width: 100%; height: auto; overflow-x: hidden; background: #fff; }
         }
     </style>
 </head>
@@ -160,7 +163,7 @@
 
             <div class="card card--featured">
                 <div class="badge">Le plus choisi</div>
-                <div class="card-name gradient">Standard</div>
+                <div class="card-name"><span class="gradient">Standard</span></div>
                 <div class="card-price"><span class="from" style="visibility:hidden">à partir de</span>699€</div>
                 <ul class="card-features">
                     <li>Tout l'Essentiel inclus</li>
@@ -209,5 +212,20 @@
     </footer>
 
 </div>
+<script>
+/* Scale la page A4 pour remplir l'ecran sur mobile (sans affecter l'impression) */
+(function() {
+    if (window.matchMedia('print').matches) return;
+    var page = document.querySelector('.page');
+    if (!page) return;
+    var vw = document.documentElement.clientWidth;
+    var pw = page.offsetWidth;
+    if (pw <= vw) return;
+    var scale = vw / pw;
+    page.style.transformOrigin = 'top left';
+    page.style.transform = 'scale(' + scale + ')';
+    document.body.style.height = Math.ceil(page.offsetHeight * scale) + 'px';
+})();
+</script>
 </body>
 </html>
