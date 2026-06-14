@@ -2,15 +2,11 @@
 if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
 }
-// pageshow se declenche APRES la restauration de scroll du navigateur (contrairement a load)
-// Les setTimeout couvrent les navigateurs qui restaurent de facon asynchrone
-window.addEventListener('pageshow', function () {
-    window.scrollTo(0, 0);
-    // Libere le scroll bloque dans le head (empeche le flash haut-bas-haut)
-    document.documentElement.style.overflow = '';
-    setTimeout(function () { window.scrollTo(0, 0); }, 0);
-    setTimeout(function () { window.scrollTo(0, 0); }, 100);
-});
+// pagehide : on remet y=0 juste avant de quitter la page.
+// Le navigateur sauvegarde donc 0 dans l'historique → la restauration ramene au top, sans saccade.
+window.addEventListener('pagehide', function () { window.scrollTo(0, 0); });
+// Filet de securite si le navigateur restaure malgre tout
+window.addEventListener('pageshow', function () { window.scrollTo(0, 0); });
 
 // Empeche les liens d'ancre de modifier l'URL : si le hash reste dans l'URL,
 // le navigateur y scrolle au refresh (scrollRestoration ne couvre pas ce cas).
