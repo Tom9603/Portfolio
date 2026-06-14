@@ -43,7 +43,7 @@ window.addEventListener('pageshow', function (e) {
     setTimeout(function () {
         window.removeEventListener('scroll', onScroll);
         reveal();
-    }, 300);
+    }, 80);
 });
 
 // Empeche les liens d'ancre de modifier l'URL : si le hash reste dans l'URL,
