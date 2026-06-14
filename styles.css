@@ -690,6 +690,34 @@ p {
 
 /* Etat de repos = l'ancien style survole : fond bleu plein,
    comme il l'etait deja sur mobile. L'allure "outline" disparait. */
+.tarifs-download {
+    text-align: center;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.tarifs-download a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.7rem 1.5rem;
+    border: 2px solid var(--bg3);
+    border-radius: 40px;
+    color: var(--bg3);
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+@media (hover: hover) {
+    .tarifs-download a:hover {
+        background: var(--bg3);
+        color: var(--color2);
+        transform: translateY(-3px);
+    }
+}
+
 .button {
     display: block;
     width: fit-content;
