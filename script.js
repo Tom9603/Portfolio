@@ -2,10 +2,12 @@
 if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
 }
-window.addEventListener('load', function () {
+// pageshow se declenche APRES la restauration de scroll du navigateur (contrairement a load)
+// Les setTimeout couvrent les navigateurs qui restaurent de facon asynchrone
+window.addEventListener('pageshow', function () {
     window.scrollTo(0, 0);
-    // Fallback pour les navigateurs qui scrollent vers l'ancre apres le load
-    setTimeout(function () { window.scrollTo(0, 0); }, 50);
+    setTimeout(function () { window.scrollTo(0, 0); }, 0);
+    setTimeout(function () { window.scrollTo(0, 0); }, 100);
 });
 
 // Empeche les liens d'ancre de modifier l'URL : si le hash reste dans l'URL,
