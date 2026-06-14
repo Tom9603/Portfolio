@@ -6,6 +6,8 @@ if ('scrollRestoration' in history) {
 // Les setTimeout couvrent les navigateurs qui restaurent de facon asynchrone
 window.addEventListener('pageshow', function () {
     window.scrollTo(0, 0);
+    // Libere le scroll bloque dans le head (empeche le flash haut-bas-haut)
+    document.documentElement.style.overflow = '';
     setTimeout(function () { window.scrollTo(0, 0); }, 0);
     setTimeout(function () { window.scrollTo(0, 0); }, 100);
 });
