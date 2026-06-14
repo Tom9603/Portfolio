@@ -16,6 +16,11 @@ document.querySelectorAll('a[href^="#"]').forEach(function (link) {
     if (!hash || hash === '#' || hash === '#a-propos') return;
     link.addEventListener('click', function (e) {
         e.preventDefault();
+        // Accueil : scroll au vrai y=0, pas au debut de la section (scroll-margin-top l'en eloignerait)
+        if (hash === '#accueil') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return;
+        }
         var target = document.querySelector(hash);
         if (target) target.scrollIntoView({ behavior: 'smooth' });
     });
