@@ -75,6 +75,8 @@
             background: linear-gradient(to right, #2c57e7, #de58e2);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             background-clip: text;
+            display: inline-block;
+            padding-bottom: 2pt;
         }
 
         .card-price { font-size: 24pt; font-weight: 700; color: #2c57e7; line-height: 1.1; margin-bottom: 12pt; }
@@ -118,6 +120,12 @@
         }
         .footer-contact { font-size: 8pt; color: #6b7280; text-align: center; }
         .footer-url { font-size: 8pt; color: #2c57e7; font-weight: 500; }
+
+        /* ---- MOBILE SCREEN (pas print) ---- */
+        @media screen {
+            html, body { width: 100%; height: auto; min-height: 100vh; overflow-y: auto; }
+            .page { width: 100%; height: auto; min-height: 100vh; }
+        }
     </style>
 </head>
 <body>
