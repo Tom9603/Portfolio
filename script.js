@@ -21,10 +21,18 @@ window.addEventListener('pageshow', function (e) {
     function reveal() {
         if (done) return;
         done = true;
+        // Reveler d'abord : iOS applique sa restauration synchroniquement
+        // au moment du changement de visibility. On ecrase ensuite.
+        document.documentElement.style.visibility = '';
         window.scrollTo(0, 0);
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
-        document.documentElement.style.visibility = '';
+        // Securite async : iOS peut aussi restaurer dans le frame suivant
+        requestAnimationFrame(function () {
+            window.scrollTo(0, 0);
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        });
     }
 
     function onScroll() {
