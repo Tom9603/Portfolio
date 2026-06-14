@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>byTom — Tarifs 2025</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @page { size: A4 portrait; margin: 0; }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            width: 210mm;
+            height: 297mm;
+            overflow: hidden;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            color: #374252;
+            background: #ffffff;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ---- HEADER ---- */
+        .header {
+            background: linear-gradient(135deg, #2c57e7 0%, #de58e2 100%);
+            padding: 22pt 32pt;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .header h1 { font-size: 22pt; font-weight: 700; letter-spacing: -0.5pt; line-height: 1; }
+        .header-sub { font-size: 9pt; opacity: 0.85; margin-top: 4pt; font-weight: 400; }
+        .header-label {
+            font-size: 7.5pt; font-weight: 500; opacity: 0.8;
+            text-transform: uppercase; letter-spacing: 1.5pt; text-align: right;
+        }
+
+        /* ---- BODY ---- */
+        .body { flex: 1; padding: 22pt 32pt 0; display: flex; flex-direction: column; }
+
+        .intro {
+            text-align: center; font-size: 9pt; color: #6b7280;
+            margin-bottom: 18pt; font-weight: 400;
+        }
+
+        /* ---- GRID ---- */
+        .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12pt; margin-bottom: 14pt; }
+
+        .card {
+            border: 1.5pt solid #e5e7eb;
+            border-radius: 10pt;
+            padding: 16pt 14pt;
+            position: relative;
+        }
+        .card--featured { border-color: #2c57e7; border-width: 2pt; }
+
+        .badge {
+            position: absolute; top: -8pt; left: 50%; transform: translateX(-50%);
+            background: linear-gradient(to right, #2c57e7, #de58e2);
+            color: white; font-size: 7pt; font-weight: 600;
+            padding: 2pt 10pt; border-radius: 999pt; white-space: nowrap;
+        }
+
+        .card-name { font-size: 13pt; font-weight: 700; margin-bottom: 4pt; }
+        .card-name.gradient {
+            background: linear-gradient(to right, #2c57e7, #de58e2);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .card-price { font-size: 24pt; font-weight: 700; color: #2c57e7; line-height: 1.1; margin-bottom: 12pt; }
+        .card-price .from { display: block; font-size: 7pt; font-weight: 400; color: #9ca3af; margin-bottom: 1pt; }
+
+        .card-features { list-style: none; }
+        .card-features li {
+            font-size: 8.5pt; color: #4b5563;
+            padding: 2.5pt 0 2.5pt 12pt;
+            position: relative; line-height: 1.4;
+        }
+        .card-features li::before {
+            content: "✓"; position: absolute; left: 0;
+            color: #2c57e7; font-weight: 700; font-size: 8pt;
+        }
+
+        /* ---- MAINTENANCE ---- */
+        .maintenance {
+            background: #f0f4ff; border: 1.5pt solid #dbeafe;
+            border-radius: 8pt; padding: 11pt 16pt; margin-bottom: 13pt;
+        }
+        .maintenance p { font-size: 9pt; color: #374252; line-height: 1.55; }
+        .maintenance strong { color: #2c57e7; }
+
+        /* ---- FINE PRINT ---- */
+        .fine-print { border-top: 1pt solid #f3f4f6; padding-top: 10pt; flex: 1; }
+        .fine-print p { font-size: 7.5pt; color: #9ca3af; line-height: 1.6; margin-bottom: 3pt; }
+
+        /* ---- FOOTER ---- */
+        .footer {
+            background: #f8f9fa; border-top: 1pt solid #e5e7eb;
+            padding: 10pt 32pt;
+            display: flex; justify-content: space-between; align-items: center;
+            flex-shrink: 0;
+        }
+        .footer-brand {
+            font-size: 12pt; font-weight: 700;
+            background: linear-gradient(to right, #2c57e7, #de58e2);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .footer-contact { font-size: 8pt; color: #6b7280; text-align: center; }
+        .footer-url { font-size: 8pt; color: #2c57e7; font-weight: 500; }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <header class="header">
+        <div>
+            <h1>byTom</h1>
+            <p class="header-sub">Développeur web freelance · Quimper, Bretagne</p>
+        </div>
+        <div class="header-label">Grille tarifaire<br>2025</div>
+    </header>
+
+    <div class="body">
+        <p class="intro">Devis gratuit et sans engagement · Paiement en 2 ou 3 fois possible</p>
+
+        <div class="grid">
+
+            <div class="card">
+                <div class="card-name">Essentiel</div>
+                <div class="card-price">499€</div>
+                <ul class="card-features">
+                    <li>Le site vitrine qui présente votre activité, simplement et efficacement</li>
+                    <li>1 à 3 pages</li>
+                    <li>Design sur mesure, adapté mobile et tablette</li>
+                    <li>Formulaire de contact</li>
+                    <li>Mentions légales et RGPD inclus</li>
+                    <li>Mise en ligne incluse, hébergement offert</li>
+                    <li>Livré en 1 à 2 semaines</li>
+                </ul>
+            </div>
+
+            <div class="card card--featured">
+                <div class="badge">Le plus choisi</div>
+                <div class="card-name gradient">Standard</div>
+                <div class="card-price">699€</div>
+                <ul class="card-features">
+                    <li>Tout l'Essentiel inclus</li>
+                    <li>Jusqu'à 6 pages</li>
+                    <li>Modifiez vos textes et photos en toute autonomie</li>
+                    <li>Espace membre sécurisé possible</li>
+                    <li>Accompagnement à la prise en main</li>
+                    <li>Idéal associations et petites entreprises</li>
+                    <li>Livré en 2 à 3 semaines</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-name">Vente en ligne</div>
+                <div class="card-price">
+                    <span class="from">à partir de</span>1399€
+                </div>
+                <ul class="card-features">
+                    <li>Tout le Standard inclus</li>
+                    <li>Catalogue produits ou prestations</li>
+                    <li>Paiement en ligne sécurisé</li>
+                    <li>Gestion des commandes et clients</li>
+                    <li>Formation à l'outil incluse</li>
+                    <li>Devis personnalisé selon vos besoins</li>
+                    <li>Livré en 3 à 4 semaines</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="maintenance">
+            <p><strong>Maintenance et tranquillité : à partir de 29€/mois.</strong> Hébergement, sauvegardes, mises à jour et petites modifications : je m'occupe de tout, vous restez concentré sur votre activité.</p>
+        </div>
+
+        <div class="fine-print">
+            <p>* Chaque projet commence par un devis gratuit et personnalisé ; les tarifs affichés couvrent les besoins les plus courants.</p>
+            <p>* Un acompte de 30 % est demandé à la signature du devis, le solde à la livraison du projet.</p>
+            <p>* Le nom de domaine reste à la charge du client. L'hébergement est offert avec l'offre Essentiel et compris dans le forfait maintenance.</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <span class="footer-brand">byTom</span>
+        <span class="footer-contact">bytom.dev@gmail.com · 06 22 04 99 27</span>
+        <span class="footer-url">by-tom.fr</span>
+    </footer>
+
+</div>
+</body>
+</html>
