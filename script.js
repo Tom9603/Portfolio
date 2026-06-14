@@ -2,8 +2,24 @@
 if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
 }
-// Fallback : appel dans load (apres que le navigateur ait pu restaurer sa position)
-window.addEventListener('load', function () { window.scrollTo(0, 0); });
+window.addEventListener('load', function () {
+    window.scrollTo(0, 0);
+    // Fallback pour les navigateurs qui scrollent vers l'ancre apres le load
+    setTimeout(function () { window.scrollTo(0, 0); }, 50);
+});
+
+// Empeche les liens d'ancre de modifier l'URL : si le hash reste dans l'URL,
+// le navigateur y scrolle au refresh (scrollRestoration ne couvre pas ce cas).
+// #a-propos a son propre handler plus bas, on le saute ici.
+document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+    var hash = link.getAttribute('href');
+    if (!hash || hash === '#' || hash === '#a-propos') return;
+    link.addEventListener('click', function (e) {
+        e.preventDefault();
+        var target = document.querySelector(hash);
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+});
 
 // Retire la classe preload apres le premier rendu pour reactiver les transitions de theme
 requestAnimationFrame(() => requestAnimationFrame(() => {
