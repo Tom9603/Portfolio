@@ -2591,8 +2591,8 @@ body.drawer-open {
        ("Galerie photo" + "Navigation simple") tiennent cote a
        cote dans la carte a 86% au lieu de s'empiler en liste */
     .project-tags span {
-        font-size: 0.78rem;
-        padding: 0.22rem 0.5rem;
+        font-size: 0.82rem;
+        padding: 0.25rem 0.55rem;
     }
 
     /* Points indicateurs sous les carrousels (injectes en JS) */
