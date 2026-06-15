@@ -38,7 +38,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <script>document.documentElement.classList.add("preload");</script>
-    <link rel="stylesheet" href="styles.css?v=119">
+    <link rel="stylesheet" href="styles.css?v=120">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -969,6 +969,14 @@
             pour les transmettre par email. <br> Ce site n'a pas de base de données, par conséquent il ne stocke pas la moindre donnée. <br><br> Vous pouvez toutefois demander la suppression
             de l'historique de nos échanges par mail en m'écrivant à : <a href="mailto:bytom.dev@gmail.com"><span class="mail">bytom.dev@gmail.com</span></a>
         </p>
+
+        <p><strong>Mesure d'audience</strong></p>
+        <p>
+            Ce site utilise <strong>Microsoft Clarity</strong> pour analyser la navigation des visiteurs (mouvements, clics, scroll). Cet outil n'est activé qu'avec votre accord explicite via le bandeau affiché à votre première visite. Aucune donnée n'est collectée sans votre consentement.
+        </p>
+        <p>
+            Vous pouvez retirer votre accord à tout moment en ouvrant la console de votre navigateur et en saisissant : <code>localStorage.removeItem('clarity_consent')</code>, puis en refusant lors de votre prochaine visite.
+        </p>
     </div>
 </div>
 
@@ -988,7 +996,7 @@
 
     <!-- BANDEAU COOKIES -->
     <div id="cookie-banner" class="cookie-banner" hidden role="dialog" aria-label="Consentement aux cookies">
-        <p class="cookie-banner__text">🍪 Ce site utilise des cookies d'analyse.</p>
+        <p class="cookie-banner__text">🍪 Ce site mesure son audience pour améliorer votre expérience.</p>
         <div class="cookie-banner__buttons">
             <button id="cookie-refuse" class="cookie-btn cookie-btn--outline">Refuser</button>
             <button id="cookie-accept" class="cookie-btn cookie-btn--fill">Accepter</button>
