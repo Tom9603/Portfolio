@@ -2986,7 +2986,7 @@ body.drawer-open {
     gap: 1rem;
     z-index: 1300;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
-    max-width: 320px;
+    max-width: 480px;
 }
 
 .cookie-banner[hidden] {
