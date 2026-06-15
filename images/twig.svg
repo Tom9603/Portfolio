@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <g fill="#bacf0a">
+    <!-- Tige centrale -->
+    <rect x="14.5" y="11" width="3" height="19" rx="1.5"/>
+    <!-- Branche gauche principale -->
+    <path d="M16 13.5 C14 11 9 8 4 5 C8 8 13.5 12 16 13.5Z"/>
+    <!-- Branche droite principale -->
+    <path d="M16 13.5 C18 11 23 8 28 5 C24 8 18.5 12 16 13.5Z"/>
+    <!-- Branche gauche secondaire -->
+    <path d="M16 20 C14.5 18 11 16.5 7 15 C10 17 14.5 19 16 20Z"/>
+    <!-- Branche droite secondaire -->
+    <path d="M16 20 C17.5 18 21 16.5 25 15 C22 17 17.5 19 16 20Z"/>
+  </g>
+</svg>
