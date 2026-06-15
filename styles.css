@@ -1270,6 +1270,33 @@ p {
     color: var(--color3);
 }
 
+.whatsapp-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    margin-top: 1.8rem;
+    padding: 0.85rem 1.25rem;
+    background: #25D366;
+    color: #fff;
+    border-radius: 0.6rem;
+    font-family: var(--primary_police);
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    touch-action: manipulation;
+    transition: background 0.18s;
+}
+
+.whatsapp-btn i {
+    font-size: 1.5rem;
+}
+
+.whatsapp-btn:hover {
+    background: #1db954;
+    color: #fff;
+}
+
 /* Nom + email cote a cote en desktop */
 .form-row {
     display: grid;
