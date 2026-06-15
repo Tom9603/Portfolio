@@ -397,6 +397,13 @@ document.querySelectorAll('.link-modal').forEach(link => {
     });
 });
 
+document.querySelectorAll('.btn-detail').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const modal = document.getElementById('modal-' + btn.dataset.modal);
+        if (modal) openModal(modal, btn);
+    });
+});
+
 document.querySelectorAll('.close').forEach(btn => {
     btn.addEventListener('click', () => {
         closeModal(document.getElementById("modal-" + btn.dataset.close));

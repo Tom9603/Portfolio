@@ -38,7 +38,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <script>document.documentElement.classList.add("preload");</script>
-    <link rel="stylesheet" href="styles.css?v=98">
+    <link rel="stylesheet" href="styles.css?v=99">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -441,6 +441,7 @@
                         </div>
 
                         <div class="project-buttons">
+                            <button type="button" class="btn-outline btn-detail" data-modal="projet-1">Voir le détail</button>
                             <a href="https://misspinupbretagne.fr/" class="btn-fill" target="_blank" rel="noopener noreferrer">Voir le site</a>
                         </div>
                     </article>
@@ -465,6 +466,7 @@
                         </div>
 
                         <div class="project-buttons">
+                            <button type="button" class="btn-outline btn-detail" data-modal="projet-2">Voir le détail</button>
                             <span class="btn-fill btn-soon">Bientôt en ligne</span>
                         </div>
                     </article>
@@ -489,6 +491,7 @@
                         </div>
 
                         <div class="project-buttons">
+                            <button type="button" class="btn-outline btn-detail" data-modal="projet-3">Voir le détail</button>
                             <a href="https://tom9603.github.io/Feuille-de-match/" class="btn-fill" target="_blank" rel="noopener noreferrer">Voir le site</a>
                         </div>
                     </article>
@@ -513,6 +516,7 @@
                         </div>
 
                         <div class="project-buttons">
+                            <button type="button" class="btn-outline btn-detail" data-modal="projet-4">Voir le détail</button>
                             <a href="https://tom9603.github.io/SiteWindsurf/" class="btn-fill" target="_blank" rel="noopener noreferrer">Voir le site</a>
                         </div>
                     </article>
@@ -747,6 +751,175 @@
             <button type="button" class="link-modal" data-modal="privacy">Politique de confidentialité</button>
         </p>
     </footer>
+    <!---- MODALS PROJETS ---->
+
+    <div id="modal-projet-1" class="modal modal--projet" role="dialog" aria-modal="true" aria-labelledby="mp1-title">
+        <div class="modal-content modal-projet-content" tabindex="-1">
+            <div class="modal-projet-header">
+                <button type="button" class="close" data-close="projet-1" aria-label="Fermer">&times;</button>
+                <span class="project-type">Site associatif</span>
+                <h2 id="mp1-title">Comité Miss Pin-up Bretagne</h2>
+            </div>
+            <img src="images/projets/Pin-up.png" alt="Page d'accueil du site Miss Pin-up Bretagne" class="modal-projet-img" loading="lazy">
+            <div class="modal-projet-body">
+                <div class="modal-projet-section">
+                    <h3>Pour qui</h3>
+                    <p>L'association Comité Miss Pin-up Bretagne, qui organise chaque année un concours régional mettant en valeur candidates et événements locaux.</p>
+                </div>
+                <div class="modal-projet-section">
+                    <h3>Problématique</h3>
+                    <p>L'association gérait ses candidates et son calendrier à la main, sans outil centralisé ni présence professionnelle en ligne.</p>
+                </div>
+                <div class="modal-projet-section">
+                    <h3>Solution</h3>
+                    <p>Un site vitrine avec un espace d'administration sur mesure : gestion des profils de candidates, du calendrier d'événements et des actualités, sans aucune compétence technique requise.</p>
+                </div>
+                <div class="modal-projet-section">
+                    <h3>Technologies</h3>
+                    <div class="project-tags">
+                        <span>Symfony</span>
+                        <span>EasyAdmin</span>
+                        <span>MySQL</span>
+                        <span>Twig</span>
+                        <span>Vite</span>
+                    </div>
+                </div>
+                <div class="modal-projet-section">
+                    <h3>Résultat</h3>
+                    <p>L'équipe gère l'ensemble du contenu en totale autonomie. Le site donne une image professionnelle au concours et centralise toutes les informations pour le public.</p>
+                </div>
+            </div>
+            <div class="modal-projet-footer">
+                <a href="https://misspinupbretagne.fr/" class="btn-fill" target="_blank" rel="noopener noreferrer">Voir le site</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-projet-2" class="modal modal--projet" role="dialog" aria-modal="true" aria-labelledby="mp2-title">
+        <div class="modal-content modal-projet-content" tabindex="-1">
+            <div class="modal-projet-header">
+                <button type="button" class="close" data-close="projet-2" aria-label="Fermer">&times;</button>
+                <span class="project-type">Site d'entreprise</span>
+                <h2 id="mp2-title">Les patounes du glazik</h2>
+            </div>
+            <div class="modal-projet-placeholder">
+                <i class="fa-solid fa-paw" aria-hidden="true"></i>
+            </div>
+            <div class="modal-projet-body">
+                <div class="modal-projet-section">
+                    <h3>Pour qui</h3>
+                    <p>Une entreprise de pet sitting proposant des services de garde à domicile et de promenade d'animaux en Cornouaille.</p>
+                </div>
+                <div class="modal-projet-section">
+                    <h3>Problématique</h3>
+                    <p>Pas de présence en ligne, gestion manuelle des réservations et des factures, sans aucun outil pour les clients.</p>
+                </div>
+                <div class="modal-projet-section">
+                    <h3>Solution</h3>
+                    <p>Un site complet avec espace client sécurisé pour consulter les réservations et télécharger les factures, et un back-office sur mesure pour l'administration.</p>
+                </div>
+                <div class="modal-projet-section">
+                    <h3>Technologies</h3>
+                    <div class="project-tags">
+                        <span>Symfony</span>
+                        <span>EasyAdmin</span>
+                        <span>MySQL</span>
+                        <span>Twig</span>
+                        <span>Vite</span>
+                    </div>
+                </div>
+                <div class="modal-projet-section">
+                    <h3>Résultat</h3>
+                    <p>Les clients gèrent leur espace en autonomie, les factures sont accessibles à tout moment. Le site est en cours de déploiement.</p>
+                </div>
+            </div>
+            <div class="modal-projet-footer">
+                <span class="btn-fill btn-soon">Bientôt en ligne</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-projet-3" class="modal modal--projet" role="dialog" aria-modal="true" aria-labelledby="mp3-title">
+        <div class="modal-content modal-projet-content" tabindex="-1">
+            <div class="modal-projet-header">
+                <button type="button" class="close" data-close="projet-3" aria-label="Fermer">&times;</button>
+                <span class="project-type">Application web</span>
+                <h2 id="mp3-title">Feuille de match</h2>
+            </div>
+            <img src="images/projets/Feuille-de-match.png" alt="Écran de composition d'équipe de l'application Feuille de match" class="modal-projet-img" loading="lazy">
+            <div class="modal-projet-body">
+                <div class="modal-projet-section">
+                    <h3>Pour qui</h3>
+                    <p>Un club de football souhaitant moderniser sa gestion d'équipe et simplifier la composition avant les matchs.</p>
+                </div>
+                <div class="modal-projet-section">
+                    <h3>Problématique</h3>
+                    <p>Les feuilles de match papier rendaient la composition difficile à partager. Les joueurs devaient se déplacer pour s'inscrire, et le staff n'avait aucune vue en temps réel.</p>
+                </div>
+                <div class="modal-projet-section">
+                    <h3>Solution</h3>
+                    <p>Une application web permettant à chaque joueur de s'inscrire depuis son téléphone et de se positionner sur le terrain. La composition est visible en temps réel par tout le staff.</p>
+                </div>
+                <div class="modal-projet-section">
+                    <h3>Technologies</h3>
+                    <div class="project-tags">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                        <span>Firebase</span>
+                    </div>
+                </div>
+                <div class="modal-projet-section">
+                    <h3>Résultat</h3>
+                    <p>La composition d'équipe est partagée instantanément. Le staff gagne un temps précieux avant chaque match, et les joueurs s'inscrivent en quelques secondes depuis leur téléphone.</p>
+                </div>
+            </div>
+            <div class="modal-projet-footer">
+                <a href="https://tom9603.github.io/Feuille-de-match/" class="btn-fill" target="_blank" rel="noopener noreferrer">Voir le site</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-projet-4" class="modal modal--projet" role="dialog" aria-modal="true" aria-labelledby="mp4-title">
+        <div class="modal-content modal-projet-content" tabindex="-1">
+            <div class="modal-projet-header">
+                <button type="button" class="close" data-close="projet-4" aria-label="Fermer">&times;</button>
+                <span class="project-type">Site vitrine</span>
+                <h2 id="mp4-title">Windsurfing</h2>
+            </div>
+            <img src="images/projets/Windsurf.png" alt="Galerie photo du site vitrine Windsurfing" class="modal-projet-img" loading="lazy">
+            <div class="modal-projet-body">
+                <div class="modal-projet-section">
+                    <h3>Pour qui</h3>
+                    <p>Projet personnel réalisé pour démontrer ce que peut être un site vitrine épuré, visuel et rapide — idéal pour un passionné souhaitant partager son univers.</p>
+                </div>
+                <div class="modal-projet-section">
+                    <h3>Problématique</h3>
+                    <p>Mettre en valeur des photos de haute qualité sans alourdir le chargement, tout en gardant une navigation intuitive et un design qui ne vole pas la vedette aux images.</p>
+                </div>
+                <div class="modal-projet-section">
+                    <h3>Solution</h3>
+                    <p>Un site minimaliste centré sur une grande galerie photo, avec un chargement optimisé et une navigation pensée pour valoriser le contenu visuel.</p>
+                </div>
+                <div class="modal-projet-section">
+                    <h3>Technologies</h3>
+                    <div class="project-tags">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                    </div>
+                </div>
+                <div class="modal-projet-section">
+                    <h3>Résultat</h3>
+                    <p>Un exemple concret de ce que peut produire un site vitrine simple, rapide et visuellement fort — sans framework, sans superflu.</p>
+                </div>
+            </div>
+            <div class="modal-projet-footer">
+                <a href="https://tom9603.github.io/SiteWindsurf/" class="btn-fill" target="_blank" rel="noopener noreferrer">Voir le site</a>
+            </div>
+        </div>
+    </div>
+
     <!---- MENTIONS LÉGALES ---->
     <div id="modal-mentions" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-mentions-title">
     <div class="modal-content" tabindex="-1">
@@ -797,6 +970,6 @@
         <i class="fa-solid fa-arrow-up-long" aria-hidden="true"></i>
      </button>
     <!-- SCRIPT JS -->
-    <script src="script.js?v=97"></script>
+    <script src="script.js?v=99"></script>
 </body>
 </html>
