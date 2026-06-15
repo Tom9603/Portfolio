@@ -1700,6 +1700,10 @@ footer {
         max-height: 92svh;
         border-radius: 1.1rem 1.1rem 0 0;
     }
+
+    .modal-projet-footer {
+        padding-bottom: calc(1.5rem + 3.75rem + env(safe-area-inset-bottom));
+    }
 }
 
 /****************************************/
