@@ -2976,7 +2976,7 @@ body.drawer-open {
 .cookie-banner {
     position: fixed;
     bottom: 1.5rem;
-    right: 1.5rem;
+    left: 1.5rem;
     background: var(--bg2);
     border: 1px solid rgba(127, 127, 127, 0.15);
     border-radius: 12px;
@@ -3044,7 +3044,8 @@ body.drawer-open {
 @media (max-width: 768px) {
     .cookie-banner {
         bottom: calc(4.5rem + env(safe-area-inset-bottom));
-        right: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
         max-width: calc(100vw - 2rem);
     }
 }
