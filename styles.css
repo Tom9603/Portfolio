@@ -1704,6 +1704,11 @@ footer {
     .modal-projet-footer {
         padding-bottom: calc(1.5rem + 3.75rem + env(safe-area-inset-bottom));
     }
+
+    .modal-projet-section .project-tags span {
+        font-size: 0.72rem;
+        padding: 0.2rem 0.45rem;
+    }
 }
 
 /****************************************/
