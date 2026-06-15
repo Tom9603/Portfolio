@@ -3047,5 +3047,19 @@ body.drawer-open {
         left: 50%;
         transform: translateX(-50%);
         max-width: calc(100vw - 1rem);
+        flex-direction: row;
+        align-items: center;
+        gap: 0.8rem;
+    }
+
+    .cookie-banner__buttons {
+        flex-direction: column;
+        flex-shrink: 0;
+        gap: 0.4rem;
+    }
+
+    .cookie-btn {
+        flex: unset;
+        white-space: nowrap;
     }
 }
