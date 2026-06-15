@@ -2592,6 +2592,7 @@ body.drawer-open {
     .project-card .project-tags {
         margin-left: 0.5rem;
         margin-right: 0.5rem;
+        justify-content: center;
     }
 
     .project-card .project-tags span {
