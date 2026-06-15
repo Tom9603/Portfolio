@@ -515,3 +515,38 @@ document.querySelectorAll('.project-card').forEach(card => {
 
     p.after(btn);
 });
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////// MICROSOFT CLARITY ///////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+(function initCookieBanner() {
+    const CLARITY_ID = 'x7mkbb1x1k';
+
+    function loadClarity() {
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window,document,"clarity","script",CLARITY_ID);
+    }
+
+    const consent = localStorage.getItem('clarity_consent');
+    if (consent === 'accepted') { loadClarity(); return; }
+    if (consent === 'refused') return;
+
+    const banner = document.getElementById('cookie-banner');
+    if (!banner) return;
+    banner.removeAttribute('hidden');
+
+    document.getElementById('cookie-accept').addEventListener('click', () => {
+        localStorage.setItem('clarity_consent', 'accepted');
+        banner.hidden = true;
+        loadClarity();
+    });
+
+    document.getElementById('cookie-refuse').addEventListener('click', () => {
+        localStorage.setItem('clarity_consent', 'refused');
+        banner.hidden = true;
+    });
+})();
