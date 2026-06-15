@@ -2812,22 +2812,6 @@ body.drawer-open {
     pointer-events: none;
 }
 
-/* Indicateur "Bientôt en ligne" sur la card projet (badge discret) */
-.badge-soon {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    padding: 0.3rem 0.9rem;
-    border-radius: 999px;
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--color3);
-    background: rgba(44, 87, 231, 0.08);
-    border: 1px solid rgba(44, 87, 231, 0.2);
-    opacity: 0.7;
-    cursor: default;
-}
-
 /* Bandeau CTA sous la grille des projets */
 .projects-banner {
     position: relative;
