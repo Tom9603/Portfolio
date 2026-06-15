@@ -2590,8 +2590,8 @@ body.drawer-open {
     /* Moins de marge latérale sur les tags dans les cards pour
        gagner de la largeur utile et tenir 2 tags par ligne */
     .project-card .project-tags {
-        margin-left: 0.75rem;
-        margin-right: 0.75rem;
+        margin-left: 1rem;
+        margin-right: 1rem;
     }
 
     .project-card .project-tags span {
