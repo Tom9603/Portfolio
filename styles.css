@@ -1704,11 +1704,6 @@ footer {
     .modal-projet-footer {
         padding-bottom: calc(1.5rem + 3.75rem + env(safe-area-inset-bottom));
     }
-
-    .modal-projet-section .project-tags span {
-        font-size: 0.72rem;
-        padding: 0.2rem 0.45rem;
-    }
 }
 
 /****************************************/
@@ -2596,8 +2591,8 @@ body.drawer-open {
        ("Galerie photo" + "Navigation simple") tiennent cote a
        cote dans la carte a 86% au lieu de s'empiler en liste */
     .project-tags span {
-        font-size: .8rem;
-        padding: .25rem .6rem;
+        font-size: 0.7rem;
+        padding: 0.18rem 0.4rem;
     }
 
     /* Points indicateurs sous les carrousels (injectes en JS) */
@@ -2817,7 +2812,7 @@ body.drawer-open {
     pointer-events: none;
 }
 
-/* Indicateur "Bientôt en ligne" dans le footer modal (badge discret) */
+/* Indicateur "Bientôt en ligne" sur la card projet (badge discret) */
 .badge-soon {
     display: inline-flex;
     align-items: center;
