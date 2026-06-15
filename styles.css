@@ -2587,12 +2587,16 @@ body.drawer-open {
         scroll-snap-align: center;
     }
 
-    /* Pastilles un cran plus compactes : les paires de tags
-       ("Galerie photo" + "Navigation simple") tiennent cote a
-       cote dans la carte a 86% au lieu de s'empiler en liste */
-    .project-tags span {
+    /* Moins de marge latérale sur les tags dans les cards pour
+       gagner de la largeur utile et tenir 2 tags par ligne */
+    .project-card .project-tags {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+    }
+
+    .project-card .project-tags span {
         font-size: 0.82rem;
-        padding: 0.25rem 0.55rem;
+        padding: 0.25rem 0.4rem;
     }
 
     /* Points indicateurs sous les carrousels (injectes en JS) */
