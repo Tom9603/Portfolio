@@ -376,6 +376,8 @@ let modalOpener = null;
 
 function openModal(modal, opener) {
     modalOpener = opener || null;
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
     modal.style.display = 'flex';
     // Focus dans la boite (tabindex="-1") : lecture d'ecran et Escape operationnels
     const content = modal.querySelector('.modal-content');
@@ -384,6 +386,8 @@ function openModal(modal, opener) {
 
 function closeModal(modal) {
     modal.style.display = 'none';
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
     if (modalOpener) {
         modalOpener.focus();
         modalOpener = null;
