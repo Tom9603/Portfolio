@@ -37,7 +37,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <script>document.documentElement.classList.add("preload");</script>
-    <link rel="stylesheet" href="/styles.css?v=139">
+    <link rel="stylesheet" href="/styles.css?v=140">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -650,30 +650,42 @@
             <h2 class="reveal">How does it work?</h2>
             <p class="process-intro reveal">From first message to launch, here are the key steps of our collaboration.</p>
             <div class="process-steps">
-                <article class="process-step reveal">
-                    <span class="process-step__num" aria-hidden="true">1</span>
-                    <i class="fa-solid fa-comments process-step__icon" aria-hidden="true"></i>
-                    <h3>Discovery</h3>
-                    <p>We talk about your project, your needs and your budget. No tech jargon.</p>
-                </article>
-                <article class="process-step reveal">
-                    <span class="process-step__num" aria-hidden="true">2</span>
-                    <i class="fa-solid fa-file-pen process-step__icon" aria-hidden="true"></i>
-                    <h3>Quote & mockup</h3>
-                    <p>You get a clear quote and a mockup to validate the approach before we start.</p>
-                </article>
-                <article class="process-step reveal">
-                    <span class="process-step__num" aria-hidden="true">3</span>
-                    <i class="fa-solid fa-code process-step__icon" aria-hidden="true"></i>
-                    <h3>Development</h3>
-                    <p>I code your site step by step, with regular check-ins to keep you in the loop.</p>
-                </article>
-                <article class="process-step reveal">
-                    <span class="process-step__num" aria-hidden="true">4</span>
-                    <i class="fa-solid fa-rocket process-step__icon" aria-hidden="true"></i>
-                    <h3>Delivery</h3>
-                    <p>Your site goes live, optimised and ready to use. I stay available after launch.</p>
-                </article>
+                <details class="process-step reveal">
+                    <summary class="process-step__header">
+                        <span class="process-step__num" aria-hidden="true">1</span>
+                        <i class="fa-solid fa-comments process-step__icon" aria-hidden="true"></i>
+                        <h3>Discovery</h3>
+                        <i class="fa-solid fa-chevron-down process-step__chevron" aria-hidden="true"></i>
+                    </summary>
+                    <p class="process-step__body">We talk about your project, your needs and your budget. No tech jargon.</p>
+                </details>
+                <details class="process-step reveal">
+                    <summary class="process-step__header">
+                        <span class="process-step__num" aria-hidden="true">2</span>
+                        <i class="fa-solid fa-file-pen process-step__icon" aria-hidden="true"></i>
+                        <h3>Quote & mockup</h3>
+                        <i class="fa-solid fa-chevron-down process-step__chevron" aria-hidden="true"></i>
+                    </summary>
+                    <p class="process-step__body">You get a clear quote and a mockup to validate the approach before we start.</p>
+                </details>
+                <details class="process-step reveal">
+                    <summary class="process-step__header">
+                        <span class="process-step__num" aria-hidden="true">3</span>
+                        <i class="fa-solid fa-code process-step__icon" aria-hidden="true"></i>
+                        <h3>Development</h3>
+                        <i class="fa-solid fa-chevron-down process-step__chevron" aria-hidden="true"></i>
+                    </summary>
+                    <p class="process-step__body">I code your site step by step, with regular check-ins to keep you in the loop.</p>
+                </details>
+                <details class="process-step reveal">
+                    <summary class="process-step__header">
+                        <span class="process-step__num" aria-hidden="true">4</span>
+                        <i class="fa-solid fa-rocket process-step__icon" aria-hidden="true"></i>
+                        <h3>Delivery</h3>
+                        <i class="fa-solid fa-chevron-down process-step__chevron" aria-hidden="true"></i>
+                    </summary>
+                    <p class="process-step__body">Your site goes live, optimised and ready to use. I stay available after launch.</p>
+                </details>
             </div>
         </section>
 
@@ -833,7 +845,7 @@
         <i class="fa-solid fa-arrow-up-long" aria-hidden="true"></i>
      </button>
     <!-- SCRIPT JS -->
-    <script src="/script.js?v=111"></script>
+    <script src="/script.js?v=112"></script>
 
     <!-- COOKIE BANNER -->
     <div id="cookie-banner" class="cookie-banner" hidden role="dialog" aria-label="Cookie consent">

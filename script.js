@@ -569,3 +569,16 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(el);
     });
 })();
+
+// Process steps : force ouverture sur desktop, accordéon sur mobile
+(function () {
+    var steps = document.querySelectorAll('details.process-step');
+    if (!steps.length) return;
+    function syncOpen() {
+        if (window.innerWidth > 480) {
+            steps.forEach(function (d) { d.open = true; });
+        }
+    }
+    syncOpen();
+    window.addEventListener('resize', syncOpen);
+})();
