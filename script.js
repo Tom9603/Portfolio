@@ -555,47 +555,78 @@ document.addEventListener('DOMContentLoaded', function() {
 //////////////////////////////////////////// VAGUES GAUCHE //////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-document.addEventListener('DOMContentLoaded', function initWaveDeco() {
-    const svg = document.querySelector('.wave-deco');
-    if (!svg) return;
+document.addEventListener('DOMContentLoaded', function initHelixDeco() {
+    const canvas = document.querySelector('.wave-deco');
+    if (!canvas || window.innerWidth < 769) return;
 
-    const path1 = svg.querySelector('.wave-deco__path--1');
-    const path2 = svg.querySelector('.wave-deco__path--2');
-    const cx = 18;
-    const amp = 12;
-    const period = 90;
+    const W = 70;
+    const H = window.innerHeight;
+    canvas.width  = W;
+    canvas.height = H;
+    const ctx = canvas.getContext('2d');
 
-    function buildPath(scrollOffset, rightFirst) {
-        const h = window.innerHeight;
-        const count = Math.ceil(h / period) + 4;
-        const phase = scrollOffset % period;
-        const startY = -period * 2 + phase;
-        const r = rightFirst ? 1 : -1;
-        let d = `M ${cx} ${startY}`;
-        for (let i = 0; i < count; i++) {
-            const y = startY + i * period;
-            d += ` C ${cx + r * amp * 1.65} ${y + period * 0.1},`
-               + ` ${cx + r * amp * 1.65} ${y + period * 0.4},`
-               + ` ${cx} ${y + period * 0.5}`;
-            d += ` C ${cx - r * amp * 1.65} ${y + period * 0.6},`
-               + ` ${cx - r * amp * 1.65} ${y + period * 0.9},`
-               + ` ${cx} ${y + period}`;
+    const cx     = W / 2;
+    const amp    = cx - 8;   // rayon de l'hélice
+    const period = 110;      // px par tour complet
+    const rW     = 10;       // demi-largeur max du ruban
+
+    function rgba(hex, a) {
+        const r = parseInt(hex.slice(1,3),16);
+        const g = parseInt(hex.slice(3,5),16);
+        const b = parseInt(hex.slice(5,7),16);
+        return `rgba(${r},${g},${b},${a})`;
+    }
+
+    function drawSegment(x, y, w, hex, front) {
+        if (w < 0.5) return;
+        const g = ctx.createLinearGradient(x - w, y, x + w, y);
+        const base  = front ? 0.55 : 0.22;
+        const edge  = front ? 0.10 : 0.05;
+        g.addColorStop(0,    rgba(hex, edge));
+        g.addColorStop(0.25, rgba(hex, base));
+        g.addColorStop(0.5,  rgba(hex, base + 0.15));
+        g.addColorStop(0.75, rgba(hex, base));
+        g.addColorStop(1,    rgba(hex, edge));
+        ctx.beginPath();
+        ctx.ellipse(x, y, w, 2.2, 0, 0, Math.PI * 2);
+        ctx.fillStyle = g;
+        ctx.fill();
+    }
+
+    function render() {
+        ctx.clearRect(0, 0, W, H);
+        const off = (window.scrollY * 0.4) % period;
+        const steps = Math.ceil(H / 2) + period;
+
+        for (let pass = 0; pass < 2; pass++) {
+            for (let i = 0; i < steps; i++) {
+                const y = i * 2 - off * 2;
+                if (y < -6 || y > H + 6) continue;
+
+                const angle = (y / period) * Math.PI * 2;
+                const cos1  = Math.cos(angle);
+                const cos2  = Math.cos(angle + Math.PI);
+
+                const x1 = cx + Math.sin(angle) * amp;
+                const x2 = cx + Math.sin(angle + Math.PI) * amp;
+                const w1 = Math.abs(cos1) * rW;
+                const w2 = Math.abs(cos2) * rW;
+
+                // pass 0 = ruban arrière, pass 1 = ruban avant
+                if (pass === 0) {
+                    if (cos1 <= 0) drawSegment(x1, y, w1, '#2c57e7', false);
+                    if (cos2 <= 0) drawSegment(x2, y, w2, '#de58e2', false);
+                } else {
+                    if (cos1 > 0)  drawSegment(x1, y, w1, '#2c57e7', true);
+                    if (cos2 > 0)  drawSegment(x2, y, w2, '#de58e2', true);
+                }
+            }
         }
-        return d;
     }
 
-    function update() {
-        const offset = window.scrollY * 0.35;
-        path1.setAttribute('d', buildPath(offset, true));
-        path2.setAttribute('d', buildPath(offset, false));
-    }
-
-    update();
-
+    render();
     let rafId;
     window.addEventListener('scroll', () => {
-        if (!rafId) {
-            rafId = requestAnimationFrame(() => { update(); rafId = null; });
-        }
+        if (!rafId) rafId = requestAnimationFrame(() => { render(); rafId = null; });
     }, { passive: true });
-})();
+});
