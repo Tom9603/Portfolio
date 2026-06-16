@@ -3156,8 +3156,8 @@ body.drawer-open {
     width: 52px;
     height: 52px;
     border-radius: 50%;
-    background: #fff;
-    color: #374252;
+    background: linear-gradient(135deg, #2c57e7, #a552a8);
+    color: #fff;
     font-size: 1.25rem;
     font-weight: 700;
     display: flex;
@@ -3165,7 +3165,6 @@ body.drawer-open {
     justify-content: center;
     margin-bottom: 1rem;
     flex-shrink: 0;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
 }
 
 .process-step__icon {
