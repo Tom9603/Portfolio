@@ -3087,10 +3087,9 @@ body.drawer-open {
     top: 0;
     width: 36px;
     height: 100vh;
-    z-index: 1;
+    z-index: 1500;
     pointer-events: none;
     overflow: hidden;
-    mix-blend-mode: overlay;
 }
 
 @media (min-width: 769px) {

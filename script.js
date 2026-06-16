@@ -555,7 +555,7 @@ document.addEventListener('DOMContentLoaded', function() {
 //////////////////////////////////////////// VAGUES GAUCHE //////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-(function initWaveDeco() {
+document.addEventListener('DOMContentLoaded', function initWaveDeco() {
     const svg = document.querySelector('.wave-deco');
     if (!svg) return;
 
