@@ -550,3 +550,52 @@ document.addEventListener('DOMContentLoaded', function() {
         banner.hidden = true;
     });
 });
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////// VAGUES GAUCHE //////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+(function initWaveDeco() {
+    const svg = document.querySelector('.wave-deco');
+    if (!svg) return;
+
+    const path1 = svg.querySelector('.wave-deco__path--1');
+    const path2 = svg.querySelector('.wave-deco__path--2');
+    const cx = 18;
+    const amp = 12;
+    const period = 90;
+
+    function buildPath(scrollOffset, rightFirst) {
+        const h = window.innerHeight;
+        const count = Math.ceil(h / period) + 4;
+        const phase = scrollOffset % period;
+        const startY = -period * 2 + phase;
+        const r = rightFirst ? 1 : -1;
+        let d = `M ${cx} ${startY}`;
+        for (let i = 0; i < count; i++) {
+            const y = startY + i * period;
+            d += ` C ${cx + r * amp * 1.65} ${y + period * 0.1},`
+               + ` ${cx + r * amp * 1.65} ${y + period * 0.4},`
+               + ` ${cx} ${y + period * 0.5}`;
+            d += ` C ${cx - r * amp * 1.65} ${y + period * 0.6},`
+               + ` ${cx - r * amp * 1.65} ${y + period * 0.9},`
+               + ` ${cx} ${y + period}`;
+        }
+        return d;
+    }
+
+    function update() {
+        const offset = window.scrollY * 0.35;
+        path1.setAttribute('d', buildPath(offset, true));
+        path2.setAttribute('d', buildPath(offset, false));
+    }
+
+    update();
+
+    let rafId;
+    window.addEventListener('scroll', () => {
+        if (!rafId) {
+            rafId = requestAnimationFrame(() => { update(); rafId = null; });
+        }
+    }, { passive: true });
+})();
