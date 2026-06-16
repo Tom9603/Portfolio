@@ -550,6 +550,3 @@ document.addEventListener('DOMContentLoaded', function() {
         banner.hidden = true;
     });
 });
-
-    }, { passive: true });
-});
