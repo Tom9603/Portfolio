@@ -38,7 +38,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <script>document.documentElement.classList.add("preload");</script>
-    <link rel="stylesheet" href="styles.css?v=130">
+    <link rel="stylesheet" href="styles.css?v=131">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -205,7 +205,7 @@
         <!-- A PROPOS -->
         <section class="about" id="a-propos">
             <h2>À propos</h2>
-            <article class="about-text">
+            <article class="about-text reveal">
                 <p>
                     Développeur web indépendant, j'accompagne les <strong>associations</strong>, les <strong>indépendants</strong>
                     et les <strong>petites entreprises</strong> qui veulent exister en ligne sans s'embarrasser de la technique.
@@ -219,7 +219,7 @@
         </section>
         <!-- À QUI S'ADRESSE MES SERVICES ?-->
         <section id="pour-qui">
-            <h2>À qui s'adressent mes services ?</h2>
+            <h2 class="reveal">À qui s'adressent mes services ?</h2>
             <article>
                 <p class="who">
                     J'accompagne différents profils, selon leurs besoins et leurs projets. Du professionnel, au particulier. <br><br>
@@ -227,7 +227,7 @@
                 </p>
                 
             </article>
-            <div class="who-grid">
+            <div class="who-grid reveal">
                 <!--  Type 1  -->
                 <div class="who-item">
                     <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
@@ -259,7 +259,7 @@
                     <p>Particulier</p>
                 </div>
             </div>
-            <div class="who-banner">
+            <div class="who-banner reveal">
                 <div class="who-banner-img"><img src="who-1.webp" alt="Boulanger dans sa boulangerie" loading="lazy"></div>
                 <div class="who-banner-img"><img src="who-8.webp" alt="Photographe en studio" loading="lazy"></div>
                 <div class="who-banner-img"><img src="who-5.webp" alt="Cuisiniers en restaurant" loading="lazy"></div>
@@ -270,10 +270,10 @@
         </section>
         <!-- TARIFS -->
         <section id="tarifs">
-            <h2 class="price-title">Tarifs</h2>
-            <p class="paiement">Devis gratuit et sans engagement. Paiement en 2 ou 3 fois possible.</p>
+            <h2 class="price-title reveal">Tarifs</h2>
+            <p class="paiement reveal">Devis gratuit et sans engagement. Paiement en 2 ou 3 fois possible.</p>
             <!--  PRICE 1  -->
-            <div class="price-grid">
+            <div class="price-grid reveal">
                 <div class="price-item">
                     <div>
                         <h3 class="essentiel">Essentiel</h3>
@@ -392,18 +392,18 @@
                     </div>
                 </div>
             </div>     
-            <div class="maintenance-banner">
+            <div class="maintenance-banner reveal">
                 <i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i>
                 <p><strong>Maintenance et tranquillité : à partir de 29€/mois.</strong> Hébergement, sauvegardes, mises à jour et petites modifications : je m'occupe de tout, vous restez concentré sur votre activité.</p>
             </div>
-            <div class="tarifs-download">
+            <div class="tarifs-download reveal">
                 <a href="tarifs.pdf" download aria-label="Télécharger la grille tarifaire en PDF">
                     <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i>
                     Télécharger la grille tarifaire
                 </a>
             </div>
         </section>
-        <div class="info">
+        <div class="info reveal">
             <p>
                 * Chaque projet commence par un devis gratuit et personnalisé ; les tarifs affichés couvrent les besoins les plus courants.
             </p>
@@ -417,8 +417,8 @@
 
         <!-- PROJETS -->
         <section class="projects" id="projets">
-            <h2 class="projects-title">Projets réalisés</h2>
-            <div class="container">
+            <h2 class="projects-title reveal">Projets réalisés</h2>
+            <div class="container reveal">
                 <div class="projects-grid">
                     <!-- PROJET 1 -->
                     <article class="project-card">
@@ -656,10 +656,42 @@
             </div>
         </section>
         
+        <!-- COMMENT ÇA SE PASSE -->
+        <section class="process" id="process">
+            <h2 class="reveal">Comment ça se passe ?</h2>
+            <p class="process-intro reveal">Du premier message à la mise en ligne, voici les grandes étapes de notre collaboration.</p>
+            <div class="process-steps">
+                <article class="process-step reveal">
+                    <span class="process-step__num" aria-hidden="true">1</span>
+                    <i class="fa-solid fa-comments process-step__icon" aria-hidden="true"></i>
+                    <h3>Discussion</h3>
+                    <p>On échange sur votre projet, vos besoins et votre budget. Zéro jargon technique.</p>
+                </article>
+                <article class="process-step reveal">
+                    <span class="process-step__num" aria-hidden="true">2</span>
+                    <i class="fa-solid fa-file-pen process-step__icon" aria-hidden="true"></i>
+                    <h3>Devis & maquette</h3>
+                    <p>Vous recevez un devis clair et une maquette pour visualiser le résultat avant de commencer.</p>
+                </article>
+                <article class="process-step reveal">
+                    <span class="process-step__num" aria-hidden="true">3</span>
+                    <i class="fa-solid fa-code process-step__icon" aria-hidden="true"></i>
+                    <h3>Développement</h3>
+                    <p>Je code votre site étape par étape, avec des points réguliers pour vous tenir informé.</p>
+                </article>
+                <article class="process-step reveal">
+                    <span class="process-step__num" aria-hidden="true">4</span>
+                    <i class="fa-solid fa-rocket process-step__icon" aria-hidden="true"></i>
+                    <h3>Livraison</h3>
+                    <p>Votre site est en ligne, optimisé et entre vos mains. Je reste disponible après la mise en ligne.</p>
+                </article>
+            </div>
+        </section>
+
         <!-- CONTACT -->
         <section class="contact" id="contact">
-            <h2>Parlons de votre projet</h2>
-            <div class="contact-layout">
+            <h2 class="reveal">Parlons de votre projet</h2>
+            <div class="contact-layout reveal">
                 <div class="contact-aside">
                     <p class="contact-intro">
                         Une idée, un besoin, une simple question ? Décrivez-moi votre projet en quelques lignes et on en discute.
@@ -989,7 +1021,7 @@
         <i class="fa-solid fa-arrow-up-long" aria-hidden="true"></i>
      </button>
     <!-- SCRIPT JS -->
-    <script src="script.js?v=110"></script>
+    <script src="script.js?v=111"></script>
 
     <!-- BANDEAU COOKIES -->
     <div id="cookie-banner" class="cookie-banner" hidden role="dialog" aria-label="Consentement aux cookies">

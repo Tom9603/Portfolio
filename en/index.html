@@ -37,7 +37,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <script>document.documentElement.classList.add("preload");</script>
-    <link rel="stylesheet" href="/styles.css?v=130">
+    <link rel="stylesheet" href="/styles.css?v=131">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -204,7 +204,7 @@
         <!-- ABOUT -->
         <section class="about" id="a-propos">
             <h2>About</h2>
-            <article class="about-text">
+            <article class="about-text reveal">
                 <p>
                     As an independent web developer, I help <strong>non-profits</strong>, <strong>freelancers</strong>
                     and <strong>small businesses</strong> get online without worrying about the technical side.
@@ -218,7 +218,7 @@
         </section>
         <!-- WHO ARE MY SERVICES FOR? -->
         <section id="pour-qui">
-            <h2>Who are my services for?</h2>
+            <h2 class="reveal">Who are my services for?</h2>
             <article>
                 <p class="who">
                     I work with all kinds of clients, from professionals to individuals, depending on their needs and projects. <br><br>
@@ -226,7 +226,7 @@
                 </p>
 
             </article>
-            <div class="who-grid">
+            <div class="who-grid reveal">
                 <!--  Type 1  -->
                 <div class="who-item">
                     <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
@@ -258,7 +258,7 @@
                     <p>Individual</p>
                 </div>
             </div>
-            <div class="who-banner">
+            <div class="who-banner reveal">
                 <div class="who-banner-img"><img src="/who-1.webp" alt="Baker in his bakery" loading="lazy"></div>
                 <div class="who-banner-img"><img src="/who-8.webp" alt="Photographer in studio" loading="lazy"></div>
                 <div class="who-banner-img"><img src="/who-5.webp" alt="Chefs in restaurant" loading="lazy"></div>
@@ -269,10 +269,10 @@
         </section>
         <!-- PRICING -->
         <section id="tarifs">
-            <h2 class="price-title">Pricing</h2>
-            <p class="paiement">Free, no-obligation quote. Payment in 2 or 3 instalments available.</p>
+            <h2 class="price-title reveal">Pricing</h2>
+            <p class="paiement reveal">Free, no-obligation quote. Payment in 2 or 3 instalments available.</p>
             <!--  PRICE 1  -->
-            <div class="price-grid">
+            <div class="price-grid reveal">
                 <div class="price-item">
                     <div>
                         <h3 class="essentiel">Essential</h3>
@@ -391,18 +391,18 @@
                     </div>
                 </div>
             </div>
-            <div class="maintenance-banner">
+            <div class="maintenance-banner reveal">
                 <i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i>
                 <p><strong>Maintenance and peace of mind: from €29/month.</strong> Hosting, backups, updates and small changes: I take care of everything, you stay focused on your business.</p>
             </div>
-            <div class="tarifs-download">
+            <div class="tarifs-download reveal">
                 <a href="/tarifs.pdf" download aria-label="Download the pricing sheet as PDF">
                     <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i>
                     Download pricing sheet
                 </a>
             </div>
         </section>
-        <div class="info">
+        <div class="info reveal">
             <p>
                 * Every project starts with a free, personalised quote; the prices shown cover the most common needs.
             </p>
@@ -416,8 +416,8 @@
 
         <!-- PROJECTS -->
         <section class="projects" id="projets">
-            <h2 class="projects-title">Recent projects</h2>
-            <div class="container">
+            <h2 class="projects-title reveal">Recent projects</h2>
+            <div class="container reveal">
                 <div class="projects-grid">
                     <!-- PROJECT 1 -->
                     <article class="project-card">
@@ -645,10 +645,42 @@
             </div>
         </section>
 
+        <!-- HOW IT WORKS -->
+        <section class="process" id="process">
+            <h2 class="reveal">How does it work?</h2>
+            <p class="process-intro reveal">From first message to launch, here are the key steps of our collaboration.</p>
+            <div class="process-steps">
+                <article class="process-step reveal">
+                    <span class="process-step__num" aria-hidden="true">1</span>
+                    <i class="fa-solid fa-comments process-step__icon" aria-hidden="true"></i>
+                    <h3>Discovery</h3>
+                    <p>We talk about your project, your needs and your budget. No tech jargon.</p>
+                </article>
+                <article class="process-step reveal">
+                    <span class="process-step__num" aria-hidden="true">2</span>
+                    <i class="fa-solid fa-file-pen process-step__icon" aria-hidden="true"></i>
+                    <h3>Quote & mockup</h3>
+                    <p>You get a clear quote and a mockup to validate the approach before we start.</p>
+                </article>
+                <article class="process-step reveal">
+                    <span class="process-step__num" aria-hidden="true">3</span>
+                    <i class="fa-solid fa-code process-step__icon" aria-hidden="true"></i>
+                    <h3>Development</h3>
+                    <p>I code your site step by step, with regular check-ins to keep you in the loop.</p>
+                </article>
+                <article class="process-step reveal">
+                    <span class="process-step__num" aria-hidden="true">4</span>
+                    <i class="fa-solid fa-rocket process-step__icon" aria-hidden="true"></i>
+                    <h3>Delivery</h3>
+                    <p>Your site goes live, optimised and ready to use. I stay available after launch.</p>
+                </article>
+            </div>
+        </section>
+
         <!-- CONTACT -->
         <section class="contact" id="contact">
-            <h2>Let's talk about your project</h2>
-            <div class="contact-layout">
+            <h2 class="reveal">Let's talk about your project</h2>
+            <div class="contact-layout reveal">
                 <div class="contact-aside">
                     <p class="contact-intro">
                         An idea, a need, a simple question? Describe your project in a few lines and let's discuss it.
@@ -801,7 +833,7 @@
         <i class="fa-solid fa-arrow-up-long" aria-hidden="true"></i>
      </button>
     <!-- SCRIPT JS -->
-    <script src="/script.js?v=110"></script>
+    <script src="/script.js?v=111"></script>
 
     <!-- COOKIE BANNER -->
     <div id="cookie-banner" class="cookie-banner" hidden role="dialog" aria-label="Cookie consent">
