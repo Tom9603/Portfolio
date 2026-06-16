@@ -3075,22 +3075,3 @@ body.drawer-open {
     }
 }
 
-/****************************************/
-/******* HÉLICE DÉCORATIVE GAUCHE *******/
-/****** canvas 3D — desktop only ********/
-/****************************************/
-
-.wave-deco {
-    display: none;
-    position: fixed;
-    left: 0;
-    top: 0;
-    pointer-events: none;
-    z-index: 0;
-}
-
-@media (min-width: 769px) {
-    .wave-deco {
-        display: block;
-    }
-}
