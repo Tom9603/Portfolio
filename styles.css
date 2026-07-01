@@ -2049,6 +2049,17 @@ body.drawer-open {
     gap: 1.65rem;
   }
 
+  /* Le <br> desktop couperait "besoins," tout seul sur une ligne :
+     on le neutralise et on laisse le navigateur equilibrer les deux
+     lignes proprement (text-wrap: balance). */
+  .hero-sub__br {
+    display: none;
+  }
+
+  .hero-sub {
+    text-wrap: balance;
+  }
+
   .hero-scroll {
     bottom: 1.75rem;
   }
