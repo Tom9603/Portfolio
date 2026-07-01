@@ -2048,6 +2048,9 @@ body.drawer-open {
   .hero-content {
     /* Resserre pour laisser de la place au CTA, a la main et a la fleche */
     gap: 1.1rem;
+    /* Remonte legerement l'ensemble (le translate ne repousse pas la
+       section suivante et ne creuse pas de vide reel en bas) */
+    transform: translateY(-1rem);
   }
 
   /* Logo plus compact sur mobile : recupere ~40px de hauteur */
