@@ -2039,14 +2039,34 @@ body.drawer-open {
   .hero {
     /* La barre du bas recouvre le bas de l'ecran : on la deduit */
     min-height: calc(100svh - 3.75rem - env(safe-area-inset-bottom));
-    /* Padding asymetrique : le contenu reste centre par flex mais
-       remonte nettement au-dessus du centre reel de l'ecran */
-    padding: 1rem 1.5rem 6rem;
+    /* Padding resserre : depuis l'ajout du badge + des arguments, tout
+       le bloc (logo -> CTA + main + fleche) doit tenir dans la hauteur
+       ecran sans deborder sous la barre du bas */
+    padding: 0.5rem 1.5rem 3rem;
   }
 
   .hero-content {
-    /* Plus aere qu'en desktop : l'ecran etroit tasse visuellement */
-    gap: 1.65rem;
+    /* Resserre pour laisser de la place au CTA, a la main et a la fleche */
+    gap: 1.1rem;
+  }
+
+  /* Logo plus compact sur mobile : recupere ~40px de hauteur */
+  .hero .header-main-logo {
+    width: 230px;
+    margin: -60px auto -78px;
+  }
+
+  .hero-badge {
+    font-size: 0.8rem;
+    padding: 0.35rem 0.8rem;
+  }
+
+  .hero-points {
+    gap: 0.35rem 1.2rem;
+  }
+
+  .hero-points li {
+    font-size: 0.82rem;
   }
 
   /* Le <br> desktop couperait "besoins," tout seul sur une ligne :
