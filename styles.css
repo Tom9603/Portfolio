@@ -2037,12 +2037,12 @@ body.drawer-open {
   .hero-blob:nth-child(3) { display: none; }
 
   .hero {
-    /* La barre du bas recouvre le bas de l'ecran : on la deduit */
-    min-height: calc(100svh - 3.75rem - env(safe-area-inset-bottom));
-    /* Padding resserre : depuis l'ajout du badge + des arguments, tout
-       le bloc (logo -> CTA + main + fleche) doit tenir dans la hauteur
-       ecran sans deborder sous la barre du bas */
-    padding: 0.5rem 1.5rem 3rem;
+    min-height: 100svh;
+    /* La barre de nav du bas (fixed, 3.75rem + safe-area) recouvre le
+       bas de l'ecran. On RESERVE cette hauteur en padding-bas : le
+       contenu centre (jusqu'au CTA + la main) reste ainsi toujours
+       au-dessus d'elle, jamais derriere. */
+    padding: 0.5rem 1.5rem calc(3.75rem + env(safe-area-inset-bottom) + 1.5rem);
   }
 
   .hero-content {
@@ -2084,8 +2084,15 @@ body.drawer-open {
     line-height: 1.6;
   }
 
+  /* La fleche doit flotter JUSTE au-dessus de la barre de nav,
+     sinon elle se retrouve cachee derriere (zone 3.75rem + safe-area) */
   .hero-scroll {
-    bottom: 1.75rem;
+    bottom: calc(3.75rem + env(safe-area-inset-bottom) + 0.5rem);
+  }
+
+  /* Main plus proche du CTA sur mobile : reste au-dessus de la barre */
+  .hero-hand {
+    top: calc(100% + 16px);
   }
 }
 
