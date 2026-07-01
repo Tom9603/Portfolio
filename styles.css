@@ -2058,6 +2058,10 @@ body.drawer-open {
 
   .hero-sub {
     text-wrap: balance;
+    /* legere reduction : les deux moities tiennent sur deux lignes
+       equilibrees meme sur les ecrans de ~360px */
+    font-size: 0.88rem;
+    line-height: 1.6;
   }
 
   .hero-scroll {
