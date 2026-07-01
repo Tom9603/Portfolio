@@ -468,15 +468,39 @@ p {
     position: relative;
 }
 
-/* Desktop seulement : la zone sociale se detache du bloc texte,
-   et le CTA descend encore d'un cran (le mobile garde son gap) */
+/* Desktop seulement : on aere le rythme vertical du hero
+   (le contenu respire au lieu de se tasser au centre), la zone
+   sociale se detache du bloc texte et le CTA descend d'un cran.
+   Le mobile garde son gap serre. */
 @media (min-width: 769px) {
+    .hero {
+        padding: 6rem 2rem;
+    }
+
+    .hero-content {
+        gap: 2.1rem;
+    }
+
+    .hero h1 {
+        line-height: 1.3;
+        margin-top: 0.25rem;
+    }
+
+    .hero-sub {
+        line-height: 1.75;
+    }
+
+    .hero-points {
+        gap: 0.7rem 2.4rem;
+        margin-top: 0.35rem;
+    }
+
     .hero .header-icons {
-        margin-top: 1.25rem;
+        margin-top: 1.75rem;
     }
 
     .button.hero-cta {
-        margin-top: 2rem;
+        margin-top: 2.25rem;
     }
 }
 
