@@ -630,12 +630,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var U=function(n){return gl.getUniformLocation(prog,n);};
   var uTime=U("uTime"), uRes=U("uRes");
-  gl.uniform1f(U("uScale"),2.8);
-  gl.uniform1f(U("uSpeed"),0.30);
-  gl.uniform1f(U("uDensity"),3.5);
+  var uScale=U("uScale"), uSpeed=U("uSpeed"), uDensity=U("uDensity"), uSweepW=U("uSweepW"), uBright=U("uBright");
   gl.uniform1f(U("uSoft"),2.2);
-  gl.uniform1f(U("uSweepW"),0.20);
-  gl.uniform1f(U("uBright"),0.80);
+  // Réglages adaptatifs : mobile étroit => plus de bandes, plus rapide, plus lumineux
+  function setParams(){
+    var mob = window.innerWidth < 768;
+    gl.uniform1f(uScale, 2.8);
+    gl.uniform1f(uSpeed, mob ? 0.42 : 0.30);
+    gl.uniform1f(uDensity, mob ? 7.0 : 3.5);
+    gl.uniform1f(uSweepW, mob ? 0.34 : 0.20);
+    gl.uniform1f(uBright, mob ? 0.98 : 0.80);
+  }
   gl.uniform3f(U("uA"),0.020,0.015,0.050); // fond quasi noir
   gl.uniform3f(U("uB"),0.320,0.153,1.000); // #5227ff violet
   gl.uniform3f(U("uC"),1.000,0.624,0.988); // #ff9ffc rose
@@ -646,6 +651,7 @@ document.addEventListener('DOMContentLoaded', function() {
     canvas.height=Math.max(1,canvas.clientHeight*dpr);
     gl.viewport(0,0,canvas.width,canvas.height);
     gl.uniform2f(uRes,canvas.width,canvas.height);
+    setParams();
   }
   resize(); window.addEventListener("resize",resize);
 

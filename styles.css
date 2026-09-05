@@ -1163,14 +1163,14 @@ p {
 
 
 .project-content {
-    padding: 1.5rem;
+    padding: 1.15rem 1.25rem;
     color: var(--color1);
 }
 
 .project-content h3 {
-    margin-top: 0.5rem;
-    margin-bottom: .5rem;
-    font-size: 1.4rem;
+    margin-top: 0.25rem;
+    margin-bottom: .4rem;
+    font-size: 1.35rem;
     color: var(--color1);
     /* Zone titre figee a 2 lignes : meme les titres longs
        (Miss Pin-up sur 2 lignes) ne decalent pas la suite,
@@ -1215,7 +1215,7 @@ p {
     /* Marges symetriques, alignees sur le padding du texte
        au-dessus (1.5rem) : les pastilles ne frolent plus le
        bord droit de la carte, elles passent a la ligne */
-    margin: 0 1.5rem 1.25rem;
+    margin: 0 1.25rem 0.9rem;
     align-content: flex-start;
 }
 
@@ -1236,7 +1236,7 @@ p {
     justify-content: center;
     gap: 1rem;
     margin-top: auto;
-    margin-bottom: 2rem;
+    margin-bottom: 1.25rem;
 }
 
 .btn-outline,
@@ -2091,7 +2091,7 @@ body.drawer-open {
   /* La fleche doit flotter JUSTE au-dessus de la barre de nav,
      sinon elle se retrouve cachee derriere (zone 3.75rem + safe-area) */
   .hero-scroll {
-    bottom: calc(3.75rem + env(safe-area-inset-bottom) + 0.5rem);
+    bottom: calc(3.75rem + env(safe-area-inset-bottom) + 2rem);
   }
 
   /* Main plus proche du CTA sur mobile : reste au-dessus de la barre */
@@ -3526,3 +3526,7 @@ header {
     pointer-events: none;
     background: radial-gradient(115% 82% at 50% 44%, rgba(5, 6, 16, 0.48), rgba(5, 6, 16, 0.16) 58%, transparent 82%);
 }
+
+/* Bandeau "Votre projet pourrait être le prochain" : sans contour (ni bordure, ni liseré) */
+.projects-banner { border: none; background-image: none; }
+.projects-banner::before { display: none; }
