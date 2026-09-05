@@ -631,12 +631,12 @@ document.addEventListener('DOMContentLoaded', function() {
   var U=function(n){return gl.getUniformLocation(prog,n);};
   var uTime=U("uTime"), uRes=U("uRes");
   var uScale=U("uScale"), uSpeed=U("uSpeed"), uDensity=U("uDensity"), uSweepW=U("uSweepW"), uBright=U("uBright");
-  gl.uniform1f(U("uSoft"),2.2);
+  gl.uniform1f(U("uSoft"),2.8);
   // Réglages adaptatifs : mobile étroit => plus de bandes, plus rapide, plus lumineux
   function setParams(){
     var mob = window.innerWidth < 768;
     gl.uniform1f(uScale, 2.8);
-    gl.uniform1f(uSpeed, mob ? 0.42 : 0.30);
+    gl.uniform1f(uSpeed, mob ? 0.52 : 0.38);
     gl.uniform1f(uDensity, mob ? 7.0 : 3.5);
     gl.uniform1f(uSweepW, mob ? 0.34 : 0.20);
     gl.uniform1f(uBright, mob ? 0.98 : 0.80);
