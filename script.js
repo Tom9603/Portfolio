@@ -575,10 +575,91 @@ document.addEventListener('DOMContentLoaded', function() {
     var steps = document.querySelectorAll('details.process-step');
     if (!steps.length) return;
     function syncOpen() {
-        if (window.innerWidth > 480) {
-            steps.forEach(function (d) { d.open = true; });
-        }
+        var open = window.innerWidth > 480;
+        steps.forEach(function (d) { d.open = open; });
     }
     syncOpen();
     window.addEventListener('resize', syncOpen);
+})();
+
+/* ============================================================
+   Fond "Scanner" du hero — shader WebGL vanilla (aucune dépendance)
+   Adapté de Scanner (React Bits), teinté bleu byTom, assombri.
+   Paramètres : scale 2.8, speed 0.45, frequency 1.35.
+   ============================================================ */
+(function () {
+  var canvas = document.querySelector(".silk-bg");
+  if (!canvas) return;
+  var gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+  if (!gl) return;
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var VS = "attribute vec2 aPos; varying vec2 vUv;" +
+    "void main(){ vUv = aPos*0.5+0.5; gl_Position = vec4(aPos,0.0,1.0); }";
+  var FS =
+    "precision highp float; varying vec2 vUv;" +
+    "uniform float uTime,uScale,uSpeed,uFreq; uniform vec2 uRes; uniform vec3 uA,uB,uC;" +
+    "float hash(vec2 p){ p=fract(p*vec2(123.34,456.21)); p+=dot(p,p+45.32); return fract(p.x*p.y); }" +
+    "void main(){" +
+    "  vec2 uv=vUv;" +
+    "  vec2 p=uv; p.x*=uRes.x/uRes.y; p*=uScale;" +
+    "  float t=uTime*uSpeed;" +
+    "  float w1 = p.y*6.0*uFreq + 0.6*sin(p.x*2.5 + t*1.1) - t*1.6;" +
+    "  float l1 = pow(0.5+0.5*sin(w1), 8.0);" +
+    "  float w2 = p.y*13.0*uFreq + 0.4*sin(p.x*4.0 - t*0.8) - t*2.4;" +
+    "  float l2 = pow(0.5+0.5*sin(w2), 14.0);" +
+    "  float lines = l1 + 0.45*l2;" +
+    "  float sweep = exp(-pow((fract(t*0.10)-uv.x)*2.5,2.0));" +
+    "  vec3 base = mix(uA, uA*1.7, uv.y);" +
+    "  vec3 col = base + uB*lines*(0.5+0.7*sweep) + uC*l2*0.7 + uB*lines*0.25;" +
+    "  float g = hash(gl_FragCoord.xy + floor(t*60.0));" +
+    "  col -= (g-0.5)*0.05;" +
+    "  float vig = smoothstep(1.25,0.25,length(uv-0.5));" +
+    "  col *= mix(0.72,1.0,vig);" +
+    "  col = (col-0.5)*1.12+0.5;" +
+    "  gl_FragColor = vec4(clamp(col,0.0,1.0),1.0);" +
+    "}";
+
+  function sh(t,src){var x=gl.createShader(t);gl.shaderSource(x,src);gl.compileShader(x);return x;}
+  var prog=gl.createProgram();
+  gl.attachShader(prog,sh(gl.VERTEX_SHADER,VS));
+  gl.attachShader(prog,sh(gl.FRAGMENT_SHADER,FS));
+  gl.linkProgram(prog); gl.useProgram(prog);
+
+  var buf=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+  var loc=gl.getAttribLocation(prog,"aPos"); gl.enableVertexAttribArray(loc);
+  gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+
+  var U=function(n){return gl.getUniformLocation(prog,n);};
+  var uTime=U("uTime"), uRes=U("uRes");
+  gl.uniform1f(U("uScale"),2.8);
+  gl.uniform1f(U("uSpeed"),0.45);
+  gl.uniform1f(U("uFreq"),1.35);
+  gl.uniform3f(U("uA"),0.050,0.070,0.180); // fond navy sombre
+  gl.uniform3f(U("uB"),0.170,0.340,0.900); // bleu byTom (bandes/glow)
+  gl.uniform3f(U("uC"),0.620,0.740,1.000); // coeur des lignes (bleu clair)
+
+  function resize(){
+    var dpr=Math.min(window.devicePixelRatio||1,2);
+    canvas.width=Math.max(1,canvas.clientWidth*dpr);
+    canvas.height=Math.max(1,canvas.clientHeight*dpr);
+    gl.viewport(0,0,canvas.width,canvas.height);
+    gl.uniform2f(uRes,canvas.width,canvas.height);
+  }
+  resize(); window.addEventListener("resize",resize);
+
+  var running=true,start=performance.now(),raf;
+  function frame(now){ if(!running)return; gl.uniform1f(uTime,(now-start)/1000); gl.drawArrays(gl.TRIANGLES,0,3); raf=requestAnimationFrame(frame); }
+  if(reduce){ gl.uniform1f(uTime,4.0); gl.drawArrays(gl.TRIANGLES,0,3); }
+  else{
+    raf=requestAnimationFrame(frame);
+    var hero=canvas.closest(".hero");
+    if("IntersectionObserver" in window && hero){
+      new IntersectionObserver(function(es){es.forEach(function(e){
+        if(e.isIntersecting){ if(!running){running=true;start=performance.now();raf=requestAnimationFrame(frame);} }
+        else { running=false; if(raf)cancelAnimationFrame(raf); }
+      });}).observe(hero);
+    }
+  }
 })();

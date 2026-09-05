@@ -178,22 +178,11 @@
     <main id="contenu">
         <!-- HERO -->
         <section class="hero" id="accueil">
-            <div class="hero-blob"></div>
-            <div class="hero-blob"></div>
-            <div class="hero-blob"></div>
+            <canvas class="silk-bg" aria-hidden="true"></canvas>
             <div class="hero-content">
                 <img src="images/byTom.png" alt="Logo byTom" class="header-main-logo" width="448" height="450" fetchpriority="high">
-                <span class="hero-badge">
-                    <span class="hero-badge__dot" aria-hidden="true"></span>
-                    Disponible pour de nouveaux projets
-                </span>
                 <h1>Votre site web,<br><em>sans vous prendre la tête.</em></h1>
                 <p class="hero-sub">Un projet sur mesure : vous exprimez vos besoins, <br class="hero-sub__br">on cadre ensemble, je m'occupe du reste.</p>
-                <ul class="hero-points">
-                    <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i>Tarif fixe, zéro surprise</li>
-                    <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i>Mise en ligne incluse</li>
-                    <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i>Suivi après la livraison</li>
-                </ul>
                 <div class="header-icons">
                     <a href="https://www.linkedin.com/in/tom-ochietti" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (nouvel onglet)">
                         <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
@@ -432,6 +421,29 @@
                     <!-- PROJET 1 -->
                     <article class="project-card">
                         <div class="project-img">
+                            <span class="project-type">Application web et desktop</span>
+                            <img src="images/projets/Pulsar.png" alt="Page d'accueil mobile de l'application Pulsar" width="392" height="601" loading="lazy" decoding="async">
+                        </div>
+                        <div class="project-content">
+                            <h3>Pulsar</h3>
+
+                            <p>
+                                Pulsar réunit conversations, appels et tâches d'une équipe au même endroit : un espace par sujet, et de quoi savoir qui fait quoi sans réunion en plus.
+                            </p>
+                        </div>
+
+                        <div class="project-tags">
+                            <span>Windows</span>
+                            <span>macOS</span>
+                        </div>
+
+                        <div class="project-buttons">
+                            <button type="button" class="btn-outline btn-detail" data-modal="projet-5">Voir le détail</button>
+                            <a href="https://join-pulsar.com/" class="btn-fill" target="_blank" rel="noopener noreferrer">Voir le site</a>
+                        </div>
+                    </article>
+                    <article class="project-card">
+                        <div class="project-img">
                             <span class="project-type">Site associatif</span>
                             <img src="images/projets/Pin-up.png" alt="Page d'accueil du site du Comité Miss Pin-up Bretagne" width="1690" height="976" loading="lazy" decoding="async">
                         </div>
@@ -453,7 +465,7 @@
 
                         <div class="project-buttons">
                             <button type="button" class="btn-outline btn-detail" data-modal="projet-1">Voir le détail</button>
-                            <a href="https://misspinupbretagne.fr/" class="btn-fill" target="_blank" rel="noopener noreferrer">Voir le site</a>
+                            <span class="btn-fill btn-soon">Bientôt en ligne</span>
                         </div>
                     </article>
                     <!-- PROJET 2 -->
@@ -482,7 +494,7 @@
 
                         <div class="project-buttons">
                             <button type="button" class="btn-outline btn-detail" data-modal="projet-2">Voir le détail</button>
-                            <span class="btn-fill btn-soon">À venir</span>
+                            <span class="btn-fill btn-soon">Bientôt en ligne</span>
                         </div>
                     </article>
                     <!-- PROJET 3 -->
@@ -507,7 +519,7 @@
 
                         <div class="project-buttons">
                             <button type="button" class="btn-outline btn-detail" data-modal="projet-3">Voir le détail</button>
-                            <a href="https://tom9603.github.io/Feuille-de-match/" class="btn-fill" target="_blank" rel="noopener noreferrer">Voir le site</a>
+                            <span class="btn-fill btn-soon">Bientôt en ligne</span>
                         </div>
                     </article>
                     <!-- PROJET 4 -->
@@ -532,7 +544,7 @@
 
                         <div class="project-buttons">
                             <button type="button" class="btn-outline btn-detail" data-modal="projet-4">Voir le détail</button>
-                            <a href="https://tom9603.github.io/SiteWindsurf/" class="btn-fill" target="_blank" rel="noopener noreferrer">Voir le site</a>
+                            <span class="btn-fill btn-soon">Bientôt en ligne</span>
                         </div>
                     </article>
                 </div>
@@ -853,7 +865,7 @@
                 </div>
             </div>
             <div class="modal-projet-footer">
-                <a href="https://misspinupbretagne.fr/" class="btn-fill" target="_blank" rel="noopener noreferrer">Voir le site</a>
+                <span class="btn-fill btn-soon">Bientôt en ligne</span>
             </div>
         </div>
     </div>
@@ -942,7 +954,7 @@
                 </div>
             </div>
             <div class="modal-projet-footer">
-                <a href="https://tom9603.github.io/Feuille-de-match/" class="btn-fill" target="_blank" rel="noopener noreferrer">Voir le site</a>
+                <span class="btn-fill btn-soon">Bientôt en ligne</span>
             </div>
         </div>
     </div>
@@ -982,7 +994,50 @@
                 </div>
             </div>
             <div class="modal-projet-footer">
-                <a href="https://tom9603.github.io/SiteWindsurf/" class="btn-fill" target="_blank" rel="noopener noreferrer">Voir le site</a>
+                <span class="btn-fill btn-soon">Bientôt en ligne</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-projet-5" class="modal modal--projet" role="dialog" aria-modal="true" aria-labelledby="mp5-title">
+        <div class="modal-content modal-projet-content" tabindex="-1">
+            <div class="modal-projet-header">
+                <button type="button" class="close" data-close="projet-5" aria-label="Fermer">&times;</button>
+                <span class="project-type">Application web et desktop</span>
+                <h2 id="mp5-title">Pulsar</h2>
+            </div>
+            <img src="images/projets/Pulsar.png" alt="Page d'accueil mobile de l'application Pulsar" class="modal-projet-img" loading="lazy">
+            <div class="modal-projet-body">
+                <div class="modal-projet-section">
+                    <h3>Description</h3>
+                    <p>Pulsar est une messagerie d'équipe pour les entreprises : conversations par espace, appels et partage d'écran, tâches et fil interne, dans une seule application.</p>
+                    <p>Web, macOS et Windows, hébergée sur son propre serveur, avec des espaces clients où l'on reçoit ses clients sans leur ouvrir la maison.</p>
+                </div>
+                <div class="modal-projet-section">
+                    <h3>Technologies</h3>
+                    <div class="project-tags">
+                        <span>JavaScript</span>
+                        <span>React</span>
+                        <span>Node.js</span>
+                        <span>SQL</span>
+                        <span>Electron</span>
+                        <span>WebRTC</span>
+                        <span>Socket.IO</span>
+                    </div>
+                </div>
+                <div class="modal-projet-section">
+                    <h3>Ce qui est le plus intéressant à mettre en avant</h3>
+                    <ul class="modal-highlights">
+                        <li><code>node:sqlite</code> — la base est le module natif de Node, sans aucune dépendance externe, avec recherche plein texte FTS5.</li>
+                        <li><strong>LiveKit + WebRTC</strong> — vocal, vidéo, partage d'écran à plusieurs, et prise de contrôle à distance de l'écran partagé depuis l'application de bureau.</li>
+                        <li><strong>MediaPipe</strong> — arrière-plans de caméra calculés dans le navigateur, rien ne sort de la machine.</li>
+                        <li><strong>Zéro dépendance d'interface</strong> — pas de bibliothèque de composants, pas de Tailwind : 13 000 lignes de CSS écrites à la main, et une traduction maison sans bibliothèque i18n.</li>
+                        <li><strong>100 bancs de mesure</strong> qui conditionnent la publication : ils montent de vraies pages dans un vrai navigateur, mesurent des positions et des couleurs peintes, et bloquent le déploiement au moindre rouge.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-projet-footer">
+                <a href="https://join-pulsar.com/" class="btn-fill" target="_blank" rel="noopener noreferrer">Voir le site</a>
             </div>
         </div>
     </div>

@@ -12,7 +12,7 @@
     --color1: #374252;
     --color2: #F3F3F5;
     --color3: #2c57e7;
-    --color4: linear-gradient(to right, #2c57e7, #de58e2);
+    --color4: linear-gradient(to right, #2c57e7, #5b8bff);
     --primary_police: "Inter", sans-serif;
 }
 
@@ -115,7 +115,7 @@ section h2::after {
     width: 56px;
     height: 4px;
     border-radius: 999px;
-    background: linear-gradient(to right, #2c57e7, #de58e2);
+    background: linear-gradient(to right, #2c57e7, #5b8bff);
 }
 
 h3 {
@@ -348,7 +348,7 @@ p {
 .hero-blob:nth-child(2) {
     width: 1190px;
     height: 1190px;
-    background: rgba(222, 88, 226, 0.45);
+    background: rgba(91, 139, 255, 0.45);
     bottom: -80px;
     left: -80px;
     animation: blob2Wander 11s ease-in-out infinite;
@@ -758,7 +758,7 @@ p {
     top: 0;
     bottom: 0;
     width: 5px;
-    background: linear-gradient(to bottom, #2c57e7, #de58e2);
+    background: linear-gradient(to bottom, #2c57e7, #5b8bff);
 }
 
 .about-text p {
@@ -1012,7 +1012,7 @@ p {
 }
 
 .vente {
-    color: #865aec;
+    color: #2c57e7;
 }
 
 .price-item ul {
@@ -1123,9 +1123,9 @@ p {
     position: absolute;
     inset: 0;
     z-index: 2; /* au-dessus des images, sinon elles cachent le liseré en haut */
-    padding: 3px;
+    padding: 2px;
     border-radius: inherit;
-    background: linear-gradient(to right, #2c57e7, #a552a8);
+    background: linear-gradient(to right, #2c57e7, #5b8bff);
     -webkit-mask:
         linear-gradient(#fff 0 0) content-box,
         linear-gradient(#fff 0 0);
@@ -1720,12 +1720,12 @@ footer {
     align-items: center;
     justify-content: center;
     aspect-ratio: 16 / 9;
-    background: linear-gradient(135deg, rgba(44, 87, 231, 0.12), rgba(222, 88, 226, 0.12));
+    background: linear-gradient(135deg, rgba(44, 87, 231, 0.12), rgba(91, 139, 255, 0.12));
 }
 
 .modal-projet-placeholder i {
     font-size: 4rem;
-    background: linear-gradient(to right, #2c57e7, #de58e2);
+    background: linear-gradient(to right, #2c57e7, #5b8bff);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -2030,7 +2030,7 @@ body.drawer-open {
   .hero-blob:nth-child(2) {
     width: 570px;
     height: 570px;
-    background: rgba(222, 88, 226, 0.50);
+    background: rgba(91, 139, 255, 0.50);
     animation: blob2WanderMobile 7s ease-in-out infinite;
     animation-delay: -2.5s;
   }
@@ -2493,7 +2493,7 @@ body.drawer-open {
     --color4: #F3F3F5;
 
     h1 {
-    background: linear-gradient(to right, #2c57e7, #de58e2);
+    background: linear-gradient(to right, #2c57e7, #5b8bff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     }
@@ -2618,7 +2618,7 @@ body.drawer-open {
 }
 
 .dark-mode .hero-blob:nth-child(1) { background: rgba(44, 87, 231, 0.38); }
-.dark-mode .hero-blob:nth-child(2) { background: rgba(222, 88, 226, 0.32); }
+.dark-mode .hero-blob:nth-child(2) { background: rgba(91, 139, 255, 0.32); }
 .dark-mode .hero-blob:nth-child(3) { background: rgba(44, 87, 231, 0.24); }
 
 /* Navigation mobile en dark mode */
@@ -2788,7 +2788,7 @@ body.drawer-open {
     border: 2px solid transparent;
     background:
         linear-gradient(var(--color2), var(--color2)) padding-box,
-        linear-gradient(135deg, #2c57e7, #de58e2) border-box;
+        linear-gradient(135deg, #2c57e7, #5b8bff) border-box;
 }
 
 .dark-mode .price-item--featured {
@@ -2807,7 +2807,7 @@ body.drawer-open {
     letter-spacing: 0.05em;
     text-transform: uppercase;
     color: #F3F3F5;
-    background: linear-gradient(to right, #2c57e7, #de58e2);
+    background: linear-gradient(to right, #2c57e7, #5b8bff);
 }
 
 /* Mention "a partir de" : flotte au-dessus du prix sans le decaler,
@@ -2866,7 +2866,7 @@ body.drawer-open {
     left: 0;
     bottom: 0;
     width: 5px;
-    background: linear-gradient(to bottom, #2c57e7, #de58e2);
+    background: linear-gradient(to bottom, #2c57e7, #5b8bff);
 }
 
 .maintenance-banner i {
@@ -2926,7 +2926,7 @@ body.drawer-open {
     letter-spacing: 0.05em;
     text-transform: uppercase;
     color: #F3F3F5;
-    background: linear-gradient(to right, #2c57e7, #de58e2);
+    background: linear-gradient(to right, #2c57e7, #5b8bff);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
@@ -2935,12 +2935,12 @@ body.drawer-open {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, rgba(44, 87, 231, 0.14), rgba(222, 88, 226, 0.14));
+    background: linear-gradient(135deg, rgba(44, 87, 231, 0.14), rgba(91, 139, 255, 0.14));
 }
 
 .project-img--placeholder i {
     font-size: 3.2rem;
-    background: linear-gradient(to right, #2c57e7, #de58e2);
+    background: linear-gradient(to right, #2c57e7, #5b8bff);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -2978,7 +2978,7 @@ body.drawer-open {
     left: 0;
     bottom: 0;
     width: 5px;
-    background: linear-gradient(to bottom, #2c57e7, #de58e2);
+    background: linear-gradient(to bottom, #2c57e7, #5b8bff);
 }
 
 .projects-banner p {
@@ -3279,7 +3279,7 @@ body.drawer-open {
     z-index: 2;
     padding: 2px;
     border-radius: inherit;
-    background: linear-gradient(135deg, #2c57e7, #a552a8);
+    background: linear-gradient(135deg, #2c57e7, #5b8bff);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
@@ -3293,7 +3293,7 @@ body.drawer-open {
     width: 52px;
     height: 52px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #2c57e7, #a552a8);
+    background: linear-gradient(135deg, #2c57e7, #5b8bff);
     color: #fff;
     font-size: 1.25rem;
     font-weight: 700;
@@ -3343,7 +3343,7 @@ body.drawer-open {
 }
 .process-step > .process-step__header::-webkit-details-marker { display: none; }
 .process-step__chevron { display: none; }
-.process-step > .process-step__body { display: block !important; }
+@media (min-width: 481px) { .process-step > .process-step__body { display: block !important; } }
 
 @media (max-width: 900px) {
     .process-steps { grid-template-columns: repeat(2, 1fr); }
@@ -3420,3 +3420,98 @@ body.drawer-open {
 
     .contact h2 { margin-top: 1.5rem; }
 }
+
+/* Masque les pastilles de carrousel (les « --- » indésirables à gauche) —
+   le carrousel reste navigable au swipe (scroll-snap). */
+.carousel-dots { display: none !important; }
+
+/* Flèches ↓ des étapes en bleu (au lieu de noir) */
+.process-step__chevron { color: #5b8bff; }
+
+/* Modales légales : rapproche le titre de la croix (le h2 global a margin-top:3rem) */
+.modal-content h2 { margin-top: 0.25rem; }
+
+/* ===== Remodelage des cartes accent (remplace la barre latérale générique) =====
+   Avant : filet plein 5px à gauche (look "bootstrap"/IA).
+   Après : liseré dégradé lumineux venant du coin haut-gauche + halo d'angle discret. */
+.about-text,
+.maintenance-banner,
+.projects-banner {
+    background-image: radial-gradient(135% 135% at 0% 0%, rgba(44, 87, 231, 0.13), transparent 46%);
+}
+.about-text::before,
+.maintenance-banner::before,
+.projects-banner::before {
+    inset: 0;
+    width: auto;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: linear-gradient(140deg, #6f9bff 0%, rgba(91, 139, 255, 0.38) 26%, rgba(44, 87, 231, 0) 56%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+}
+
+/* ===== Header & bandeau cookies : verre translucide NEUTRE (blur, sans teinte) ===== */
+header {
+    background: rgba(243, 243, 245, 0.62);
+    -webkit-backdrop-filter: blur(14px) saturate(1.3);
+            backdrop-filter: blur(14px) saturate(1.3);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 6px 24px rgba(15, 23, 42, 0.08);
+}
+.dark-mode header {
+    background: rgba(20, 21, 26, 0.55);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+.cookie-banner {
+    background: rgba(255, 255, 255, 0.66);
+    -webkit-backdrop-filter: blur(16px) saturate(1.3);
+            backdrop-filter: blur(16px) saturate(1.3);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+.dark-mode .cookie-banner {
+    background: rgba(26, 27, 32, 0.60);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ===== Fond "Silk" (shader WebGL) du hero ===== */
+.hero { position: relative; overflow: hidden; }
+.silk-bg {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    z-index: 0; display: block;
+    background: linear-gradient(140deg, #141a3a, #0e1230); /* repli sans WebGL */
+}
+.hero-content { position: relative; z-index: 1; }
+/* fondu bas vers le fond de page (transition douce vers la section suivante) */
+.hero::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+    height: 24%; z-index: 0; pointer-events: none;
+    background: linear-gradient(to bottom, transparent, var(--bg1));
+}
+/* Texte du hero en blanc sur le silk (le logo image garde son "Tom" bleu) */
+.hero-content h1 {
+    background: none;
+    -webkit-text-fill-color: #fff;
+    color: #fff;
+    text-shadow: 0 2px 26px rgba(0, 0, 0, 0.35);
+}
+.hero-content .hero-sub { color: rgba(255, 255, 255, 0.88); }
+.hero-content .hero-points li { color: #fff; }
+
+
+/* Modale projet : liste "points forts" + code inline (charte byTom) */
+.modal-highlights { list-style: none; margin: 0.2rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 0.7rem; }
+.modal-highlights li { position: relative; padding-left: 1.15rem; color: var(--color1); font-size: 0.95rem; line-height: 1.55; }
+.modal-highlights li::before { content: ""; position: absolute; left: 0; top: 0.6em; width: 6px; height: 6px; border-radius: 50%; background: #2c57e7; }
+.dark-mode .modal-highlights li::before { background: #5b8bff; }
+.modal-highlights strong { color: var(--color1); font-weight: 700; }
+.modal-highlights code {
+    font-family: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+    font-size: 0.85em; padding: 0.05em 0.42em; border-radius: 6px;
+    background: rgba(44, 87, 231, 0.12); color: #2c57e7; border: 1px solid rgba(44, 87, 231, 0.22);
+}
+.dark-mode .modal-highlights code { background: rgba(91, 139, 255, 0.14); color: #8ab4f8; border-color: rgba(138, 180, 248, 0.25); }
