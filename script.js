@@ -609,7 +609,7 @@ document.addEventListener('DOMContentLoaded', function() {
     "  float glow = pow(band, uSoft);" +
     "  float m = 0.5 + 0.5*sin(y*0.6 + p.x*0.5 + t*0.4);" +
     "  vec3 bandCol = mix(uB, uC, m);" +
-    "  float scanPos = fract(t*0.5);" +
+    "  float scanPos = 0.5 + 0.5*sin(t*0.5);" +
     "  float sweep = exp(-pow((uv.y - scanPos)/uSweepW, 2.0));" +
     "  vec3 col = uA + bandCol*glow*uBright*(0.40 + 0.70*sweep);" +
     "  float g = hash(gl_FragCoord.xy + floor(t*60.0)); col -= (g-0.5)*0.04;" +
@@ -663,7 +663,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var hero=canvas.closest(".hero");
     if("IntersectionObserver" in window && hero){
       new IntersectionObserver(function(es){es.forEach(function(e){
-        if(e.isIntersecting){ if(!running){running=true;start=performance.now();raf=requestAnimationFrame(frame);} }
+        if(e.isIntersecting){ if(!running){running=true;raf=requestAnimationFrame(frame);} }
         else { running=false; if(raf)cancelAnimationFrame(raf); }
       });}).observe(hero);
     }
