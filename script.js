@@ -584,8 +584,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /* ============================================================
    Fond "Scanner" du hero — shader WebGL vanilla (aucune dépendance)
-   Adapté de Scanner (React Bits), teinté bleu byTom, assombri.
-   Paramètres : scale 2.8, speed 0.45, frequency 1.35.
+   Adapté de Scanner (React Bits) — couleurs d'origine (#5227ff / #ff9ffc / #fff).
+   Réglages : speed 0.3 · scale 2.8 · bandDensity 3.5 · softness ~ · sweepWidth 0.2 · brightness 0.8.
    ============================================================ */
 (function () {
   var canvas = document.querySelector(".silk-bg");
@@ -598,25 +598,22 @@ document.addEventListener('DOMContentLoaded', function() {
     "void main(){ vUv = aPos*0.5+0.5; gl_Position = vec4(aPos,0.0,1.0); }";
   var FS =
     "precision highp float; varying vec2 vUv;" +
-    "uniform float uTime,uScale,uSpeed,uFreq; uniform vec2 uRes; uniform vec3 uA,uB,uC;" +
+    "uniform float uTime,uScale,uSpeed,uDensity,uSoft,uSweepW,uBright; uniform vec2 uRes; uniform vec3 uA,uB,uC;" +
     "float hash(vec2 p){ p=fract(p*vec2(123.34,456.21)); p+=dot(p,p+45.32); return fract(p.x*p.y); }" +
     "void main(){" +
     "  vec2 uv=vUv;" +
     "  vec2 p=uv; p.x*=uRes.x/uRes.y; p*=uScale;" +
     "  float t=uTime*uSpeed;" +
-    "  float w1 = p.y*6.0*uFreq + 0.6*sin(p.x*2.5 + t*1.1) - t*1.6;" +
-    "  float l1 = pow(0.5+0.5*sin(w1), 8.0);" +
-    "  float w2 = p.y*13.0*uFreq + 0.4*sin(p.x*4.0 - t*0.8) - t*2.4;" +
-    "  float l2 = pow(0.5+0.5*sin(w2), 14.0);" +
-    "  float lines = l1 + 0.45*l2;" +
-    "  float sweep = exp(-pow((fract(t*0.10)-uv.x)*2.5,2.0));" +
-    "  vec3 base = mix(uA, uA*1.7, uv.y);" +
-    "  vec3 col = base + uB*lines*(0.5+0.7*sweep) + uC*l2*0.7 + uB*lines*0.25;" +
-    "  float g = hash(gl_FragCoord.xy + floor(t*60.0));" +
-    "  col -= (g-0.5)*0.05;" +
-    "  float vig = smoothstep(1.25,0.25,length(uv-0.5));" +
-    "  col *= mix(0.72,1.0,vig);" +
-    "  col = (col-0.5)*1.12+0.5;" +
+    "  float y = p.y*uDensity + 0.30*sin(p.x*2.0 + t*0.6) + 0.12*sin(p.x*5.0 - t) - t*0.8;" +
+    "  float band = 0.5 + 0.5*sin(y);" +
+    "  float glow = pow(band, uSoft);" +
+    "  float m = 0.5 + 0.5*sin(y*0.6 + p.x*0.5 + t*0.4);" +
+    "  vec3 bandCol = mix(uB, uC, m);" +
+    "  float scanPos = fract(t*0.5);" +
+    "  float sweep = exp(-pow((uv.y - scanPos)/uSweepW, 2.0));" +
+    "  vec3 col = uA + bandCol*glow*uBright*(0.40 + 0.70*sweep);" +
+    "  float g = hash(gl_FragCoord.xy + floor(t*60.0)); col -= (g-0.5)*0.04;" +
+    "  float vig = smoothstep(1.25, 0.15, length(uv-0.5)); col *= mix(0.50, 1.0, vig);" +
     "  gl_FragColor = vec4(clamp(col,0.0,1.0),1.0);" +
     "}";
 
@@ -634,11 +631,14 @@ document.addEventListener('DOMContentLoaded', function() {
   var U=function(n){return gl.getUniformLocation(prog,n);};
   var uTime=U("uTime"), uRes=U("uRes");
   gl.uniform1f(U("uScale"),2.8);
-  gl.uniform1f(U("uSpeed"),0.45);
-  gl.uniform1f(U("uFreq"),1.35);
-  gl.uniform3f(U("uA"),0.050,0.070,0.180); // fond navy sombre
-  gl.uniform3f(U("uB"),0.170,0.340,0.900); // bleu byTom (bandes/glow)
-  gl.uniform3f(U("uC"),0.620,0.740,1.000); // coeur des lignes (bleu clair)
+  gl.uniform1f(U("uSpeed"),0.30);
+  gl.uniform1f(U("uDensity"),3.5);
+  gl.uniform1f(U("uSoft"),2.2);
+  gl.uniform1f(U("uSweepW"),0.20);
+  gl.uniform1f(U("uBright"),0.80);
+  gl.uniform3f(U("uA"),0.020,0.015,0.050); // fond quasi noir
+  gl.uniform3f(U("uB"),0.320,0.153,1.000); // #5227ff violet
+  gl.uniform3f(U("uC"),1.000,0.624,0.988); // #ff9ffc rose
 
   function resize(){
     var dpr=Math.min(window.devicePixelRatio||1,2);

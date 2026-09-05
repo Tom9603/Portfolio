@@ -3515,3 +3515,14 @@ header {
     background: rgba(44, 87, 231, 0.12); color: #2c57e7; border: 1px solid rgba(44, 87, 231, 0.22);
 }
 .dark-mode .modal-highlights code { background: rgba(91, 139, 255, 0.14); color: #8ab4f8; border-color: rgba(138, 180, 248, 0.25); }
+
+/* Voile sombre derrière le texte du hero (lisibilité sur le fond animé) */
+.hero-content { z-index: 2; }
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: radial-gradient(115% 82% at 50% 44%, rgba(5, 6, 16, 0.48), rgba(5, 6, 16, 0.16) 58%, transparent 82%);
+}
