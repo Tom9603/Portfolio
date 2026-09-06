@@ -3469,7 +3469,10 @@ header {
 .silk-bg {
     position: absolute; inset: 0; width: 100%; height: 100%;
     z-index: 0; display: block;
-    background: linear-gradient(140deg, #141a3a, #0e1230); /* repli sans WebGL */
+    background: linear-gradient(140deg, #eef0ff, #ffffff); /* repli sans WebGL (light) */
+}
+.dark-mode .silk-bg {
+    background: linear-gradient(140deg, #141a3a, #0e1230); /* repli sans WebGL (dark) */
 }
 .hero-content { position: relative; z-index: 1; }
 /* fondu bas vers le fond de page (transition douce vers la section suivante).
@@ -3483,15 +3486,17 @@ header {
 .dark-mode .hero::after {
     background: linear-gradient(to bottom, transparent, var(--bg1));
 }
-/* Texte du hero en blanc sur le silk (le logo image garde son "Tom" bleu) */
-.hero-content h1 {
+/* Texte du hero en blanc uniquement en dark (fond animé sombre).
+   En light le fond animé est blanc : le h1 garde le dégradé bleu, le
+   sous-titre reprend le gris foncé du thème. */
+.dark-mode .hero-content h1 {
     background: none;
     -webkit-text-fill-color: #fff;
     color: #fff;
     text-shadow: 0 2px 26px rgba(0, 0, 0, 0.35);
 }
-.hero-content .hero-sub { color: rgba(255, 255, 255, 0.88); }
-.hero-content .hero-points li { color: #fff; }
+.dark-mode .hero-content .hero-sub { color: rgba(255, 255, 255, 0.88); }
+.dark-mode .hero-content .hero-points li { color: #fff; }
 
 
 /* Modale projet : liste "points forts" + code inline (charte byTom) */
@@ -3507,7 +3512,8 @@ header {
 }
 .dark-mode .modal-highlights code { background: rgba(91, 139, 255, 0.14); color: #8ab4f8; border-color: rgba(138, 180, 248, 0.25); }
 
-/* Voile sombre derrière le texte du hero (lisibilité sur le fond animé) */
+/* Voile derrière le texte du hero (lisibilité sur le fond animé).
+   Light : voile blanc (texte foncé). Dark : voile sombre (texte blanc). */
 .hero-content { z-index: 2; }
 .hero::before {
     content: "";
@@ -3515,6 +3521,9 @@ header {
     inset: 0;
     z-index: 1;
     pointer-events: none;
+    background: radial-gradient(115% 82% at 50% 44%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.28) 58%, transparent 82%);
+}
+.dark-mode .hero::before {
     background: radial-gradient(115% 82% at 50% 44%, rgba(5, 6, 16, 0.48), rgba(5, 6, 16, 0.16) 58%, transparent 82%);
 }
 

@@ -583,8 +583,8 @@ document.addEventListener('DOMContentLoaded', function() {
 })();
 
 /* ============================================================
-   Fond "Scanner" du hero — shader WebGL vanilla (aucune dépendance)
-   Adapté de Scanner (React Bits) — couleurs d'origine (#5227ff / #ff9ffc / #fff).
+   Fond "Scanner" du hero : shader WebGL vanilla (aucune dépendance)
+   Adapté de Scanner (React Bits) : couleurs d'origine (#5227ff / #ff9ffc / #fff).
    Réglages : speed 0.3 · scale 2.8 · bandDensity 3.5 · softness ~ · sweepWidth 0.2 · brightness 0.8.
    ============================================================ */
 (function () {
@@ -598,7 +598,7 @@ document.addEventListener('DOMContentLoaded', function() {
     "void main(){ vUv = aPos*0.5+0.5; gl_Position = vec4(aPos,0.0,1.0); }";
   var FS =
     "precision highp float; varying vec2 vUv;" +
-    "uniform float uTime,uScale,uSpeed,uDensity,uSoft,uSweepW,uBright; uniform vec2 uRes; uniform vec3 uA,uB,uC;" +
+    "uniform float uTime,uScale,uSpeed,uDensity,uSoft,uSweepW,uBright,uLight; uniform vec2 uRes; uniform vec3 uA,uB,uC;" +
     "float hash(vec2 p){ p=fract(p*vec2(123.34,456.21)); p+=dot(p,p+45.32); return fract(p.x*p.y); }" +
     "void main(){" +
     "  vec2 uv=vUv;" +
@@ -611,9 +611,12 @@ document.addEventListener('DOMContentLoaded', function() {
     "  vec3 bandCol = mix(uB, uC, m);" +
     "  float scanPos = 0.5 + 0.5*sin(t*0.5);" +
     "  float sweep = exp(-pow((uv.y - scanPos)/uSweepW, 2.0));" +
-    "  vec3 col = uA + bandCol*glow*uBright*(0.40 + 0.70*sweep);" +
+    "  float k = glow*uBright*(0.40 + 0.70*sweep);" +
+    "  vec3 colDark = uA + bandCol*k;" +                                  // dark : vagues additives sur fond sombre
+    "  vec3 colLight = mix(uA, bandCol, clamp(k, 0.0, 1.0));" +           // light : fond blanc teinte vers la couleur des vagues
+    "  vec3 col = mix(colDark, colLight, uLight);" +
     "  float g = hash(gl_FragCoord.xy + floor(t*60.0)); col -= (g-0.5)*0.04;" +
-    "  float vig = smoothstep(1.25, 0.15, length(uv-0.5)); col *= mix(0.50, 1.0, vig);" +
+    "  float vig = smoothstep(1.25, 0.15, length(uv-0.5)); col *= mix(mix(0.50, 0.94, uLight), 1.0, vig);" +
     "  gl_FragColor = vec4(clamp(col,0.0,1.0),1.0);" +
     "}";
 
@@ -641,9 +644,16 @@ document.addEventListener('DOMContentLoaded', function() {
     gl.uniform1f(uSweepW, mob ? 0.34 : 0.20);
     gl.uniform1f(uBright, mob ? 0.98 : 0.80);
   }
-  gl.uniform3f(U("uA"),0.020,0.015,0.050); // fond quasi noir
+  var uA_=U("uA"), uLight_=U("uLight");
   gl.uniform3f(U("uB"),0.320,0.153,1.000); // #5227ff violet
   gl.uniform3f(U("uC"),1.000,0.624,0.988); // #ff9ffc rose
+  // Fond du hero selon le theme : sombre en dark, blanc en light (vagues conservees)
+  function applyTheme(){
+    var isDark = document.body.classList.contains("dark-mode");
+    if(isDark){ gl.uniform3f(uA_, 0.020, 0.015, 0.050); gl.uniform1f(uLight_, 0.0); }
+    else { gl.uniform3f(uA_, 1.0, 1.0, 1.0); gl.uniform1f(uLight_, 1.0); }
+    if(reduce){ gl.uniform1f(uTime, 4.0); gl.drawArrays(gl.TRIANGLES, 0, 3); }
+  }
 
   function resize(){
     var dpr=Math.min(window.devicePixelRatio||1,2);
@@ -654,6 +664,10 @@ document.addEventListener('DOMContentLoaded', function() {
     setParams();
   }
   resize(); window.addEventListener("resize",resize);
+  applyTheme();
+  if("MutationObserver" in window){
+    new MutationObserver(applyTheme).observe(document.body,{attributes:true,attributeFilter:["class"]});
+  }
 
   var running=true,start=performance.now(),raf;
   function frame(now){ if(!running)return; gl.uniform1f(uTime,(now-start)/1000); gl.drawArrays(gl.TRIANGLES,0,3); raf=requestAnimationFrame(frame); }
