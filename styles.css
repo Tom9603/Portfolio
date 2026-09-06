@@ -3472,10 +3472,15 @@ header {
     background: linear-gradient(140deg, #141a3a, #0e1230); /* repli sans WebGL */
 }
 .hero-content { position: relative; z-index: 1; }
-/* fondu bas vers le fond de page (transition douce vers la section suivante) */
+/* fondu bas vers le fond de page (transition douce vers la section suivante).
+   Uniquement en dark : le hero est toujours sombre, donc fondre vers le fond
+   clair en light creerait un halo blanc disgracieux. */
 .hero::after {
     content: ""; position: absolute; left: 0; right: 0; bottom: 0;
     height: 24%; z-index: 0; pointer-events: none;
+    background: none;
+}
+.dark-mode .hero::after {
     background: linear-gradient(to bottom, transparent, var(--bg1));
 }
 /* Texte du hero en blanc sur le silk (le logo image garde son "Tom" bleu) */
