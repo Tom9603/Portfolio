@@ -99,23 +99,9 @@ h2 {
     }
 }
 
-/* Barre degradee sous les titres de section : rappel du hero.
-   (les h2 des modales ne sont pas dans des sections, donc epargnes) */
+/* Titres de section (barre degradee retiree a la demande) */
 section h2 {
-    position: relative;
-    padding-bottom: 0.85rem;
-}
-
-section h2::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 56px;
-    height: 4px;
-    border-radius: 999px;
-    background: linear-gradient(to right, #2c57e7, #5b8bff);
+    padding-bottom: 0.35rem;
 }
 
 h3 {
@@ -3421,7 +3407,7 @@ body.drawer-open {
     .contact h2 { margin-top: 1.5rem; }
 }
 
-/* Masque les pastilles de carrousel (les « --- » indésirables à gauche) —
+/* Masque les pastilles de carrousel (les « --- » indésirables à gauche) :
    le carrousel reste navigable au swipe (scroll-snap). */
 .carousel-dots { display: none !important; }
 
@@ -3530,3 +3516,76 @@ header {
 /* Bandeau "Votre projet pourrait être le prochain" : sans contour (ni bordure, ni liseré) */
 .projects-banner { border: none; background-image: none; }
 .projects-banner::before { display: none; }
+
+/****************************************/
+/* Alternance subtile des fonds de section (rythme visuel / "chapitres") */
+/* Bandes pleine largeur derriere Pour qui, Projets et Process.          */
+/****************************************/
+:root { --section-alt: #ececf0; }
+.dark-mode { --section-alt: #202024; }
+
+#pour-qui,
+.projects,
+.process,
+.contact {
+    position: relative;
+}
+
+#pour-qui::before,
+.projects::before,
+.process::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+    /* Teinte qui s'estompe en haut et en bas : marges larges pour eloigner
+       la couleur des bords et des titres */
+    background: linear-gradient(
+        to bottom,
+        transparent 0,
+        var(--section-alt) 30%,
+        var(--section-alt) 70%,
+        transparent 100%
+    );
+    z-index: -2;
+    pointer-events: none;
+}
+
+/****************************************/
+/* Halos violet/bleu tres diffus derriere Projets et Contact.            */
+/* Prolongent l'ambiance du hero au-dela du premier ecran (dark seul).   */
+/****************************************/
+.dark-mode #pour-qui::after,
+.dark-mode .projects::after,
+.dark-mode .contact::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.dark-mode #pour-qui::after {
+    background:
+        radial-gradient(50% 40% at 30% 72%, rgba(82, 39, 255, 0.12), transparent 70%),
+        radial-gradient(44% 38% at 80% 86%, rgba(44, 87, 231, 0.10), transparent 72%);
+}
+
+.dark-mode .projects::after {
+    background:
+        radial-gradient(48% 42% at 78% 12%, rgba(82, 39, 255, 0.13), transparent 70%),
+        radial-gradient(42% 40% at 15% 82%, rgba(44, 87, 231, 0.10), transparent 72%);
+}
+
+.dark-mode .contact::after {
+    background:
+        radial-gradient(52% 46% at 20% 18%, rgba(82, 39, 255, 0.12), transparent 70%),
+        radial-gradient(46% 44% at 82% 88%, rgba(44, 87, 231, 0.11), transparent 72%);
+}
