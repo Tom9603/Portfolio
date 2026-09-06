@@ -599,7 +599,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var FS =
     "precision highp float; varying vec2 vUv;" +
     "uniform float uTime,uScale,uSpeed,uDensity,uSoft,uSweepW,uBright,uLight; uniform vec2 uRes; uniform vec3 uA,uB,uC;" +
-    "float hash(vec2 p){ p=fract(p*vec2(123.34,456.21)); p+=dot(p,p+45.32); return fract(p.x*p.y); }" +
+    "float hash(vec2 p){ return fract(sin(dot(p, vec2(12.9898,78.233))) * 43758.5453); }" +
     "void main(){" +
     "  vec2 uv=vUv;" +
     "  vec2 p=uv; p.x*=uRes.x/uRes.y; p*=uScale;" +
@@ -613,9 +613,9 @@ document.addEventListener('DOMContentLoaded', function() {
     "  float sweep = exp(-pow((uv.y - scanPos)/uSweepW, 2.0));" +
     "  float k = glow*uBright*(0.40 + 0.70*sweep);" +
     "  vec3 colDark = uA + bandCol*k;" +                                  // dark : vagues additives sur fond sombre
-    "  vec3 colLight = mix(uA, bandCol, clamp(k, 0.0, 1.0));" +           // light : fond blanc teinte vers la couleur des vagues
+    "  vec3 colLight = mix(uA, bandCol, clamp(k*1.6, 0.0, 1.0));" +       // light : fond blanc teinte vers la couleur des vagues (vagues plus marquees)
     "  vec3 col = mix(colDark, colLight, uLight);" +
-    "  float g = hash(gl_FragCoord.xy + floor(t*60.0)); col -= (g-0.5)*0.04;" +
+    "  float g = hash(gl_FragCoord.xy); col += (g-0.5)*0.02;" +           // tramage statique fin (anti-banding, sans motif en mouvement)
     "  float vig = smoothstep(1.25, 0.15, length(uv-0.5)); col *= mix(mix(0.50, 0.94, uLight), 1.0, vig);" +
     "  gl_FragColor = vec4(clamp(col,0.0,1.0),1.0);" +
     "}";
