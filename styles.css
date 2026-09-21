@@ -302,6 +302,7 @@ p {
     position: relative;
     min-height: 100vh;
     min-height: 100svh;
+    min-height: 100dvh;   /* viewport dynamique : remplit l'ecran quelle que soit la barre du navigateur mobile (fin du contenu qui depasse sous la tabbar) */
     width: 100vw;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
