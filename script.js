@@ -582,104 +582,268 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('resize', syncOpen);
 })();
 
+
 /* ============================================================
-   Fond "Scanner" du hero : shader WebGL vanilla (aucune dépendance)
-   Adapté de Scanner (React Bits) : couleurs d'origine (#5227ff / #ff9ffc / #fff).
-   Réglages : speed 0.3 · scale 2.8 · bandDensity 3.5 · softness ~ · sweepWidth 0.2 · brightness 0.8.
+   Fond "Ribbon Glow" du hero (adapte d'Originkit, WebGL2 vanilla).
+   Deux passes : field (rendu du ruban en demi-resolution) puis finish
+   (compositing sur le fond + tonemapping + tramage). Theme-aware :
+   fond sombre en dark, clair en light (mode "paper" de l'effet).
    ============================================================ */
 (function () {
-  var canvas = document.querySelector(".silk-bg");
+  var canvas = document.querySelector(".ribbon-bg");
   if (!canvas) return;
-  var gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+  var gl = canvas.getContext("webgl2", { antialias: false, alpha: false, depth: false, stencil: false });
   if (!gl) return;
+
+  var MAX_DPR = 2;
+
+  var VERT_SRC =
+    "#version 300 es\n" +
+    "const vec2 P[3] = vec2[3](vec2(-1.0, -1.0), vec2(3.0, -1.0), vec2(-1.0, 3.0));\n" +
+    "void main() { gl_Position = vec4(P[gl_VertexID], 0.0, 1.0); }\n";
+
+  var FIELD_SRC =
+    "#version 300 es\n" +
+    "precision highp float;\n" +
+    "uniform vec2 uRes; uniform float uTime; uniform vec3 uC1; uniform vec3 uC2;\n" +
+    "uniform float uSize; uniform float uAngle; uniform vec2 uMouse; uniform float uOn;\n" +
+    "uniform float uReach; uniform vec2 uVel; out vec4 o;\n" +
+    "const float TAU = 6.28318530718;\n" +
+    "const float LAYERS = 84.0;\n" +
+    "const float TWIST = 1.250;\n" +
+    "const float DRAG = 0.180;\n" +
+    "const float GAIN = 0.62;\n" +
+    "const vec2 CENTRE = vec2(-0.62, 0.24);\n" +
+    "const float TILT = 0.6;\n" +
+    "const float ZOOM = 1.05;\n" +
+    "const float THETA = 2.13;\n" +
+    "const float SHEAR = 0.963;\n" +
+    "const float SHRINK = 0.953;\n" +
+    "const vec2 WARP_FREQ = vec2(0.42, 2.4);\n" +
+    "const vec2 WARP_AMP = vec2(0.13, 0.027);\n" +
+    "const vec2 ASPECT = vec2(2.1, 0.17);\n" +
+    "const float OFFSET = 0.36;\n" +
+    "const float GLOW = 0.0021;\n" +
+    "const float SOFT = 0.0019;\n" +
+    "const float FALLOFF = 0.37;\n" +
+    "const float PHASE = 12.0;\n" +
+    "const float CYCLE = 0.16;\n" +
+    "const float HUE_TRAVEL = 2.0;\n" +
+    "mat2 rot(float a) { float c = cos(a), s = sin(a); return mat2(c, s, -s, c); }\n" +
+    "void main() {\n" +
+    "  vec2 R = uRes;\n" +
+    "  vec2 pos = (gl_FragCoord.xy - 0.5 * R) / R.y;\n" +
+    "  vec2 d = pos - uMouse;\n" +
+    "  float w = uOn * exp(-dot(d, d) / (uReach * uReach));\n" +
+    "  if (w > 1e-4) pos = uMouse + rot(w * TWIST) * d * (1.0 - 0.3 * min(w, 1.0)) - uVel * min(w, 1.0) * DRAG;\n" +
+    "  pos = rot(uAngle) * pos / uSize;\n" +
+    "  float t = uTime * 0.49 + PHASE;\n" +
+    "  float breath = (-sin(uTime * 0.735) + sin(uTime * 0.49 + 1.0)) * 0.25 + 0.5;\n" +
+    "  vec2 u = rot(TILT) * ((pos - CENTRE) * (ZOOM - breath * 0.085));\n" +
+    "  mat2 fold = mat2(cos(THETA), sin(THETA), -SHEAR, cos(THETA));\n" +
+    "  vec3 col = vec3(0.0);\n" +
+    "  for (float i = 1.0; i <= LAYERS; i += 1.0) {\n" +
+    "    u.x -= sin(u.y * WARP_FREQ.x + t + i * 0.007) * WARP_AMP.x;\n" +
+    "    u.y -= sin(u.x * WARP_FREQ.y - t + i * 0.02) * WARP_AMP.y;\n" +
+    "    u = fold * u * SHRINK;\n" +
+    "    vec2 q = (u - vec2(OFFSET + breath * 0.1, 0.0)) * ASPECT;\n" +
+    "    float g = GLOW / (dot(q, q) + SOFT) * (0.25 + breath * 0.4);\n" +
+    "    float r = length(u);\n" +
+    "    float kk = sin(i * CYCLE + t * 1.2 + r * HUE_TRAVEL) * 0.5 + 0.5;\n" +
+    "    col += g * mix(uC1, uC2, kk) * (0.62 + 0.5 * kk) * exp2(-r * FALLOFF);\n" +
+    "  }\n" +
+    "  vec3 x = max(col * GAIN, 0.0);\n" +
+    "  col = (x * (2.51 * x + 0.03)) / (x * (2.43 * x + 0.59) + 0.14);\n" +
+    "  col = pow(clamp(col, 0.0, 1.0), vec3(0.85, 0.92, 0.98));\n" +
+    "  col *= 1.0 - smoothstep(0.5, 1.6, length(pos)) * 0.07;\n" +
+    "  o = vec4(col, 1.0);\n" +
+    "}\n";
+
+  var FINISH_SRC =
+    "#version 300 es\n" +
+    "precision highp float;\n" +
+    "uniform sampler2D uField; uniform vec2 uRes; uniform float uTime; uniform vec3 uBg; uniform float uPaper; out vec4 o;\n" +
+    "float ign(vec2 p, float f) { p += 5.588238 * mod(f, 64.0); return fract(52.9829189 * fract(0.06711056 * p.x + 0.00583715 * p.y)); }\n" +
+    "void main() {\n" +
+    "  vec2 frag = gl_FragCoord.xy;\n" +
+    "  vec3 L = max(texture(uField, frag / uRes).rgb, 0.0);\n" +
+    "  vec3 dark = uBg + L * (1.0 - uBg);\n" +
+    "  float strength = clamp(max(L.r, max(L.g, L.b)), 0.0, 1.0);\n" +
+    "  vec3 paper = uBg * (1.0 - strength) + L * 0.96;\n" +
+    "  vec3 col = mix(dark, paper, uPaper);\n" +
+    "  col += (ign(frag, floor(uTime * 24.0)) - 0.5) / 255.0;\n" +
+    "  o = vec4(clamp(col, 0.0, 1.0), 1.0);\n" +
+    "}\n";
+
+  function compile(type, src, label) {
+    var sh = gl.createShader(type);
+    gl.shaderSource(sh, src);
+    gl.compileShader(sh);
+    if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) {
+      console.error("RibbonGlow " + label + " shader:", gl.getShaderInfoLog(sh));
+      gl.deleteShader(sh); return null;
+    }
+    return sh;
+  }
+  function linkProg(fragSrc, label) {
+    var vs = compile(gl.VERTEX_SHADER, VERT_SRC, label);
+    var fs = compile(gl.FRAGMENT_SHADER, fragSrc, label);
+    if (!vs || !fs) return null;
+    var prog = gl.createProgram();
+    gl.attachShader(prog, vs); gl.attachShader(prog, fs);
+    gl.linkProgram(prog);
+    gl.deleteShader(vs); gl.deleteShader(fs);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+      console.error("RibbonGlow " + label + " link:", gl.getProgramInfoLog(prog));
+      gl.deleteProgram(prog); return null;
+    }
+    return prog;
+  }
+
+  var field = linkProg(FIELD_SRC, "field");
+  var finish = linkProg(FINISH_SRC, "finish");
+  if (!field || !finish) return;
+
+  function locs(prog, names) {
+    var o = {}; for (var i = 0; i < names.length; i++) o[names[i]] = gl.getUniformLocation(prog, names[i]); return o;
+  }
+  var uf = locs(field, ["uRes", "uTime", "uC1", "uC2", "uSize", "uAngle", "uMouse", "uOn", "uReach", "uVel"]);
+  var un = locs(finish, ["uField", "uRes", "uTime", "uBg", "uPaper"]);
+
+  var vao = gl.createVertexArray();
+  gl.bindVertexArray(vao);
+
+  // Framebuffer demi-resolution pour la passe "field"
+  var fbo = gl.createFramebuffer();
+  var tex = null, fw = 0, fh = 0;
+  var half = !!gl.getExtension("EXT_color_buffer_float");
+  function resizeTarget(nw, nh) {
+    if (nw === fw && nh === fh && tex) return;
+    for (var attempt = 0; attempt < 2; attempt++) {
+      if (tex) gl.deleteTexture(tex);
+      tex = gl.createTexture();
+      gl.bindTexture(gl.TEXTURE_2D, tex);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      gl.texImage2D(gl.TEXTURE_2D, 0, half ? gl.RGBA16F : gl.RGBA8, nw, nh, 0, gl.RGBA, half ? gl.HALF_FLOAT : gl.UNSIGNED_BYTE, null);
+      gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
+      gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tex, 0);
+      var ok = gl.checkFramebufferStatus(gl.FRAMEBUFFER) === gl.FRAMEBUFFER_COMPLETE;
+      gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+      if (ok || !half) break;
+      half = false;
+    }
+    fw = nw; fh = nh;
+  }
+
+  // Suivi du pointeur (le ruban se tord pres du curseur)
+  var ptr = { tx: 0, ty: 0, inside: false };
+  function readPtr(e) {
+    var r = canvas.getBoundingClientRect();
+    var sx = canvas.offsetWidth / (r.width || 1);
+    var sy = canvas.offsetHeight / (r.height || 1);
+    ptr.tx = (e.clientX - r.left) * sx;
+    ptr.ty = (e.clientY - r.top) * sy;
+    ptr.inside = e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
+  }
+  window.addEventListener("pointermove", readPtr, { passive: true });
+  window.addEventListener("pointerdown", readPtr, { passive: true });
+  document.addEventListener("pointerout", function (e) { if (!e.relatedTarget) ptr.inside = false; });
+
+  // Couleurs (preset "base") ; fond selon le theme
+  var C1 = [0x2f / 255, 0xd3 / 255, 0xf2 / 255]; // #2FD3F2 cyan
+  var C2 = [0x7b / 255, 0x61 / 255, 0xff / 255]; // #7B61FF violet
+  var BG_DARK = [0x0b / 255, 0x0a / 255, 0x10 / 255];  // #0B0A10
+  var BG_LIGHT = [0xf3 / 255, 0xf3 / 255, 0xf5 / 255]; // #F3F3F5
+  var SPEED = 1.0, SIZE = 1.0, ANGLE = -Math.PI, HOVER = 1.0, REACH = 240;
+
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var mx = 0, my = 0, vx = 0, vy = 0, on = 0, clock = 0, last = -1, raf = 0, running = true;
 
-  var VS = "attribute vec2 aPos; varying vec2 vUv;" +
-    "void main(){ vUv = aPos*0.5+0.5; gl_Position = vec4(aPos,0.0,1.0); }";
-  var FS =
-    "precision highp float; varying vec2 vUv;" +
-    "uniform float uTime,uScale,uSpeed,uDensity,uSoft,uSweepW,uBright,uLight; uniform vec2 uRes; uniform vec3 uA,uB,uC;" +
-    "float hash(vec2 p){ return fract(sin(dot(p, vec2(12.9898,78.233))) * 43758.5453); }" +
-    "void main(){" +
-    "  vec2 uv=vUv;" +
-    "  vec2 p=uv; p.x*=uRes.x/uRes.y; p*=uScale;" +
-    "  float t=uTime*uSpeed;" +
-    "  float y = p.y*uDensity + 0.30*sin(p.x*2.0 + t*0.6) + 0.12*sin(p.x*5.0 - t) - t*0.8;" +
-    "  float band = 0.5 + 0.5*sin(y);" +
-    "  float glow = pow(band, uSoft);" +
-    "  float m = 0.5 + 0.5*sin(y*0.6 + p.x*0.5 + t*0.4);" +
-    "  vec3 bandCol = mix(uB, uC, m);" +
-    "  float scanPos = 0.5 + 0.5*sin(t*0.5);" +
-    "  float sweep = exp(-pow((uv.y - scanPos)/uSweepW, 2.0));" +
-    "  float k = glow*uBright*(0.40 + 0.70*sweep);" +
-    "  vec3 colDark = uA + bandCol*k;" +                                  // dark : vagues additives sur fond sombre
-    "  vec3 colLight = mix(uA, bandCol, clamp(k*1.6, 0.0, 1.0));" +       // light : fond blanc teinte vers la couleur des vagues (vagues plus marquees)
-    "  vec3 col = mix(colDark, colLight, uLight);" +
-    "  float g = hash(gl_FragCoord.xy); col += (g-0.5)*0.02;" +           // tramage statique fin (anti-banding, sans motif en mouvement)
-    "  float vig = smoothstep(1.25, 0.15, length(uv-0.5)); col *= mix(mix(0.50, 0.94, uLight), 1.0, vig);" +
-    "  gl_FragColor = vec4(clamp(col,0.0,1.0),1.0);" +
-    "}";
+  function clampN(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
 
-  function sh(t,src){var x=gl.createShader(t);gl.shaderSource(x,src);gl.compileShader(x);return x;}
-  var prog=gl.createProgram();
-  gl.attachShader(prog,sh(gl.VERTEX_SHADER,VS));
-  gl.attachShader(prog,sh(gl.FRAGMENT_SHADER,FS));
-  gl.linkProgram(prog); gl.useProgram(prog);
+  function draw(now) {
+    var dt = last < 0 ? 0 : clampN((now - last) / 1000, 0, 0.05);
+    last = now;
+    clock = (clock + dt * SPEED) % 3600;
 
-  var buf=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER,buf);
-  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
-  var loc=gl.getAttribLocation(prog,"aPos"); gl.enableVertexAttribArray(loc);
-  gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+    var dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
+    var cw = canvas.clientWidth || 1200;
+    var ch = canvas.clientHeight || 800;
+    var bw = Math.max(1, Math.round(cw * dpr));
+    var bh = Math.max(1, Math.round(ch * dpr));
+    if (canvas.width !== bw || canvas.height !== bh) { canvas.width = bw; canvas.height = bh; }
+    resizeTarget(Math.max(1, Math.round(bw / 2)), Math.max(1, Math.round(bh / 2)));
 
-  var U=function(n){return gl.getUniformLocation(prog,n);};
-  var uTime=U("uTime"), uRes=U("uRes");
-  var uScale=U("uScale"), uSpeed=U("uSpeed"), uDensity=U("uDensity"), uSweepW=U("uSweepW"), uBright=U("uBright");
-  gl.uniform1f(U("uSoft"),2.8);
-  // Réglages adaptatifs : mobile étroit => plus de bandes, plus rapide, plus lumineux
-  function setParams(){
-    var mob = window.innerWidth < 768;
-    gl.uniform1f(uScale, 2.8);
-    gl.uniform1f(uSpeed, mob ? 0.52 : 0.38);
-    gl.uniform1f(uDensity, mob ? 7.0 : 3.5);
-    gl.uniform1f(uSweepW, mob ? 0.34 : 0.20);
-    gl.uniform1f(uBright, mob ? 0.98 : 0.80);
-  }
-  var uA_=U("uA"), uLight_=U("uLight");
-  gl.uniform3f(U("uB"),0.320,0.153,1.000); // #5227ff violet
-  gl.uniform3f(U("uC"),1.000,0.624,0.988); // #ff9ffc rose
-  // Fond du hero selon le theme : sombre en dark, blanc en light (vagues conservees)
-  function applyTheme(){
+    var present = ptr.inside ? 1 : 0;
+    if (present && on < 0.02) { mx = ptr.tx; my = ptr.ty; }
+    on += (present - on) * (1 - Math.exp(-dt * 5));
+    var kk = 1 - Math.exp(-dt * 16);
+    var nx = mx + (ptr.tx - mx) * kk;
+    var ny = my + (ptr.ty - my) * kk;
+    if (dt > 0) {
+      var kv = 1 - Math.exp(-dt * 8);
+      vx += ((nx - mx) / dt - vx) * kv;
+      vy += ((ny - my) / dt - vy) * kv;
+    }
+    mx = nx; my = ny;
+    var vLen = Math.hypot(vx, vy) / ch;
+    var vCap = vLen > 3 ? 3 / vLen : 1;
+
     var isDark = document.body.classList.contains("dark-mode");
-    if(isDark){ gl.uniform3f(uA_, 0.020, 0.015, 0.050); gl.uniform1f(uLight_, 0.0); }
-    else { gl.uniform3f(uA_, 1.0, 1.0, 1.0); gl.uniform1f(uLight_, 1.0); }
-    if(reduce){ gl.uniform1f(uTime, 4.0); gl.drawArrays(gl.TRIANGLES, 0, 3); }
+    var bg = isDark ? BG_DARK : BG_LIGHT;
+    var bgLum = 0.2126 * bg[0] + 0.7152 * bg[1] + 0.0722 * bg[2];
+
+    // Passe 1 : field -> FBO demi-res
+    gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
+    gl.viewport(0, 0, fw, fh);
+    gl.useProgram(field);
+    gl.uniform2f(uf.uRes, fw, fh);
+    gl.uniform1f(uf.uTime, clock);
+    gl.uniform3f(uf.uC1, C1[0], C1[1], C1[2]);
+    gl.uniform3f(uf.uC2, C2[0], C2[1], C2[2]);
+    gl.uniform1f(uf.uSize, SIZE);
+    gl.uniform1f(uf.uAngle, ANGLE);
+    gl.uniform2f(uf.uMouse, (mx - cw / 2) / ch, (ch / 2 - my) / ch);
+    gl.uniform1f(uf.uOn, on * HOVER);
+    gl.uniform1f(uf.uReach, REACH / ch);
+    gl.uniform2f(uf.uVel, (vx / ch) * vCap, (-vy / ch) * vCap);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+
+    // Passe 2 : finish -> ecran
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+    gl.viewport(0, 0, bw, bh);
+    gl.useProgram(finish);
+    gl.activeTexture(gl.TEXTURE0);
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.uniform1i(un.uField, 0);
+    gl.uniform2f(un.uRes, bw, bh);
+    gl.uniform1f(un.uTime, clock);
+    gl.uniform3f(un.uBg, bg[0], bg[1], bg[2]);
+    gl.uniform1f(un.uPaper, clampN((bgLum - 0.35) / 0.3, 0, 1));
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
   }
 
-  function resize(){
-    var dpr=Math.min(window.devicePixelRatio||1,2);
-    canvas.width=Math.max(1,canvas.clientWidth*dpr);
-    canvas.height=Math.max(1,canvas.clientHeight*dpr);
-    gl.viewport(0,0,canvas.width,canvas.height);
-    gl.uniform2f(uRes,canvas.width,canvas.height);
-    setParams();
-  }
-  resize(); window.addEventListener("resize",resize);
-  applyTheme();
-  if("MutationObserver" in window){
-    new MutationObserver(applyTheme).observe(document.body,{attributes:true,attributeFilter:["class"]});
+  function frame(now) {
+    if (!running) return;
+    raf = requestAnimationFrame(frame);
+    draw(now);
   }
 
-  var running=true,start=performance.now(),raf;
-  function frame(now){ if(!running)return; gl.uniform1f(uTime,(now-start)/1000); gl.drawArrays(gl.TRIANGLES,0,3); raf=requestAnimationFrame(frame); }
-  if(reduce){ gl.uniform1f(uTime,4.0); gl.drawArrays(gl.TRIANGLES,0,3); }
-  else{
-    raf=requestAnimationFrame(frame);
-    var hero=canvas.closest(".hero");
-    if("IntersectionObserver" in window && hero){
-      new IntersectionObserver(function(es){es.forEach(function(e){
-        if(e.isIntersecting){ if(!running){running=true;raf=requestAnimationFrame(frame);} }
-        else { running=false; if(raf)cancelAnimationFrame(raf); }
-      });}).observe(hero);
+  if (reduce) {
+    draw(performance.now()); // rendu statique unique
+  } else {
+    raf = requestAnimationFrame(frame);
+    var hero = canvas.closest(".hero");
+    if ("IntersectionObserver" in window && hero) {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (e.isIntersecting) { if (!running) { running = true; last = -1; raf = requestAnimationFrame(frame); } }
+          else { running = false; if (raf) cancelAnimationFrame(raf); }
+        });
+      }).observe(hero);
     }
   }
 })();

@@ -3279,8 +3279,9 @@ body.drawer-open {
     width: 52px;
     height: 52px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #2c57e7, #5b8bff);
-    color: #fff;
+    background: var(--color2);        /* meme fond que la carte (pas de bloc bleu plein) */
+    color: #2c57e7;                   /* chiffre bleu en light */
+    border: 2px solid #2c57e7;        /* contour bleu de marque */
     font-size: 1.25rem;
     font-weight: 700;
     display: flex;
@@ -3289,6 +3290,9 @@ body.drawer-open {
     margin-bottom: 1rem;
     flex-shrink: 0;
 }
+
+/* En dark : chiffre blanc sur le fond sombre de la carte, contour bleu conserve */
+.dark-mode .process-step__num { color: #fff; border-color: #2c57e7; }
 
 .process-step__icon {
     font-size: 1.5rem;
@@ -3464,31 +3468,17 @@ header {
     border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* ===== Fond "Silk" (shader WebGL) du hero ===== */
+/* ===== Hero : fond anime "Ribbon Glow" (WebGL2, adapte d'Originkit) ===== */
 .hero { position: relative; overflow: hidden; }
-.silk-bg {
+.ribbon-bg {
     position: absolute; inset: 0; width: 100%; height: 100%;
     z-index: 0; display: block;
-    background: linear-gradient(140deg, #eef0ff, #ffffff); /* repli sans WebGL (light) */
+    background: #f3f3f5; /* repli si WebGL2 indisponible (light) */
 }
-.dark-mode .silk-bg {
-    background: linear-gradient(140deg, #141a3a, #0e1230); /* repli sans WebGL (dark) */
-}
+.dark-mode .ribbon-bg { background: #0b0a10; } /* repli (dark) */
 .hero-content { position: relative; z-index: 1; }
-/* fondu bas vers le fond de page (transition douce vers la section suivante).
-   Uniquement en dark : le hero est toujours sombre, donc fondre vers le fond
-   clair en light creerait un halo blanc disgracieux. */
-.hero::after {
-    content: ""; position: absolute; left: 0; right: 0; bottom: 0;
-    height: 24%; z-index: 0; pointer-events: none;
-    background: none;
-}
-.dark-mode .hero::after {
-    background: linear-gradient(to bottom, transparent, var(--bg1));
-}
-/* Texte du hero en blanc uniquement en dark (fond animé sombre).
-   En light le fond animé est blanc : le h1 garde le dégradé bleu, le
-   sous-titre reprend le gris foncé du thème. */
+/* Texte du hero en blanc uniquement en dark (fond sombre du thème).
+   En light le h1 garde le dégradé bleu et le sous-titre le gris foncé. */
 .dark-mode .hero-content h1 {
     background: none;
     -webkit-text-fill-color: #fff;
@@ -3512,20 +3502,8 @@ header {
 }
 .dark-mode .modal-highlights code { background: rgba(91, 139, 255, 0.14); color: #8ab4f8; border-color: rgba(138, 180, 248, 0.25); }
 
-/* Voile derrière le texte du hero (lisibilité sur le fond animé).
-   Light : voile blanc (texte foncé). Dark : voile sombre (texte blanc). */
+/* Contenu du hero au-dessus du canvas Ribbon Glow */
 .hero-content { z-index: 2; }
-.hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    background: radial-gradient(115% 82% at 50% 44%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.28) 58%, transparent 82%);
-}
-.dark-mode .hero::before {
-    background: radial-gradient(115% 82% at 50% 44%, rgba(5, 6, 16, 0.48), rgba(5, 6, 16, 0.16) 58%, transparent 82%);
-}
 
 /* Bandeau "Votre projet pourrait être le prochain" : sans contour (ni bordure, ni liseré) */
 .projects-banner { border: none; background-image: none; }
@@ -3568,38 +3546,21 @@ header {
     pointer-events: none;
 }
 
+
 /****************************************/
-/* Halos violet/bleu tres diffus derriere Projets et Contact.            */
-/* Prolongent l'ambiance du hero au-dela du premier ecran (dark seul).   */
+/* Boutons : bleu de marque #2c57e7 dans les deux themes (comme en light),  */
+/* aligne sur le logo. En dark on remplace le bleu pale #8ab4f8 + texte     */
+/* fonce par le bleu de marque + texte blanc (survol inclus).               */
 /****************************************/
-.dark-mode #pour-qui::after,
-.dark-mode .projects::after,
-.dark-mode .contact::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    width: 100vw;
-    transform: translateX(-50%);
-    z-index: -1;
-    pointer-events: none;
-}
+.dark-mode .button { background: #2c57e7; color: #fff; border-color: #2c57e7; }
+@media (hover: hover) { .dark-mode .button:hover { color: #fff; } }
+/* Halo des boutons en dark : bleu de marque, plus doux et diffus (au lieu du bleu pale blanchatre) */
+.dark-mode .button { box-shadow: 0 4px 26px rgba(44, 87, 231, 0.40); }
 
-.dark-mode #pour-qui::after {
-    background:
-        radial-gradient(50% 40% at 30% 72%, rgba(82, 39, 255, 0.12), transparent 70%),
-        radial-gradient(44% 38% at 80% 86%, rgba(44, 87, 231, 0.10), transparent 72%);
-}
-
-.dark-mode .projects::after {
-    background:
-        radial-gradient(48% 42% at 78% 12%, rgba(82, 39, 255, 0.13), transparent 70%),
-        radial-gradient(42% 40% at 15% 82%, rgba(44, 87, 231, 0.10), transparent 72%);
-}
-
-.dark-mode .contact::after {
-    background:
-        radial-gradient(52% 46% at 20% 18%, rgba(82, 39, 255, 0.12), transparent 70%),
-        radial-gradient(46% 44% at 82% 88%, rgba(44, 87, 231, 0.11), transparent 72%);
+/* Icones reseaux du hero : meme bleu que les boutons (au lieu du bleu pale).
+   On reaffirme background-clip:text, sinon le shorthand background remet un carre plein. */
+.dark-mode .hero .header-icons i {
+    background: #2c57e7;
+    -webkit-background-clip: text;
+    background-clip: text;
 }
