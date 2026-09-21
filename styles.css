@@ -1809,7 +1809,7 @@ footer {
     left: 0;
     right: 0;
     bottom: 0;
-    height: calc(140px + env(safe-area-inset-bottom));
+    height: calc(112px + env(safe-area-inset-bottom));
     z-index: 1290;
     pointer-events: none;
     /* Degrade progressif (pas de palier plat) : le fond se dissout en douceur,
