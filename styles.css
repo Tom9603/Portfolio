@@ -1808,7 +1808,7 @@ footer {
     position: fixed;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: -40px;   /* decale vers le bas : la partie opaque passe sous le bord de l'ecran, on voit la couleur du hero sous le menu */
     height: calc(112px + env(safe-area-inset-bottom));
     z-index: 1290;
     pointer-events: none;
