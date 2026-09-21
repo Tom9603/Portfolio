@@ -3492,19 +3492,6 @@ header {
 .dark-mode .hero-content .hero-points li { color: #fff; }
 
 
-/* Modale projet : liste "points forts" + code inline (charte byTom) */
-.modal-highlights { list-style: none; margin: 0.2rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 0.7rem; }
-.modal-highlights li { position: relative; padding-left: 1.15rem; color: var(--color1); font-size: 0.95rem; line-height: 1.55; }
-.modal-highlights li::before { content: ""; position: absolute; left: 0; top: 0.6em; width: 6px; height: 6px; border-radius: 50%; background: #2c57e7; }
-.dark-mode .modal-highlights li::before { background: #5b8bff; }
-.modal-highlights strong { color: var(--color1); font-weight: 700; }
-.modal-highlights code {
-    font-family: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
-    font-size: 0.85em; padding: 0.05em 0.42em; border-radius: 6px;
-    background: rgba(44, 87, 231, 0.12); color: #2c57e7; border: 1px solid rgba(44, 87, 231, 0.22);
-}
-.dark-mode .modal-highlights code { background: rgba(91, 139, 255, 0.14); color: #8ab4f8; border-color: rgba(138, 180, 248, 0.25); }
-
 /* Contenu du hero au-dessus du canvas Ribbon Glow */
 .hero-content { z-index: 2; }
 
