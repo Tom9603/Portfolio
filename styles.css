@@ -2795,8 +2795,10 @@ body.drawer-open {
         display: none;
     }
 
+    /* Au-dessus de la tabbar flottante : son haut est a 12px (marge) +
+       60px (hauteur) du bas, plus 14px d'espace pour ne pas la toucher */
     #topBtn {
-        bottom: calc(3.75rem + env(safe-area-inset-bottom) + 0.9rem);
+        bottom: calc(12px + 60px + env(safe-area-inset-bottom) + 14px);
         right: 15px;
     }
 
