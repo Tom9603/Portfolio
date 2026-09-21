@@ -1844,14 +1844,17 @@ footer {
     height: 60px;
     padding: 0 6px;
     box-sizing: border-box;
-    background: rgba(255, 255, 255, 0.38);   /* light : verre translucide neutre */
-    -webkit-backdrop-filter: blur(20px) saturate(1.6);
-            backdrop-filter: blur(20px) saturate(1.6);
-    border: 1px solid rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0.18);   /* light : verre translucide neutre, tres transparent */
+    -webkit-backdrop-filter: blur(18px) saturate(1.6);
+            backdrop-filter: blur(18px) saturate(1.6);
+    border: 1px solid rgba(255, 255, 255, 0.40);
     border-radius: 32px;
+    /* Ombre douce et visible pour que la barre se detache du fond clair
+       malgre la forte transparence */
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.55),
-        0 12px 30px rgba(15, 23, 42, 0.14);
+        0 10px 26px rgba(15, 23, 42, 0.16),
+        0 2px 8px rgba(15, 23, 42, 0.10);
 }
 
 .mobile-tabbar__item {
@@ -1883,10 +1886,10 @@ footer {
     transform: translate(0, -50%); /* centrage vertical robuste (JS met le X) */
     border-radius: 21px;
     /* Liquid glass neutre : verre translucide qui refracte le fond + reflet spéculaire */
-    background: rgba(255, 255, 255, 0.32);
+    background: rgba(255, 255, 255, 0.16);
     -webkit-backdrop-filter: blur(8px) saturate(1.6) brightness(1.08);
             backdrop-filter: blur(8px) saturate(1.6) brightness(1.08);
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.55);
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.75),
         inset 0 -1px 2px rgba(15, 23, 42, 0.06),
@@ -1901,8 +1904,8 @@ footer {
         opacity 0.25s ease;
 }
 .dark-mode .mobile-tabbar__indicator {
-    background: rgba(255, 255, 255, 0.11);
-    border-color: rgba(255, 255, 255, 0.24);
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.20);
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.30),
         inset 0 -1px 2px rgba(0, 0, 0, 0.22),
@@ -2704,7 +2707,7 @@ body.drawer-open {
 
 /* Navigation mobile en dark mode */
 .dark-mode .mobile-tabbar {
-    background: rgba(24, 24, 28, 0.38);       /* dark : verre charbon translucide neutre */
+    background: rgba(24, 24, 28, 0.20);       /* dark : verre charbon translucide, tres transparent */
     border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.08),
