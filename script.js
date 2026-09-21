@@ -847,3 +847,37 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 })();
+
+
+/* ============================================================
+   Tabbar mobile : indicateur "pilule" qui glisse vers l'onglet actif.
+   La classe .active est deja posee par le scroll-spy ; ici on ne fait
+   que deplacer/redimensionner la pilule sous l'item actif.
+   ============================================================ */
+(function initTabbarIndicator() {
+  var bar = document.querySelector('.mobile-tabbar');
+  if (!bar) return;
+  var indicator = bar.querySelector('.mobile-tabbar__indicator');
+  if (!indicator) return;
+
+  function update() {
+    // Tabbar masquee (desktop) : rien a faire
+    if (getComputedStyle(bar).display === 'none') return;
+    var it = bar.querySelector('.mobile-tabbar__item.active');
+    if (!it) { indicator.style.opacity = '0'; return; }
+    var inset = 12; // pilule un peu plus etroite que l'item
+    var w = Math.max(0, it.offsetWidth - inset);
+    var x = it.offsetLeft + inset / 2;
+    indicator.style.width = w + 'px';
+    indicator.style.transform = 'translateX(' + x + 'px)';
+    indicator.style.opacity = '1';
+  }
+
+  // Le scroll-spy (plus haut) met a jour .active pendant le scroll ; on suit.
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  // Tap sur un onglet : .active est pose dans le meme cycle, on rafraichit apres
+  bar.addEventListener('click', function () { requestAnimationFrame(update); });
+  window.addEventListener('load', update);
+  requestAnimationFrame(update);
+})();

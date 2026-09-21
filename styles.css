@@ -499,10 +499,13 @@ p {
     top: calc(100% + 24px);
     left: 80%;
     font-size: 1.5rem;
-    color: var(--color1);
+    color: #1b1b1d;                                    /* light : main foncee */
+    text-shadow: 0 1px 4px rgba(255, 255, 255, 0.6);   /* halo clair pour ressortir sur le ruban */
     animation: handBounce 1.5s ease-in-out infinite;
     pointer-events: none;
 }
+/* Dark : main blanche + ombre sombre (le noir se fondrait dans le fond sombre) */
+.dark-mode .hero-hand { color: #fff; text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8); }
 
 /* Desktop : encore un peu plus d'air entre le bouton et la main */
 @media (min-width: 769px) {
@@ -1804,6 +1807,8 @@ footer {
 }
 
 .mobile-tabbar__item {
+    position: relative;
+    z-index: 1;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -1819,9 +1824,30 @@ footer {
     font-size: 0.66rem;
     font-weight: 600;
     font-family: var(--primary_police);
-    transition: color 0.2s ease;
+    transition: color 0.25s ease;
     touch-action: manipulation;
 }
+
+/* Pilule qui glisse en douceur derriere l'onglet actif (facon app / Instagram).
+   Position et largeur pilotees en JS ; le glissement vient de la transition. */
+.mobile-tabbar__indicator {
+    position: absolute;
+    top: 7px;
+    left: 0;
+    width: 0;
+    height: calc(3.75rem - 14px);
+    border-radius: 16px;
+    background: rgba(44, 87, 231, 0.12);
+    z-index: 0;
+    opacity: 0;
+    pointer-events: none;
+    will-change: transform, width;
+    transition:
+        transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+        width 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.25s ease;
+}
+.dark-mode .mobile-tabbar__indicator { background: rgba(90, 139, 255, 0.20); }
 
 .mobile-tabbar__item i {
     font-size: 1.25rem;
@@ -3291,8 +3317,8 @@ body.drawer-open {
     flex-shrink: 0;
 }
 
-/* En dark : chiffre blanc sur le fond sombre de la carte, contour bleu conserve */
-.dark-mode .process-step__num { color: #fff; border-color: #2c57e7; }
+/* En dark : contour blanc + chiffre blanc sur le fond sombre de la carte */
+.dark-mode .process-step__num { color: #fff; border-color: #fff; }
 
 .process-step__icon {
     font-size: 1.5rem;
@@ -3505,8 +3531,10 @@ header {
 /* Contenu du hero au-dessus du canvas Ribbon Glow */
 .hero-content { z-index: 2; }
 
-/* Bandeau "Votre projet pourrait être le prochain" : sans contour (ni bordure, ni liseré) */
-.projects-banner { border: none; background-image: none; }
+/* Bandeau "Votre projet pourrait être le prochain" : sans contour ni surface.
+   Fond transparent + pas d'ombre : il se fond dans la section (fini la "zone"
+   plus sombre que la bande d'alternance derriere). */
+.projects-banner { border: none; background: transparent; box-shadow: none; }
 .projects-banner::before { display: none; }
 
 /****************************************/
@@ -3564,3 +3592,16 @@ header {
     -webkit-background-clip: text;
     background-clip: text;
 }
+
+/****************************************/
+/* Bouton "Envoyer" du contact : aligne sur les autres boutons               */
+/* (bleu de marque #2c57e7, texte blanc, halo bleu doux, forme pilule).      */
+/****************************************/
+.contact-form button { border-radius: 40px; }
+.contact-form button:hover { background: var(--color3); color: var(--color2); } /* plus de survol gris */
+.dark-mode .contact-form button {
+    background: #2c57e7;
+    color: #fff;
+    box-shadow: 0 4px 26px rgba(44, 87, 231, 0.40);
+}
+.dark-mode .contact-form button:hover { background: #2c57e7; color: #fff; }
