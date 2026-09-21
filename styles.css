@@ -1146,6 +1146,14 @@ p {
   transition: transform 0.45s ease;
 }
 
+/* Pour une capture de site pleine page ou le ratio ne colle pas au cadre :
+   recadre vers le haut pour garder le logo/menu visible plutot que couper
+   symetriquement en haut et en bas. */
+.project-img img.img-top,
+.modal-projet-img.img-top {
+  object-position: top;
+}
+
 /* Zoom doux de l'image au survol de la carte */
 .project-card:hover .project-img img {
     transform: scale(1.06);
