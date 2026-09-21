@@ -432,11 +432,30 @@ document.addEventListener('keydown', (e) => {
 /////////////////////////////////////// MENU SECTION ACTIVE /////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// Pendant le defilement lance par un tap sur la barre du bas, le scroll-spy
+// ne touche pas a la barre : sinon il remettait l'onglet de la section de
+// depart (puis ceux des sections traversees) et la bulle faisait un
+// aller-retour avant de glisser vers l'onglet tape.
+let tabbarScrollLock = false;
+let tabbarLockTimer = null;
+
+function releaseTabbarLock(delay) {
+    clearTimeout(tabbarLockTimer);
+    tabbarLockTimer = setTimeout(() => { tabbarScrollLock = false; }, delay);
+}
+
+window.addEventListener('scrollend', () => {
+    if (tabbarScrollLock) releaseTabbarLock(0);
+});
+
 // Menu actif au scroll
 window.addEventListener('scroll', () => {
     const sections = document.querySelectorAll('section[id]');
     const menuLinks = document.querySelectorAll('.menu ul li a, .mobile-tabbar a');
-    
+
+    // Tant que ca defile, le verrou tient (relache 150ms apres le dernier scroll)
+    if (tabbarScrollLock) releaseTabbarLock(150);
+
     let current = '';
     
     // Point de lecture : le tiers haut de l'ecran, pas son bord superieur.
@@ -456,6 +475,9 @@ window.addEventListener('scroll', () => {
     });
     
     menuLinks.forEach(link => {
+        // Defilement lance depuis la barre : on garde l'onglet tape
+        if (tabbarScrollLock && link.closest('.mobile-tabbar')) return;
+
         link.classList.remove('active');
 
         // Si le lien correspond à la section actuelle, ajoute la classe active
@@ -481,6 +503,11 @@ window.addEventListener('scroll', () => {
 // sans attendre que le scroll rattrape la section visee
 document.querySelectorAll('.mobile-tabbar a').forEach(link => {
     link.addEventListener('click', () => {
+        // Verrouille la barre pendant le defilement vers la section
+        // (relache au plus tard 700ms apres le tap si rien ne defile)
+        tabbarScrollLock = true;
+        releaseTabbarLock(700);
+
         document.querySelectorAll('.menu ul li a, .mobile-tabbar a')
             .forEach(l => {
                 l.classList.remove('active');
