@@ -1969,6 +1969,9 @@ footer {
     box-shadow: -8px 0 40px rgba(0, 0, 0, 0.18);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    /* Defilement vertical natif ; le glissement horizontal (ranger le
+       tiroir vers la droite) est gere en JS */
+    touch-action: pan-y;
 }
 
 .mobile-drawer.is-open {

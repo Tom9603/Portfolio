@@ -267,6 +267,20 @@ if (langBtn) {
         drawer.classList.contains('is-open') ? close() : open();
     });
 
+    // Tap = appui relache sans avoir bouge : un glissement qui demarre sur
+    // un lien ou la croix ne declenche rien (au lieu de naviguer des le toucher)
+    function onTap(el, fn) {
+        let x0 = 0, y0 = 0, down = false;
+        el.addEventListener('pointerdown', e => { down = true; x0 = e.clientX; y0 = e.clientY; });
+        el.addEventListener('pointercancel', () => { down = false; });
+        el.addEventListener('pointerup', e => {
+            if (!down) return;
+            down = false;
+            if (Math.abs(e.clientX - x0) > 10 || Math.abs(e.clientY - y0) > 10) return;
+            fn(e);
+        });
+    }
+
     // Fermeture : voile (des le toucher), croix et liens du tiroir
     overlay.addEventListener('pointerdown', close);
     overlay.addEventListener('click', close);
@@ -281,9 +295,9 @@ if (langBtn) {
             return;
         }
 
-        // Croix et ancres : fermeture des le toucher, comme le voile
-        // (iOS mange parfois le click qui suit un premier tap)
-        el.addEventListener('pointerdown', () => {
+        // Croix et ancres : fermeture au relachement du tap, sans attendre le
+        // click (iOS mange parfois le click qui suit un premier tap)
+        onTap(el, () => {
             close();
             if (isAnchor) {
                 const target = document.querySelector(el.hash);
@@ -298,7 +312,69 @@ if (langBtn) {
     // La croix vit pres du bord haut de l'ecran, ou iOS avale parfois
     // le tap : tout le bandeau du logo sert de zone de fermeture de secours
     const head = drawer.querySelector('.mobile-drawer__head');
-    if (head) head.addEventListener('pointerdown', close);
+    if (head) onTap(head, close);
+
+    // Glisser le tiroir vers la droite pour le ranger : il suit le doigt et le
+    // voile s'eclaircit ; relache apres ~1/3 de sa largeur (ou d'un geste
+    // rapide), il se range, sinon il revient en place.
+    let x0 = 0, y0 = 0, t0 = 0, dx = 0, decided = false, dragging = false, suppressClick = false;
+
+    drawer.addEventListener('touchstart', e => {
+        if (!drawer.classList.contains('is-open') || e.touches.length !== 1) return;
+        x0 = e.touches[0].clientX;
+        y0 = e.touches[0].clientY;
+        t0 = performance.now();
+        dx = 0;
+        decided = false;
+        dragging = false;
+    }, { passive: true });
+
+    drawer.addEventListener('touchmove', e => {
+        if (!drawer.classList.contains('is-open') || e.touches.length !== 1) return;
+        const mx = e.touches[0].clientX - x0;
+        const my = e.touches[0].clientY - y0;
+        if (!decided) {
+            if (Math.abs(mx) < 8 && Math.abs(my) < 8) return;
+            decided = true;
+            // Geste horizontal vers la droite uniquement ; sinon on laisse
+            // le tiroir defiler verticalement
+            dragging = mx > 0 && Math.abs(mx) > Math.abs(my);
+            if (dragging) {
+                drawer.style.transition = 'none';
+                overlay.style.transition = 'none';
+            }
+        }
+        if (!dragging) return;
+        if (e.cancelable) e.preventDefault();
+        dx = Math.max(0, mx);
+        drawer.style.transform = `translateX(${dx}px)`;
+        overlay.style.opacity = String(Math.max(0, 1 - dx / drawer.offsetWidth));
+    }, { passive: false });
+
+    function endDrag() {
+        if (!dragging) return;
+        dragging = false;
+        const speed = dx / Math.max(1, performance.now() - t0); // px/ms
+        const shouldClose = dx > drawer.offsetWidth * 0.33 || (dx > 30 && speed > 0.45);
+        // On rend la main aux transitions CSS : le tiroir repart de la
+        // position du doigt vers ferme (ou ouvert)
+        drawer.style.transition = '';
+        overlay.style.transition = '';
+        drawer.style.transform = '';
+        overlay.style.opacity = '';
+        if (shouldClose) close();
+        // Pas de navigation parasite si le doigt a fini sur un lien
+        suppressClick = true;
+        setTimeout(() => { suppressClick = false; }, 400);
+    }
+    drawer.addEventListener('touchend', endDrag);
+    drawer.addEventListener('touchcancel', endDrag);
+
+    drawer.addEventListener('click', e => {
+        if (!suppressClick) return;
+        e.preventDefault();
+        e.stopPropagation();
+    }, true);
 
     // Filet de securite iOS : tout tap hors du tiroir le ferme,
     // meme si le voile n'a pas recu l'evenement
