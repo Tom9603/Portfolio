@@ -2121,12 +2121,19 @@ body.drawer-open {
   .hero-blob:nth-child(3) { display: none; }
 
   .hero {
-    min-height: 100svh;
+    /* Le hero se prolonge de --hero-extra sous l'ecran : son fond anime
+       continue sous la barre flottante, et la photo de la section
+       suivante n'arrive qu'apres un vrai scroll (plus visible au repos
+       ni en debut de scroll). Le meme --hero-extra est ajoute au
+       padding-bas et a la fleche : le contenu visible au repos ne bouge pas. */
+    --hero-extra: 160px;
+    min-height: calc(100svh + var(--hero-extra));
+    min-height: calc(100dvh + var(--hero-extra));
     /* La barre de nav du bas (fixed, 3.75rem + safe-area) recouvre le
        bas de l'ecran. On RESERVE cette hauteur en padding-bas : le
        contenu centre (jusqu'au CTA + la main) reste ainsi toujours
        au-dessus d'elle, jamais derriere. */
-    padding: 0.5rem 1.5rem calc(3.75rem + env(safe-area-inset-bottom) + 1.5rem);
+    padding: 0.5rem 1.5rem calc(3.75rem + env(safe-area-inset-bottom) + 1.5rem + var(--hero-extra));
   }
 
   .hero-content {
@@ -2175,7 +2182,7 @@ body.drawer-open {
   /* La fleche doit flotter JUSTE au-dessus de la barre de nav,
      sinon elle se retrouve cachee derriere (zone 3.75rem + safe-area) */
   .hero-scroll {
-    bottom: calc(3.75rem + env(safe-area-inset-bottom) + 2rem);
+    bottom: calc(3.75rem + env(safe-area-inset-bottom) + 2rem + var(--hero-extra, 0px));
   }
 
   /* Main plus proche du CTA sur mobile : reste au-dessus de la barre */
