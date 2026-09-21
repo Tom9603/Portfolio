@@ -1792,6 +1792,24 @@ footer {
 /***** barre du bas + tiroir lateral ****/
 /****************************************/
 
+/* Fondu vers le fond en bas d'ecran : le contenu se dissout dans la couleur
+   de fond sous la tabbar flottante (fini la photo/section qui traine dans le
+   trou du bas). Sous le bandeau cookies (1300) et la tabbar (1400). */
+.tabbar-fade {
+    display: none;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: calc(140px + env(safe-area-inset-bottom));
+    z-index: 1290;
+    pointer-events: none;
+    background: linear-gradient(to top, #F3F3F5 60%, rgba(243, 243, 245, 0));
+}
+.dark-mode .tabbar-fade {
+    background: linear-gradient(to top, #1b1b1d 60%, rgba(27, 27, 29, 0));
+}
+
 /* ===== Tabbar mobile : barre flottante en pilule (facon Instagram) =====
    Detachee des bords, icones seules, avec un rectangle arrondi gris qui
    glisse derriere l'icone active. */
@@ -2715,6 +2733,10 @@ body.drawer-open {
 @media (max-width: 768px) {
     .mobile-tabbar {
         display: flex;
+    }
+
+    .tabbar-fade {
+        display: block;
     }
 
     /* Place pour la barre flottante du bas */
