@@ -1812,10 +1812,23 @@ footer {
     height: calc(140px + env(safe-area-inset-bottom));
     z-index: 1290;
     pointer-events: none;
-    background: linear-gradient(to top, #F3F3F5 60%, rgba(243, 243, 245, 0));
+    /* Degrade progressif (pas de palier plat) : le fond se dissout en douceur,
+       prolongement naturel de ce qu'il y a au-dessus plutot qu'une tranche
+       noire nette qui apparait d'un coup. */
+    background: linear-gradient(to top,
+        #F3F3F5 0%,
+        rgba(243, 243, 245, 0.85) 20%,
+        rgba(243, 243, 245, 0.5) 50%,
+        rgba(243, 243, 245, 0.15) 78%,
+        rgba(243, 243, 245, 0) 100%);
 }
 .dark-mode .tabbar-fade {
-    background: linear-gradient(to top, #1b1b1d 60%, rgba(27, 27, 29, 0));
+    background: linear-gradient(to top,
+        #1b1b1d 0%,
+        rgba(27, 27, 29, 0.85) 20%,
+        rgba(27, 27, 29, 0.5) 50%,
+        rgba(27, 27, 29, 0.15) 78%,
+        rgba(27, 27, 29, 0) 100%);
 }
 
 /* ===== Tabbar mobile : barre flottante en pilule (facon Instagram) =====
