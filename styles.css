@@ -1836,10 +1836,11 @@ footer {
    Position et largeur pilotees en JS ; le glissement vient de la transition. */
 .mobile-tabbar__indicator {
     position: absolute;
-    top: 9px;
+    top: 50%;
     left: 0;
     width: 0;
-    height: calc(60px - 18px);
+    height: 42px;
+    transform: translate(0, -50%); /* centrage vertical robuste (JS met le X) */
     border-radius: 21px;
     /* Liquid glass : verre translucide qui refracte le fond + reflet spéculaire */
     background: rgba(255, 255, 255, 0.42);

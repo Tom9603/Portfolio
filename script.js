@@ -869,7 +869,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var w = Math.max(0, it.offsetWidth - inset);
     var x = it.offsetLeft + inset / 2;
     indicator.style.width = w + 'px';
-    indicator.style.transform = 'translateX(' + x + 'px)';
+    indicator.style.transform = 'translate(' + x + 'px, -50%)';
     indicator.style.opacity = '1';
   }
 
