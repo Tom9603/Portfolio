@@ -1818,12 +1818,12 @@ footer {
             backdrop-filter: blur(24px) saturate(1.9);
     border: 1px solid rgba(255, 255, 255, 0.45);
     border-radius: 32px;
-    /* Ombre douce et visible pour que la barre se detache du fond clair
-       malgre la forte transparence */
+    /* Legere ombre centree autour de la barre (peu decalee vers le bas,
+       pour ne pas former de halo sombre sous la barre) */
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.55),
-        0 10px 26px rgba(15, 23, 42, 0.16),
-        0 2px 8px rgba(15, 23, 42, 0.10);
+        0 3px 16px rgba(15, 23, 42, 0.12),
+        0 1px 4px rgba(15, 23, 42, 0.08);
 }
 
 .mobile-tabbar__item {
@@ -2285,10 +2285,14 @@ body.drawer-open {
         color: var(--color2) !important;
     }
 
-    /* Bouton "Discutons de votre projet" */
+    /* Bouton "Discutons de votre projet" : aucun effet au tap, il garde son
+       apparence de repos (le survol reste colle apres un tap sur iOS) */
     .button:hover {
-        background: var(--bg3) !important;
+        background: #2c57e7 !important;
         color: var(--color2) !important;
+    }
+    .dark-mode .button:hover {
+        color: #fff !important;
     }
 
     /* Logo menu */
@@ -2687,9 +2691,11 @@ body.drawer-open {
 .dark-mode .mobile-tabbar {
     background: rgba(24, 24, 28, 0.10);       /* dark : quasi transparent, le flou fait le verre */
     border: 1px solid rgba(255, 255, 255, 0.10);
+    /* Ombre tres douce et centree : l'ancienne (decalee de 12px, 40%)
+       formait un halo sombre sous la barre sur le fond clair du hero */
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.08),
-        0 12px 34px rgba(0, 0, 0, 0.40);
+        0 2px 12px rgba(0, 0, 0, 0.14);
 }
 
 .dark-mode .mobile-drawer__logo {
@@ -3118,8 +3124,11 @@ body.drawer-open {
 
     /* Boutons : au tap, on reste sur le fond bleu de repos */
     .button:hover {
-        background: var(--bg3);
+        background: #2c57e7;
         color: var(--color2);
+    }
+    .dark-mode .button:hover {
+        color: #fff;
     }
 
     .btn-outline:hover {
