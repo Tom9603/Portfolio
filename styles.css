@@ -1800,37 +1800,6 @@ footer {
 /***** barre du bas + tiroir lateral ****/
 /****************************************/
 
-/* Fondu vers le fond en bas d'ecran : le contenu se dissout dans la couleur
-   de fond sous la tabbar flottante (fini la photo/section qui traine dans le
-   trou du bas). Sous la tabbar (1400), au-dessus du contenu. */
-.tabbar-fade {
-    display: none;
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: -40px;   /* decale vers le bas : la partie opaque passe sous le bord de l'ecran, on voit la couleur du hero sous le menu */
-    height: calc(112px + env(safe-area-inset-bottom));
-    z-index: 1290;
-    pointer-events: none;
-    /* Degrade progressif (pas de palier plat) : le fond se dissout en douceur,
-       prolongement naturel de ce qu'il y a au-dessus plutot qu'une tranche
-       noire nette qui apparait d'un coup. */
-    background: linear-gradient(to top,
-        #F3F3F5 0%,
-        rgba(243, 243, 245, 0.85) 20%,
-        rgba(243, 243, 245, 0.5) 50%,
-        rgba(243, 243, 245, 0.15) 78%,
-        rgba(243, 243, 245, 0) 100%);
-}
-.dark-mode .tabbar-fade {
-    background: linear-gradient(to top,
-        #1b1b1d 0%,
-        rgba(27, 27, 29, 0.85) 20%,
-        rgba(27, 27, 29, 0.5) 50%,
-        rgba(27, 27, 29, 0.15) 78%,
-        rgba(27, 27, 29, 0) 100%);
-}
-
 /* ===== Tabbar mobile : barre flottante en pilule (facon Instagram) =====
    Detachee des bords, icones seules, avec un rectangle arrondi gris qui
    glisse derriere l'icone active. */
@@ -2766,10 +2735,6 @@ body.drawer-open {
 @media (max-width: 768px) {
     .mobile-tabbar {
         display: flex;
-    }
-
-    .tabbar-fade {
-        display: block;
     }
 
     /* Place pour la barre flottante du bas */
