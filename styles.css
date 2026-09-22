@@ -2476,8 +2476,7 @@ body.drawer-open {
        bouton epingle en bas pour des cartes uniformes */
     .price-item > div {
     flex: 1;
-    /* Haut commun a toutes les cartes : le bandeau "Le plus choisi"
-       loge dans cet espace sans decaler le contenu */
+    /* Haut commun a toutes les cartes : meme marge en haut partout */
     padding: 1.7rem 1.15rem 1.1rem;
     text-align: left;
     display: grid;
@@ -2885,7 +2884,7 @@ body.drawer-open {
 /****************************************/
 /****************************************/
 
-/* Carte recommandee : bordure degradee + bandeau "Le plus choisi" */
+/* Carte recommandee : bordure degradee */
 .price-item--featured {
     position: relative;
     overflow: hidden;
@@ -2897,21 +2896,6 @@ body.drawer-open {
 
 .dark-mode .price-item--featured {
     border: 2px solid transparent;
-}
-
-.price-badge {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 0.28rem 0;
-    text-align: center;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: #F3F3F5;
-    background: linear-gradient(to right, #2c57e7, #5b8bff);
 }
 
 /* Mention "a partir de" : flotte au-dessus du prix sans le decaler,
