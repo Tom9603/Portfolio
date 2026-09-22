@@ -3533,10 +3533,11 @@ header {
 /* Halo des boutons en dark : bleu de marque, plus doux et diffus (au lieu du bleu pale blanchatre) */
 .dark-mode .button { box-shadow: 0 4px 26px rgba(44, 87, 231, 0.40); }
 
-/* Icones reseaux du hero : meme bleu que les boutons (au lieu du bleu pale).
-   On reaffirme background-clip:text, sinon le shorthand background remet un carre plein. */
+/* Icones reseaux du hero : blanc texte de la charte (#E5E5E5, comme le "by"
+   du logo). On reaffirme background-clip:text, sinon le shorthand
+   background remet un carre plein. */
 .dark-mode .hero .header-icons i {
-    background: #2c57e7;
+    background: #e5e5e5;
     -webkit-background-clip: text;
     background-clip: text;
 }
