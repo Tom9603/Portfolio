@@ -329,12 +329,26 @@ if (langBtn) {
         dragging = false;
     }, { passive: true });
 
+    // Le doigt sur le tiroir ne fait jamais defiler la page derriere : le
+    // tiroir defile s'il deborde, sinon le geste est bloque. Des le premier
+    // mouvement : une fois qu'iOS a lance le defilement, il ne s'annule plus.
+    function blockPageScroll(e, my) {
+        const max = drawer.scrollHeight - drawer.clientHeight;
+        const blocked = max <= 0
+            || (my > 0 && drawer.scrollTop <= 0)
+            || (my < 0 && drawer.scrollTop >= max - 1);
+        if (blocked && e.cancelable) e.preventDefault();
+    }
+
     drawer.addEventListener('touchmove', e => {
         if (!drawer.classList.contains('is-open') || e.touches.length !== 1) return;
         const mx = e.touches[0].clientX - x0;
         const my = e.touches[0].clientY - y0;
         if (!decided) {
-            if (Math.abs(mx) < 8 && Math.abs(my) < 8) return;
+            if (Math.abs(mx) < 8 && Math.abs(my) < 8) {
+                blockPageScroll(e, my);
+                return;
+            }
             decided = true;
             // Geste horizontal vers la droite uniquement ; sinon on laisse
             // le tiroir defiler verticalement
@@ -344,7 +358,10 @@ if (langBtn) {
                 overlay.style.transition = 'none';
             }
         }
-        if (!dragging) return;
+        if (!dragging) {
+            blockPageScroll(e, my);
+            return;
+        }
         if (e.cancelable) e.preventDefault();
         dx = Math.max(0, mx);
         drawer.style.transform = `translateX(${dx}px)`;

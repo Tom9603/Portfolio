@@ -1934,6 +1934,8 @@ footer {
     box-shadow: none;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    /* Arrive en butee, le defilement du tiroir ne passe pas a la page */
+    overscroll-behavior: contain;
     /* Defilement vertical natif ; le glissement horizontal (ranger le
        tiroir vers la droite) est gere en JS */
     touch-action: pan-y;
