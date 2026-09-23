@@ -62,18 +62,6 @@ section {
     scroll-margin-top: 100px;
 }
 
-/* À propos : inclure l'image au-dessus dans le scroll (mobile 160px + header 70px) */
-#a-propos {
-    scroll-margin-top: 230px;
-}
-
-@media (min-width: 769px) {
-    /* desktop : image 480px + header 70px */
-    #a-propos {
-        scroll-margin-top: 550px;
-    }
-}
-
 h1 {
     margin: 0;
     margin-bottom: 2rem;
@@ -661,8 +649,8 @@ p {
     width: 100vw;
     margin-left: calc(50% - 50vw);
     height: 480px;
+    margin-top: 5rem;
     overflow: hidden;
-    scroll-margin-top: 70px;
 }
 
 .dev-banner img {
@@ -676,6 +664,7 @@ p {
 @media (max-width: 768px) {
     .dev-banner {
         height: 160px;
+        margin-top: 1.25rem;
     }
 
     .dev-banner img {
@@ -728,27 +717,11 @@ p {
     padding-top: 1rem;
 }
 
+/* Texte libre, sans carte : meme gabarit que le paragraphe "Pour qui" */
 .about-text {
-    position: relative;
     max-width: 800px;
     margin: 0 auto 1rem;
-    padding: 1.6rem 2rem;
-    background: var(--color2);
-    border: 1px solid rgba(53, 39, 175, 0.12);
-    border-radius: 16px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-    overflow: hidden;
-}
-
-/* Filet degrade vertical sur la gauche de la carte */
-.about-text::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 5px;
-    background: linear-gradient(to bottom, #2c57e7, #5b8bff);
+    padding: 1rem 2rem 0;
 }
 
 .about-text p {
@@ -1916,11 +1889,13 @@ footer {
     color: var(--color1);
 }
 
-/* Voile sombre derriere le tiroir */
+/* Voile flou derriere le tiroir : le site reste visible mais floute */
 .mobile-drawer-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.45);
+    background: rgba(0, 0, 0, 0.2);
+    -webkit-backdrop-filter: blur(6px);
+            backdrop-filter: blur(6px);
     opacity: 0;
     transition: opacity 0.3s ease;
     z-index: 1450;
@@ -1940,13 +1915,23 @@ footer {
     bottom: 0;
     width: 78%;
     max-width: 285px;
-    background: var(--bg1);
+    /* Verre depoli : fond translucide, la page floutee passe a travers */
+    background: rgba(243, 243, 245, 0.55);
+    -webkit-backdrop-filter: blur(24px) saturate(1.6);
+            backdrop-filter: blur(24px) saturate(1.6);
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
+    /* Filets et tuiles d'icones des liens */
+    --drawer-line: rgba(15, 23, 42, 0.08);
+    --drawer-tile: #fff;
+    --drawer-accent: var(--color1);
     z-index: 1460;
     display: flex;
     flex-direction: column;
     transform: translateX(100%);
-    transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: -8px 0 40px rgba(0, 0, 0, 0.18);
+    transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.32s ease;
+    /* Ombre seulement a l'ouverture : ferme, le tiroir est hors ecran
+       mais son ombre debordait sur le bord droit (visible en theme clair) */
+    box-shadow: none;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     /* Defilement vertical natif ; le glissement horizontal (ranger le
@@ -1956,6 +1941,7 @@ footer {
 
 .mobile-drawer.is-open {
     transform: translateX(0);
+    box-shadow: -8px 0 40px rgba(0, 0, 0, 0.18);
 }
 
 .mobile-drawer__head {
@@ -1988,20 +1974,72 @@ footer {
     touch-action: manipulation;
 }
 
+/* Liens : une ligne par section avec son icone (les memes que la barre
+   du bas), separees par un filet fin */
 .mobile-drawer__links {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: 0.5rem 0;
-    flex: 1;
+    /* marges auto : la liste se centre dans l'espace libre du tiroir */
+    margin: auto 1.25rem;
+    padding: 0.3rem;
 }
 
 .mobile-drawer__links a {
-    padding: 0.85rem 1.5rem;
-    text-align: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    /* Lignes aerees, un peu moins sur les ecrans bas pour que les
+       boutons du bas restent visibles sans faire defiler le tiroir */
+    padding: clamp(0.95rem, 2.6vh, 1.35rem) 0.7rem;
     color: var(--color1);
-    font-size: 1.05rem;
-    font-weight: 500;
+    font-size: 1rem;
+    font-weight: 600;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Filet entre deux lignes, aligne sur le texte (pas sous l'icone) */
+.mobile-drawer__links a + a::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: calc(0.7rem + 34px + 0.8rem);
+    right: 0.7rem;
+    height: 1px;
+    background: var(--drawer-line);
+}
+
+/* Icone de section sombre dans une tuile blanche */
+.mobile-drawer__links a i {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: var(--drawer-tile);
+    color: var(--drawer-accent);
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Centrage optique : ces deux glyphes ont leur masse trop haute
+   (et a gauche pour les etiquettes) par rapport aux autres */
+.mobile-drawer__links .fa-tags::before {
+    position: relative;
+    top: 1px;
+    left: 0.5px;
+}
+
+.mobile-drawer__links .fa-diagram-project::before {
+    position: relative;
+    top: 1px;
+}
+
+/* Section en cours (scroll-spy) : sa tuile passe en bleu plein */
+.mobile-drawer__links a.active i {
+    background: #2c57e7;
+    color: #fff;
 }
 
 /* Rangee de carres (theme + langue) sous le logo */
@@ -2397,10 +2435,24 @@ body.drawer-open {
     scroll-margin-top: 9rem;
     }
 
-    /* La carte A propos respire sur les cotes */
+    /* A propos plus ramasse : moins d'air au-dessus du titre. L'espace est
+       un padding (et non la marge du titre, qui debordait hors de la section) */
+    .about {
+    padding-top: 2rem;
+    }
+
+    .about h2 {
+    margin-top: 0;
+    }
+
+    /* A l'arrivee (fleche du hero, onglet), le titre se pose sous la barre d'etat */
+    #a-propos {
+    scroll-margin-top: 2.5rem;
+    }
+
+    /* Texte A propos : memes marges laterales que le paragraphe "Pour qui" */
     .about-text {
-    margin: 0 1.1rem 1rem;
-    padding: 1.4rem 1.3rem;
+    padding: 0.5rem 1.5rem 0;
     }
 
     /* Texte courant un cran plus petit sur mobile */
@@ -2654,11 +2706,6 @@ body.drawer-open {
         transform: translateY(-50%) !important;
     }
 
-    /* Carte A propos */
-    .about-text {
-    border-color: rgba(241, 241, 241, 0.15);
-    }
-
     /* Price cards */
     .price-item {
     border: 1px solid rgba(241, 241, 241, 0.15);
@@ -2713,6 +2760,14 @@ body.drawer-open {
 
 .dark-mode .mobile-drawer__logo {
     content: url("images/byTom_dark_cut.png");
+}
+
+.dark-mode .mobile-drawer {
+    background: rgba(27, 27, 29, 0.55);
+    border-left-color: rgba(255, 255, 255, 0.1);
+    --drawer-line: rgba(255, 255, 255, 0.08);
+    --drawer-tile: #fff;
+    --drawer-accent: #1b1b1d;
 }
 
 
@@ -3408,12 +3463,10 @@ body.drawer-open {
 /* ===== Remodelage des cartes accent (remplace la barre latérale générique) =====
    Avant : filet plein 5px à gauche (look "bootstrap"/IA).
    Après : liseré dégradé lumineux venant du coin haut-gauche + halo d'angle discret. */
-.about-text,
 .maintenance-banner,
 .projects-banner {
     background-image: radial-gradient(135% 135% at 0% 0%, rgba(44, 87, 231, 0.13), transparent 46%);
 }
-.about-text::before,
 .maintenance-banner::before,
 .projects-banner::before {
     inset: 0;

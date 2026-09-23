@@ -92,26 +92,26 @@ toggleTopBtn();
 /////////////////////////////////////////// HERO SCROLL /////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// Scroll vers l'image : on utilise offsetTop du banner (position dans le layout CSS)
+// Scroll vers A propos : on utilise offsetTop de la section (position dans le layout CSS)
 // plutot que getBoundingClientRect, qui peut etre instable sur iOS Safari quand la
 // barre d'adresse se replie en meme temps que le scroll demarre.
-function scrollToDevBanner() {
-    const banner = document.getElementById('dev-banner');
-    if (!banner) return;
-    const headerH = document.querySelector('header')?.offsetHeight ?? 0;
-    window.scrollTo({ top: banner.offsetTop - headerH, behavior: 'smooth' });
+function scrollToAbout() {
+    const about = document.getElementById('a-propos');
+    if (!about) return;
+    const margin = parseFloat(getComputedStyle(about).scrollMarginTop) || 0;
+    window.scrollTo({ top: about.offsetTop - margin, behavior: 'smooth' });
 }
 
 const heroScroll = document.getElementById('heroScroll');
 if (heroScroll) {
-    heroScroll.addEventListener('click', scrollToDevBanner);
+    heroScroll.addEventListener('click', scrollToAbout);
 }
 
-// "À propos" dans nav/tabbar : scroll jusqu'à l'image
+// "À propos" dans nav/tabbar
 document.querySelectorAll('a[href="#a-propos"]').forEach(link => {
     link.addEventListener('click', e => {
         e.preventDefault();
-        scrollToDevBanner();
+        scrollToAbout();
     });
 });
 
@@ -527,7 +527,7 @@ window.addEventListener('scrollend', () => {
 // Menu actif au scroll
 window.addEventListener('scroll', () => {
     const sections = document.querySelectorAll('section[id]');
-    const menuLinks = document.querySelectorAll('.menu ul li a, .mobile-tabbar a');
+    const menuLinks = document.querySelectorAll('.menu ul li a, .mobile-tabbar a, .mobile-drawer__links a');
 
     // Tant que ca defile, le verrou tient (relache 150ms apres le dernier scroll)
     if (tabbarScrollLock) releaseTabbarLock(150);
@@ -584,7 +584,7 @@ document.querySelectorAll('.mobile-tabbar a').forEach(link => {
         tabbarScrollLock = true;
         releaseTabbarLock(700);
 
-        document.querySelectorAll('.menu ul li a, .mobile-tabbar a')
+        document.querySelectorAll('.menu ul li a, .mobile-tabbar a, .mobile-drawer__links a')
             .forEach(l => {
                 l.classList.remove('active');
                 l.removeAttribute('aria-current');
