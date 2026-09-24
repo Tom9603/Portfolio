@@ -3335,20 +3335,12 @@ body.drawer-open {
 /* En dark : contour blanc + chiffre blanc sur le fond sombre de la carte */
 .dark-mode .process-step__num { color: #fff; border-color: #fff; }
 
-.process-step__icon {
-    font-size: 1.5rem;
-    margin-bottom: 0.75rem;
-    color: var(--color1);
-    background: none;
-    -webkit-background-clip: initial;
-    -webkit-text-fill-color: initial;
-    background-clip: initial;
-}
-
 .process-step h3 {
     font-size: 1rem;
     font-weight: 700;
     color: var(--color3);
+    /* Titre rapproche du cercle numerote (marge h3 par defaut : 1em) */
+    margin-top: 0.35rem;
     margin-bottom: 0.5rem;
 }
 
@@ -3373,7 +3365,9 @@ body.drawer-open {
     pointer-events: none;
 }
 .process-step > .process-step__header::-webkit-details-marker { display: none; }
-.process-step__chevron { display: none; }
+/* Chevron reserve a l'accordeon mobile. Deux classes : la feuille Font
+   Awesome, chargee apres, remettait .fa-solid en inline-block */
+.process-step .process-step__chevron { display: none; }
 @media (min-width: 481px) { .process-step > .process-step__body { display: block !important; } }
 
 @media (max-width: 900px) {
@@ -3411,8 +3405,6 @@ body.drawer-open {
         flex-shrink: 0;
     }
 
-    .process-step > .process-step__header .process-step__icon { display: none; }
-
     .process-step > .process-step__header h3 {
         flex: 1;
         font-size: 0.95rem;
@@ -3420,7 +3412,7 @@ body.drawer-open {
         text-align: left;
     }
 
-    .process-step__chevron {
+    .process-step .process-step__chevron {
         display: block;
         color: var(--color3);
         font-size: 0.8rem;
@@ -3457,7 +3449,7 @@ body.drawer-open {
 .carousel-dots { display: none !important; }
 
 /* Flèches ↓ des étapes en bleu (au lieu de noir) */
-.process-step__chevron { color: #5b8bff; }
+.process-step .process-step__chevron { color: #5b8bff; }
 
 /* Modales légales : rapproche le titre de la croix (le h2 global a margin-top:3rem) */
 .modal-content h2 { margin-top: 0.25rem; }
